@@ -6,6 +6,7 @@
     using Merchain.Data.Common.Repositories;
     using Merchain.Data.Models;
     using Merchain.Services.Mapping;
+    using Merchain.Services.Data.Interfaces;
 
     public class SettingsService : ISettingsService
     {

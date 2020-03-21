@@ -5,7 +5,7 @@
 
     using Merchain.Data.Common.Repositories;
     using Merchain.Data.Models;
-    using Merchain.Services.Data;
+    using Merchain.Services.Data.Interfaces;
     using Merchain.Web.ViewModels.Settings;
 
     using Microsoft.AspNetCore.Mvc;

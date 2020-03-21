@@ -9,6 +9,7 @@
     using Merchain.Data.Repositories;
     using Merchain.Data.Seeding;
     using Merchain.Services.Data;
+    using Merchain.Services.Data.Interfaces;
     using Merchain.Services.Mapping;
     using Merchain.Services.Messaging;
     using Merchain.Web.ViewModels;
@@ -59,6 +60,8 @@
             // Application services
             services.AddTransient<IEmailSender, NullMessageSender>();
             services.AddTransient<ISettingsService, SettingsService>();
+            services.AddTransient<IProductsService, ProductsService>();
+            services.AddTransient<ICategoriesService, CategoriesService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

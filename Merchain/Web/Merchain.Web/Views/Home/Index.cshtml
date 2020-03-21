@@ -1,4 +1,72 @@
-﻿@using Merchain.Common
+﻿@model IndexViewModel
 @{
     this.ViewData["Title"] = "Home Page";
 }
+
+<section class="top-letest-product-section">
+    <div class="container">
+        <div class="section-title">
+            <h2>LATEST PRODUCTS</h2>
+        </div>
+        <div class="product-slider owl-carousel">
+            @foreach (var product in Model.LatestProducts)
+            {
+                <div class="product-item">
+                    <div class="pi-pic">
+                        <div class="tag-new">New</div>
+                        <img src="@product.ImageUrl" alt="@product.Name">
+                        <div class="pi-links">
+                            <a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
+                            <a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
+                        </div>
+                    </div>
+                    <div class="pi-text">
+                        <h6>$@product.Price</h6>
+                        <a asp-area="" asp-controller="Products" asp-action="Details" asp-route-id="@product.Id">
+                            <p>@product.Name</p>
+                        </a>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+<section class="product-filter-section">
+    <div class="container">
+        <div class="section-title">
+            <h2>BROWSE TOP SELLING PRODUCTS</h2>
+        </div>
+        <ul class="product-filter-menu">
+            @foreach (var category in Model.Categories)
+            {
+                <li><a href="javascript:;" id="@category.Id">@category.Title.ToUpper()</a></li>
+            }
+        </ul>
+        <div class="row">
+            @foreach (var product in Model.BestSellingProducts)
+            {
+                <div class="col-lg-3 col-sm-6">
+                    <div class="product-item">
+                        <div class="pi-pic">
+                            <img src="@product.ImageUrl" alt="@product.Name">
+                            <div class="pi-links">
+                                <a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
+                                <a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
+                            </div>
+                        </div>
+                        <div class="pi-text">
+                            <h6>$@product.Price</h6>
+                            <a asp-area="" asp-controller="Products" asp-action="Details" asp-route-id="@product.Id">
+                                <p>@product.Name</p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="text-center pt-5">
+            <button class="site-btn sb-line sb-dark">LOAD MORE</button>
+        </div>
+    </div>
+</section>

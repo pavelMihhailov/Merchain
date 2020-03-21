@@ -1,4 +1,4 @@
-﻿namespace Merchain.Services.Data
+﻿namespace Merchain.Services.Data.Interfaces
 {
     using System.Collections.Generic;
 
