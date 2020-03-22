@@ -38,6 +38,13 @@
             entry.State = EntityState.Modified;
         }
 
+        public async Task<TEntity> GetById(params object[] id)
+        {
+            var getByIdPredicate = EfExpressionHelper.BuildByIdPredicate<TEntity>(this.Context, id);
+
+            return await this.All().FirstOrDefaultAsync(getByIdPredicate);
+        }
+
         public virtual void Delete(TEntity entity) => this.DbSet.Remove(entity);
 
         public Task<int> SaveChangesAsync() => this.Context.SaveChangesAsync();
