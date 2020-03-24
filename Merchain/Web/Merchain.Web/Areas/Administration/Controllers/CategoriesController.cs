@@ -46,7 +46,6 @@
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Title")] Category category)
         {
             if (this.ModelState.IsValid)
@@ -77,7 +76,6 @@
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Title")] Category category)
         {
             if (id != category.Id)
@@ -115,7 +113,6 @@
 
         [HttpPost]
         [ActionName("Delete")]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var category = await this.categoriesService.GetByIdAsync(id);

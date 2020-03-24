@@ -4,19 +4,34 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Linq.Expressions;
+    using System.Threading.Tasks;
 
     using Merchain.Data.Common.Repositories;
     using Merchain.Data.Models;
+    using Merchain.Services.CloudinaryService;
     using Merchain.Services.Data.Interfaces;
     using Merchain.Services.Mapping;
+    using Microsoft.AspNetCore.Http;
+    using Microsoft.EntityFrameworkCore;
+    using Microsoft.Extensions.Logging;
 
     public class ProductsService : IProductsService
     {
         private readonly IDeletableEntityRepository<Product> productsRepository;
+        private readonly IRepository<Category> categoryRepository;
+        private readonly CloudinaryService cloudinaryService;
+        private readonly ILogger<ProductsService> logger;
 
-        public ProductsService(IDeletableEntityRepository<Product> productsRepository)
+        public ProductsService(
+            IDeletableEntityRepository<Product> productsRepository,
+            IRepository<Category> categoryRepository,
+            CloudinaryService cloudinaryService,
+            ILogger<ProductsService> logger)
         {
             this.productsRepository = productsRepository;
+            this.categoryRepository = categoryRepository;
+            this.cloudinaryService = cloudinaryService;
+            this.logger = logger;
         }
 
         public int GetCount()
@@ -35,6 +50,90 @@
                 .OrderByDescending(orderBy)
                 .To<T>()
                 .ToList();
+        }
+
+        public async Task<Product> GetByIdAsync(int id)
+        {
+            return await this.productsRepository.GetById(id);
+        }
+
+        public async Task<IEnumerable<Product>> GetAllAsync()
+        {
+            return await this.productsRepository.All().ToListAsync();
+        }
+
+        public async Task<Task> AddProductAsync(Product product)
+        {
+            product.CreatedOn = DateTime.UtcNow;
+
+            await this.productsRepository.AddAsync(product);
+
+            await this.productsRepository.SaveChangesAsync();
+
+            return Task.CompletedTask;
+        }
+
+        public async Task CreateProduct(
+            string name,
+            string description,
+            decimal price,
+            IFormFile image,
+            IEnumerable<int> categoryIds)
+        {
+            try
+            {
+                var product = new Product()
+                {
+                    Name = name,
+                    Description = description,
+                    Price = price,
+                    Likes = 0,
+                    Orders = 0,
+                    ImageUrl = await this.cloudinaryService.UploadImage(image),
+                    ProductsCategories = new List<ProductCategory>(),
+                };
+
+                await this.AddCategoriesToProduct(categoryIds, product);
+
+                await this.AddProductAsync(product);
+            }
+            catch (Exception ex)
+            {
+                this.logger.LogError($"Could not create the product.\n{ex.Message}");
+                throw;
+            }
+        }
+
+        public async Task<Task> Edit(Product product)
+        {
+            this.productsRepository.Update(product);
+
+            await this.productsRepository.SaveChangesAsync();
+
+            return Task.CompletedTask;
+        }
+
+        public async Task<Task> Delete(Product product)
+        {
+            this.productsRepository.Delete(product);
+
+            await this.productsRepository.SaveChangesAsync();
+
+            return Task.CompletedTask;
+        }
+
+        private async Task AddCategoriesToProduct(IEnumerable<int> categoryIds, Product product)
+        {
+            foreach (int categoryId in categoryIds)
+            {
+                Category category = await this.categoryRepository.GetById(categoryId);
+
+                if (category != null)
+                {
+                    product.ProductsCategories.Add(
+                        new ProductCategory { Category = category, Product = product });
+                }
+            }
         }
     }
 }

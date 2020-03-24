@@ -2,12 +2,14 @@
 {
     using System.Reflection;
 
+    using CloudinaryDotNet;
     using Merchain.Data;
     using Merchain.Data.Common;
     using Merchain.Data.Common.Repositories;
     using Merchain.Data.Models;
     using Merchain.Data.Repositories;
     using Merchain.Data.Seeding;
+    using Merchain.Services.CloudinaryService;
     using Merchain.Services.Data;
     using Merchain.Services.Data.Interfaces;
     using Merchain.Services.Mapping;
@@ -17,6 +19,7 @@
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
+    using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
@@ -48,6 +51,10 @@
                     });
 
             services.AddControllersWithViews();
+            services.AddMvc(options =>
+            {
+                options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
+            });
             services.AddRazorPages();
 
             services.AddSingleton(this.configuration);
@@ -57,11 +64,22 @@
             services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
             services.AddScoped<IDbQueryRunner, DbQueryRunner>();
 
+            Account account = new Account()
+            {
+                Cloud = this.configuration["Cloudinary:Cloud"],
+                ApiKey = this.configuration["Cloudinary:ApiKey"],
+                ApiSecret = this.configuration["Cloudinary:ApiSecret"],
+            };
+
+            Cloudinary cloudinary = new Cloudinary(account);
+            services.AddSingleton(cloudinary);
+
             // Application services
             services.AddTransient<IEmailSender, NullMessageSender>();
             services.AddTransient<ISettingsService, SettingsService>();
             services.AddTransient<IProductsService, ProductsService>();
             services.AddTransient<ICategoriesService, CategoriesService>();
+            services.AddTransient<CloudinaryService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
