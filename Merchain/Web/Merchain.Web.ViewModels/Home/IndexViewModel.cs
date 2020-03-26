@@ -2,13 +2,14 @@
 {
     using System.Collections.Generic;
 
+    using Merchain.Web.ViewModels.Products;
     using Merchain.Web.ViewModels.Shared;
 
     public class IndexViewModel
     {
-        public IEnumerable<ProductHomeViewModel> LatestProducts { get; set; }
+        public IEnumerable<ProductDefaultViewModel> LatestProducts { get; set; }
 
-        public IEnumerable<ProductHomeViewModel> BestSellingProducts { get; set; }
+        public IEnumerable<ProductDefaultViewModel> BestSellingProducts { get; set; }
 
         public IEnumerable<CategoryViewModel> Categories { get; set; }
     }

@@ -19,17 +19,20 @@
     {
         private readonly IDeletableEntityRepository<Product> productsRepository;
         private readonly IDeletableEntityRepository<Category> categoryRepository;
+        private readonly IRepository<ProductCategory> productsCategoriesRepo;
         private readonly CloudinaryService cloudinaryService;
         private readonly ILogger<ProductsService> logger;
 
         public ProductsService(
             IDeletableEntityRepository<Product> productsRepository,
             IDeletableEntityRepository<Category> categoryRepository,
+            IRepository<ProductCategory> productsCategoriesRepo,
             CloudinaryService cloudinaryService,
             ILogger<ProductsService> logger)
         {
             this.productsRepository = productsRepository;
             this.categoryRepository = categoryRepository;
+            this.productsCategoriesRepo = productsCategoriesRepo;
             this.cloudinaryService = cloudinaryService;
             this.logger = logger;
         }
@@ -120,6 +123,36 @@
             await this.productsRepository.SaveChangesAsync();
 
             return Task.CompletedTask;
+        }
+
+        public IEnumerable<Product> GetProductsByCategory(int? categoryId)
+        {
+            if (categoryId == null)
+            {
+                return new List<Product>();
+            }
+
+            var products = this.productsCategoriesRepo.All()
+                .Where(x => x.Category.Id == categoryId)
+                .Select(cp => cp.Product)
+                .AsEnumerable();
+
+            return products;
+        }
+
+        public IEnumerable<Product> GetProductsByCategory(string categoryName)
+        {
+            if (string.IsNullOrWhiteSpace(categoryName))
+            {
+                return new List<Product>();
+            }
+
+            var products = this.productsCategoriesRepo.All()
+                .Where(x => x.Category.Title == categoryName)
+                .Select(cp => cp.Product)
+                .AsEnumerable();
+
+            return products;
         }
 
         private async Task AddCategoriesToProduct(IEnumerable<int> categoryIds, Product product)

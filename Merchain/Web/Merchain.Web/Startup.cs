@@ -51,6 +51,11 @@
                     });
 
             services.AddControllersWithViews();
+            services.AddSession(options =>
+            {
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
             services.AddMvc(options =>
             {
                 options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
@@ -79,6 +84,7 @@
             services.AddTransient<ISettingsService, SettingsService>();
             services.AddTransient<IProductsService, ProductsService>();
             services.AddTransient<ICategoriesService, CategoriesService>();
+            services.AddTransient<ICartService, CartService>();
             services.AddTransient<CloudinaryService>();
         }
 
@@ -117,12 +123,18 @@
 
             app.UseRouting();
 
+            app.UseSession();
+
             app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(
                 endpoints =>
                     {
+                        endpoints.MapControllerRoute(
+                            name: "cart",
+                            pattern: "cart/{action=Index}",
+                            defaults: new { controller = "ShoppingCart", action = "Index", });
                         endpoints.MapControllerRoute("areaRoute", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
                         endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
                         endpoints.MapRazorPages();

@@ -32,5 +32,9 @@
         Task<Task> Edit(Product product);
 
         Task<Task> Delete(Product product);
+
+        IEnumerable<Product> GetProductsByCategory(int? categoryId);
+
+        IEnumerable<Product> GetProductsByCategory(string categoryName);
     }
 }

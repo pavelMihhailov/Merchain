@@ -1,9 +1,9 @@
-﻿namespace Merchain.Web.ViewModels.Home
+﻿namespace Merchain.Web.ViewModels.Products
 {
     using Merchain.Data.Models;
     using Merchain.Services.Mapping;
 
-    public class ProductHomeViewModel : IMapFrom<Product>
+    public class ProductDefaultViewModel : IMapFrom<Product>
     {
         public int Id { get; set; }
 

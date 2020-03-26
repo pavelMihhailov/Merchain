@@ -9,8 +9,8 @@
     using Merchain.Services.Mapping;
     using Merchain.Web.ViewModels;
     using Merchain.Web.ViewModels.Home;
+    using Merchain.Web.ViewModels.Products;
     using Merchain.Web.ViewModels.Shared;
-
     using Microsoft.AspNetCore.Mvc;
 
     public class HomeController : BaseController
@@ -29,11 +29,11 @@
         public IActionResult Index()
         {
             var latestProducts = this.productsService
-                .GetAllDescending<ProductHomeViewModel>(x => x.CreatedOn)
+                .GetAllDescending<ProductDefaultViewModel>(x => x.CreatedOn)
                 .Take(5);
 
             var bestSellingProducts = this.productsService
-                .GetAllDescending<ProductHomeViewModel>(x => x.Orders)
+                .GetAllDescending<ProductDefaultViewModel>(x => x.Orders)
                 .Take(5);
 
             var categories = this.categoriesService.GetAll<CategoryViewModel>();
@@ -46,6 +46,21 @@
             };
 
             return this.View(viewModel);
+        }
+
+        [HttpGet]
+        public IActionResult ListProductsBy(int? categoryId)
+        {
+            if (categoryId == null)
+            {
+                return new EmptyResult();
+            }
+
+            var products = this.productsService.GetProductsByCategory(categoryId)
+                .AsQueryable()
+                .To<ProductDefaultViewModel>();
+
+            return this.PartialView("_ListProducts", products);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

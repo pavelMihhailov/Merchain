@@ -25,4 +25,8 @@
     <ProjectReference Include="..\..\Merchain.Common\Merchain.Common.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="CartService\" />
+  </ItemGroup>
+
 </Project>
