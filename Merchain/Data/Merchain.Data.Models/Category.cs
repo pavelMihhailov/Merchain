@@ -5,7 +5,7 @@
 
     using Merchain.Data.Common.Models;
 
-    public class Category : BaseModel<int>
+    public class Category : BaseDeletableModel<int>
     {
         public Category()
         {

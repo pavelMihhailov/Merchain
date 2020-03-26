@@ -13,9 +13,9 @@
 
     public class CategoriesService : ICategoriesService
     {
-        private readonly IRepository<Category> categoryRepository;
+        private readonly IDeletableEntityRepository<Category> categoryRepository;
 
-        public CategoriesService(IRepository<Category> categoryRepository)
+        public CategoriesService(IDeletableEntityRepository<Category> categoryRepository)
         {
             this.categoryRepository = categoryRepository;
         }

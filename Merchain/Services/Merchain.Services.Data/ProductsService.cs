@@ -18,13 +18,13 @@
     public class ProductsService : IProductsService
     {
         private readonly IDeletableEntityRepository<Product> productsRepository;
-        private readonly IRepository<Category> categoryRepository;
+        private readonly IDeletableEntityRepository<Category> categoryRepository;
         private readonly CloudinaryService cloudinaryService;
         private readonly ILogger<ProductsService> logger;
 
         public ProductsService(
             IDeletableEntityRepository<Product> productsRepository,
-            IRepository<Category> categoryRepository,
+            IDeletableEntityRepository<Category> categoryRepository,
             CloudinaryService cloudinaryService,
             ILogger<ProductsService> logger)
         {
