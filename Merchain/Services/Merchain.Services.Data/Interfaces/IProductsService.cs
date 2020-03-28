@@ -20,6 +20,8 @@
 
         Task<IEnumerable<Product>> GetAllAsync();
 
+        Task<IEnumerable<T>> GetAllAsync<T>();
+
         Task<Task> AddProductAsync(Product product);
 
         Task CreateProduct(

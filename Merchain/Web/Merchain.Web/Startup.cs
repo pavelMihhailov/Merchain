@@ -34,7 +34,6 @@
             this.configuration = configuration;
         }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ApplicationDbContext>(
@@ -135,6 +134,10 @@
                             name: "cart",
                             pattern: "cart/{action=Index}",
                             defaults: new { controller = "ShoppingCart", action = "Index", });
+                        endpoints.MapControllerRoute(
+                            name: "productDetails",
+                            pattern: "p/{id?}",
+                            defaults: new { controller = "Products", action = "Details", });
                         endpoints.MapControllerRoute("areaRoute", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
                         endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
                         endpoints.MapRazorPages();

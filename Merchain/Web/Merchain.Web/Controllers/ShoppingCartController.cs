@@ -9,6 +9,7 @@
     using Merchain.Common.Extensions;
     using Merchain.Data.Models;
     using Merchain.Services.Data.Interfaces;
+    using Merchain.Web.ViewModels.Products;
     using Merchain.Web.ViewModels.ShoppingCart;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Logging;
@@ -16,11 +17,16 @@
     public class ShoppingCartController : Controller
     {
         private readonly ICartService cartService;
+        private readonly IProductsService productsService;
         private readonly ILogger<ShoppingCartController> logger;
 
-        public ShoppingCartController(ICartService cartService, ILogger<ShoppingCartController> logger)
+        public ShoppingCartController(
+            ICartService cartService,
+            IProductsService productsService,
+            ILogger<ShoppingCartController> logger)
         {
             this.cartService = cartService;
+            this.productsService = productsService;
             this.logger = logger;
         }
 
@@ -31,10 +37,15 @@
             decimal totalSum = cart != null ?
                 cart.Sum(item => item.Product.Price * item.Quantity) : 0;
 
+            var suggestedProducts = this.productsService
+                .GetAll<ProductDefaultViewModel>()
+                .Take(4);
+
             var viewModel = new CartViewModel()
             {
                 Cart = cart ?? new List<CartItem>(),
                 SumTotal = totalSum,
+                SuggestedProducts = suggestedProducts,
             };
 
             return this.View(viewModel);

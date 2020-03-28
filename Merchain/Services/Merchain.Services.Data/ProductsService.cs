@@ -6,6 +6,8 @@
     using System.Linq.Expressions;
     using System.Threading.Tasks;
 
+    using AutoMapper;
+
     using Merchain.Data.Common.Repositories;
     using Merchain.Data.Models;
     using Merchain.Services.CloudinaryService;
@@ -63,6 +65,11 @@
         public async Task<IEnumerable<Product>> GetAllAsync()
         {
             return await this.productsRepository.All().ToListAsync();
+        }
+
+        public async Task<IEnumerable<T>> GetAllAsync<T>()
+        {
+            return await this.productsRepository.All().To<T>().ToListAsync();
         }
 
         public async Task<Task> AddProductAsync(Product product)

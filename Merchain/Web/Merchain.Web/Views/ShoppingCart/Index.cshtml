@@ -20,48 +20,55 @@
         <div class="row">
             <div class="col-lg-8">
                 <div class="cart-table">
-                    <h3>Your Cart</h3>
-                    <div class="cart-table-warp">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th></th>
-                                    <th class="product-th">Product</th>
-                                    <th class="quy-th">Quantity</th>
-                                    <th class="size-th">Size</th>
-                                    <th class="total-th">Price</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var item in Model.Cart)
-                                {
-                                    var product = item.Product;
-                                    <tr id="@product.Id">
-                                        <td><img src="~/img/icons/clear.svg" class="remove-icon mr-2"/></td>
-                                        <td class="product-col">
-                                            <img src="@product.ImageUrl" alt="@product.Name">
-                                            <div class="pc-title">
-                                                <h4>@product.Name</h4>
-                                                <p>$@product.Price</p>
-                                            </div>
-                                        </td>
-                                        <td class="quy-col">
-                                            <div class="quantity">
-                                                <div class="pro-qty">
-                                                    <input type="text" value="@item.Quantity">
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="size-col"><h4>Size M</h4></td>
-                                        <td class="total-col"><h4>$@(item.Quantity * product.Price)</h4></td>
+                    @if (!Model.Cart.Any())
+                    {
+                        <h3>Your cart is empty</h3>
+                    }
+                    else
+                    {
+                        <h3>Your Cart</h3>
+                        <div class="cart-table-warp">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th class="product-th">Product</th>
+                                        <th class="quy-th">Quantity</th>
+                                        <th class="size-th">Size</th>
+                                        <th class="total-th">Price</th>
                                     </tr>
-                                }
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="total-cost">
-                        <h6>Total <span>$@Model.SumTotal</span></h6>
-                    </div>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.Cart)
+                                    {
+                                        var product = item.Product;
+                                        <tr id="@product.Id">
+                                            <td><img src="~/img/icons/clear.svg" class="remove-icon mr-2" /></td>
+                                            <td class="product-col">
+                                                <img src="@product.ImageUrl" alt="@product.Name">
+                                                <div class="pc-title">
+                                                    <h4>@product.Name</h4>
+                                                    <p>$@product.Price</p>
+                                                </div>
+                                            </td>
+                                            <td class="quy-col">
+                                                <div class="quantity">
+                                                    <div class="pro-qty">
+                                                        <input type="text" value="@item.Quantity">
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="size-col"><h4>Size M</h4></td>
+                                            <td class="total-col"><h4>$@(item.Quantity * product.Price)</h4></td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="total-cost">
+                            <h6>Total <span>$@Model.SumTotal</span></h6>
+                        </div>
+                    }
                 </div>
             </div>
             <div class="col-lg-4 card-right">
@@ -82,10 +89,7 @@
             <h2>Continue Shopping</h2>
         </div>
         <div class="row">
-            @*foreach collection with products*@
-            <div class="col-lg-3 col-sm-6">
-                @*<partial name="_Product" />*@
-            </div>
+            <partial name="_ListProducts" model="Model.SuggestedProducts" />
         </div>
     </div>
 </section>
