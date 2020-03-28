@@ -25,6 +25,7 @@
                         <table>
                             <thead>
                                 <tr>
+                                    <th></th>
                                     <th class="product-th">Product</th>
                                     <th class="quy-th">Quantity</th>
                                     <th class="size-th">Size</th>
@@ -35,7 +36,8 @@
                                 @foreach (var item in Model.Cart)
                                 {
                                     var product = item.Product;
-                                    <tr>
+                                    <tr id="@product.Id">
+                                        <td><img src="~/img/icons/clear.svg" class="remove-icon mr-2"/></td>
                                         <td class="product-col">
                                             <img src="@product.ImageUrl" alt="@product.Name">
                                             <div class="pc-title">
@@ -87,3 +89,7 @@
         </div>
     </div>
 </section>
+
+@section Scripts {
+    <script src="~/js/cart.js"></script>
+}

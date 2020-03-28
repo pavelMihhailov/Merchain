@@ -41,7 +41,6 @@
         }
 
         [HttpGet]
-        //Consider if this is get or post!
         public async Task<IActionResult> AddProduct(int id)
         {
             //TODO: Pass quantity as parameter
@@ -51,7 +50,7 @@
             }
             catch (Exception ex)
             {
-                this.logger.LogError($"Could not remove product from the cart.\n-{ex.Message}");
+                this.logger.LogError($"Could not add product to the cart.\n-{ex.Message}");
             }
 
             //TODO: Remove page redirection, and create pop up for 'Item added'
@@ -72,6 +71,14 @@
 
             //TODO: Consider redirect or show popuo
             return new StatusCodeResult(200);
+        }
+
+        [HttpGet]
+        public int GetCartItemsCount()
+        {
+            int itemsCount = this.cartService.GetCartItemsCount(this.HttpContext.Session);
+
+            return itemsCount;
         }
     }
 }

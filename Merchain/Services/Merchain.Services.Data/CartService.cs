@@ -47,6 +47,13 @@
             }
         }
 
+        public int GetCartItemsCount(ISession session)
+        {
+            var cart = SessionExtension.Get<List<CartItem>>(session, SessionConstants.Cart);
+
+            return cart != null ? cart.Count : 0;
+        }
+
         private void SetSession(ISession session, int id, Product product, IEnumerable<CartItem> cartItems)
         {
             if (cartItems == null)
@@ -58,7 +65,7 @@
             }
             else
             {
-                var productInCart = cartItems.FirstOrDefault(x => x.ProductId == id);
+                var productInCart = cartItems.FirstOrDefault(x => x.Product.Id == id);
 
                 if (productInCart != null)
                 {
