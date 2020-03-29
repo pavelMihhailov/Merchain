@@ -11,7 +11,7 @@
         <div class="product-slider owl-carousel">
             @foreach (var product in Model.LatestProducts)
             {
-                <partial name="_Product" model="product" />
+                <partial name="/Views/Products/Partials/_Product.cshtml" model="product" />
             }
         </div>
     </div>
@@ -29,7 +29,7 @@
             }
         </ul>
         <div class="row" id="listed-products">
-            <partial name="_ListProducts" model="Model.BestSellingProducts" />
+            <partial name="/Views/Products/Partials/_ListProducts.cshtml" model="Model.BestSellingProducts" />
         </div>
         <div class="text-center pt-5">
             <button class="site-btn sb-line sb-dark">LOAD MORE</button>

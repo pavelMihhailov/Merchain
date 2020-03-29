@@ -1,8 +1,10 @@
 ﻿namespace Merchain.Web
 {
+    using System;
     using System.Reflection;
 
     using CloudinaryDotNet;
+    using Merchain.Common;
     using Merchain.Data;
     using Merchain.Data.Common;
     using Merchain.Data.Common.Repositories;
@@ -54,6 +56,7 @@
             {
                 options.Cookie.HttpOnly = true;
                 options.Cookie.IsEssential = true;
+                options.IdleTimeout = TimeSpan.FromMinutes(20);
             });
             services.AddMvc(options =>
             {
@@ -129,19 +132,23 @@
 
             app.UseEndpoints(
                 endpoints =>
-                    {
-                        endpoints.MapControllerRoute(
+                {
+                    endpoints.MapControllerRoute(
                             name: "cart",
                             pattern: "cart/{action=Index}",
                             defaults: new { controller = "ShoppingCart", action = "Index", });
-                        endpoints.MapControllerRoute(
-                            name: "productDetails",
-                            pattern: "p/{id?}",
-                            defaults: new { controller = "Products", action = "Details", });
-                        endpoints.MapControllerRoute("areaRoute", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
-                        endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
-                        endpoints.MapRazorPages();
-                    });
+                    //endpoints.MapControllerRoute(
+                    //    name: "productDetails",
+                    //    pattern: "p/{id}",
+                    //    defaults: new { controller = "Products", action = "Details", });
+                    //endpoints.MapControllerRoute(
+                    //    name: "products",
+                    //    pattern: "p/{action=Index}",
+                    //    defaults: new { controller = "Products", action = "Index", });
+                    endpoints.MapControllerRoute("areaRoute", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+                    endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
+                    endpoints.MapRazorPages();
+                });
         }
     }
 }

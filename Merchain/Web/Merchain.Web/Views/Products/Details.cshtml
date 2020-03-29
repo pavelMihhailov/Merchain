@@ -127,7 +127,7 @@
         <div class="product-slider owl-carousel">
             @foreach (var product in Model.RelatedProducts)
             {
-                <partial name="_Product" model="product" />
+                <partial name="/Views/Products/Partials/_Product.cshtml" model="product" />
             }
         </div>
     </div>

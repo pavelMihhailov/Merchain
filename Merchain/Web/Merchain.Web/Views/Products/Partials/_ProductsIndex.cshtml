@@ -1,0 +1,8 @@
+﻿@model IEnumerable<ProductDefaultViewModel>
+
+@foreach (var product in Model)
+{
+    <div class="col-lg-4 col-sm-6">
+        <partial name="/Views/Products/Partials/_Product.cshtml" model="product"/>
+    </div>
+}

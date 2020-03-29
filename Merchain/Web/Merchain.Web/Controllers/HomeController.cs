@@ -60,7 +60,7 @@
                 .AsQueryable()
                 .To<ProductDefaultViewModel>();
 
-            return this.PartialView("_ListProducts", products);
+            return this.PartialView("/Views/Products/Partials/_ListProducts.cshtml", products);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

@@ -9,7 +9,7 @@
         <h4>Your cart</h4>
         <div class="site-pagination">
             <a asp-controller="Home" asp-action="Index">Home</a> /
-            <a href="">Your cart</a>
+            <a>Your cart</a>
         </div>
     </div>
 </div>
@@ -76,8 +76,8 @@
                     <input type="text" placeholder="Enter promo code">
                     <button>Submit</button>
                 </form>
-                <a href="" class="site-btn">Proceed to checkout</a>
-                <a href="" class="site-btn sb-dark">Continue shopping</a>
+                <a asp-controller="Order" asp-action="Index" class="site-btn">Proceed to checkout</a>
+                <a asp-controller="Products" asp-action="Index" class="site-btn sb-dark">Continue shopping</a>
             </div>
         </div>
     </div>
@@ -89,7 +89,7 @@
             <h2>Continue Shopping</h2>
         </div>
         <div class="row">
-            <partial name="_ListProducts" model="Model.SuggestedProducts" />
+            <partial name="/Views/Products/Partials/_ListProducts.cshtml" model="Model.SuggestedProducts" />
         </div>
     </div>
 </section>
