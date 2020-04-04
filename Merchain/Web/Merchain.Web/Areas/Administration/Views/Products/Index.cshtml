@@ -2,6 +2,8 @@
 
 @{
     ViewData["Title"] = "Index";
+
+    var currPage = ViewBag.CurrPage;
 }
 
 <div class="container">
@@ -11,7 +13,7 @@
         <a asp-action="Create">Create New</a>
     </p>
     <table class="table">
-        <thead>
+        <thead class="table-head">
             <tr>
                 <th>
                     @Html.DisplayNameFor(model => model.Name)
@@ -51,7 +53,7 @@
                         @Html.DisplayFor(modelItem => product.Description)
                     </td>
                     <td>
-                        <img src="@product.ImageUrl">
+                        <img src="@product.ImageUrl" width="120">
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => product.Price)
@@ -77,4 +79,45 @@
             }
         </tbody>
     </table>
+    <div class="pagination-wrapper">
+        <div class="pagination">
+            @if (currPage > 1)
+            {
+                <a class="prev page-numbers"
+                   asp-area="@AreaConstants.Administration" asp-controller="Products" asp-action="Index"
+                   asp-route-page="@(currPage - 1)">Previous</a>
+            }
+            else
+            {
+                <span aria-current="page" class="prev page-numbers">Previous</span>
+            }
+            @for (int i = 1; i <= ViewBag.MaxPage; i++)
+            {
+                if (currPage == i)
+                {
+                    <span aria-current="page" class="page-numbers current">@i</span>
+                }
+                else
+                {
+                    <a class="page-numbers"
+                       asp-area="@AreaConstants.Administration" asp-controller="Products" asp-action="Index"
+                       asp-route-page="@i">@i</a>
+                }
+            }
+            @if (currPage < ViewBag.MaxPage)
+            {
+                <a class="next page-numbers"
+                   asp-area="@AreaConstants.Administration" asp-controller="Products" asp-action="Index"
+                   asp-route-page="@(currPage + 1)">Next</a>
+            }
+            else
+            {
+                <span aria-current="page" class="next page-numbers">Next</span>
+            }
+        </div>
+    </div>
 </div>
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/orders.css" />
+}

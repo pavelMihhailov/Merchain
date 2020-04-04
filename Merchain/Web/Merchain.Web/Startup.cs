@@ -82,6 +82,10 @@
             Cloudinary cloudinary = new Cloudinary(account);
             services.AddSingleton(cloudinary);
 
+            SendGridEmailSender sendGridEmailSender =
+                new SendGridEmailSender(this.configuration["SendGridEmail:ApiKey"]);
+            services.AddSingleton(sendGridEmailSender);
+
             // Application services
             services.AddTransient<UserManager<ApplicationUser>>();
             services.AddTransient<IEmailSender, NullMessageSender>();

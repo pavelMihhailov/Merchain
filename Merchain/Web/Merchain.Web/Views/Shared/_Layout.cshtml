@@ -4,8 +4,8 @@
 <head>
     <title>@this.ViewData["Title"] - @GlobalConstants.SystemName</title>
     <meta charset="UTF-8">
-    <meta name="description" content=" Divisima | eCommerce Template">
-    <meta name="keywords" content="divisima, eCommerce, creative, html">
+    <meta name="description" content="Merchain">
+    <meta name="keywords" content="merchain, eCommerce, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <environment names="Development">
@@ -25,7 +25,7 @@
     @RenderSection("Styles", required: false)
 
     <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300,300i,400,400i,700,700i" rel="stylesheet">
-    <link href="img/favicon.ico" rel="shortcut icon" />
+    <link href="~/img/favicon.ico" rel="shortcut icon" />
 </head>
 <body>
     <div id="preloder">
@@ -37,7 +37,6 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-2 text-center text-lg-left">
-                        <!-- logo -->
                         <a asp-area="" asp-controller="Home" asp-action="Index" class="site-logo">
                             <img src="~/img/merchain-logo.png" alt="">
                         </a>
@@ -67,6 +66,11 @@
         <partial name="_Navbar" />
     </header>
     <partial name="_CookieConsentPartial" />
+
+    <partial name="/Views/Shared/Partials/_SuccessPopup.cshtml"
+             model="this.ViewData[ViewDataConstants.SucccessMessage]" />
+    <partial name="/Views/Shared/Partials/_ErrorPopup.cshtml"
+             model="this.ViewData[ViewDataConstants.ErrorMessage]" />
 
     @this.RenderBody()
 

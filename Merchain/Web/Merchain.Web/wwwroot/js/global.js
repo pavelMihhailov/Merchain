@@ -2,6 +2,16 @@
     refreshCartItems();
 });
 
+$(document).ready(function () {
+    let messagePopup = $("#msgPopup");
+
+    if (messagePopup.length !== 0) {
+        setTimeout(function () {
+            messagePopup.fadeOut("slow");
+        }, 8000);
+    }
+});
+
 function refreshCartItems() {
     $.ajax({
         type: "GET",

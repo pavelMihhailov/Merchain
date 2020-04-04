@@ -28,11 +28,17 @@
             this.logger = logger;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? page = 1)
         {
             var products = await this.productsService.GetAllAsync();
 
-            return this.View(products);
+            var pageSize = 8;
+            var productsCount = products.Count();
+
+            this.ViewBag.CurrPage = page;
+            this.ViewBag.MaxPage = (productsCount / pageSize) + (productsCount % pageSize == 0 ? 0 : 1);
+
+            return this.View(products.Skip(((int)page - 1) * pageSize).Take(pageSize).ToList());
         }
 
         public async Task<IActionResult> Details(int? id)
