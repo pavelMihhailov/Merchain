@@ -12,7 +12,7 @@
         public Product()
         {
             this.ProductsCategories = new HashSet<ProductCategory>();
-            this.CartItems = new HashSet<CartItem>();
+            this.CartItems = new HashSet<OrderItem>();
         }
 
         [Required]
@@ -36,6 +36,6 @@
 
         public virtual ICollection<ProductCategory> ProductsCategories { get; set; }
 
-        public virtual ICollection<CartItem> CartItems { get; set; }
+        public virtual ICollection<OrderItem> CartItems { get; set; }
     }
 }

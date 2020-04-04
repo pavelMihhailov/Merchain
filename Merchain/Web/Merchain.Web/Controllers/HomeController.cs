@@ -2,7 +2,7 @@
 {
     using System.Diagnostics;
     using System.Linq;
-
+    using Merchain.Common;
     using Merchain.Data.Common.Repositories;
     using Merchain.Data.Models;
     using Merchain.Services.Data.Interfaces;
@@ -44,6 +44,9 @@
                 BestSellingProducts = bestSellingProducts,
                 Categories = categories,
             };
+
+            this.ViewData[ViewDataConstants.SucccessMessage] = this.TempData[ViewDataConstants.SucccessMessage];
+            this.ViewData[ViewDataConstants.ErrorMessage] = this.TempData[ViewDataConstants.ErrorMessage];
 
             return this.View(viewModel);
         }

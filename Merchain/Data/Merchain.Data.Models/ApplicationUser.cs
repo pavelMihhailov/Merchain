@@ -3,6 +3,7 @@ namespace Merchain.Data.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
 
     using Merchain.Data.Common.Models;
 
@@ -28,6 +29,21 @@ namespace Merchain.Data.Models
         public bool IsDeleted { get; set; }
 
         public DateTime? DeletedOn { get; set; }
+
+        [DefaultValue("")]
+        public string Address { get; set; }
+
+        [DefaultValue("")]
+        public string Address2 { get; set; }
+
+        [DefaultValue("")]
+        public string Country { get; set; }
+
+        [DefaultValue("")]
+        public string ZipCode { get; set; }
+
+        [DefaultValue("")]
+        public override string PhoneNumber { get; set; }
 
         public virtual ICollection<IdentityUserRole<string>> Roles { get; set; }
 

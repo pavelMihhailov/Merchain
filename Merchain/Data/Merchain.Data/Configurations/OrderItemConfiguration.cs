@@ -1,20 +1,19 @@
 ﻿namespace Merchain.Data.Configurations
 {
     using Merchain.Data.Models;
-
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-    public class CartItemConfiguration : IEntityTypeConfiguration<CartItem>
+    public class OrderItemConfiguration : IEntityTypeConfiguration<OrderItem>
     {
-        public void Configure(EntityTypeBuilder<CartItem> cartItem)
+        public void Configure(EntityTypeBuilder<OrderItem> orderItem)
         {
-            cartItem
+            orderItem
                 .HasOne(x => x.Product)
                 .WithMany(x => x.CartItems)
                 .HasForeignKey(x => x.ProductId);
 
-            cartItem
+            orderItem
                 .HasOne(x => x.Order)
                 .WithMany(x => x.OrderedItems)
                 .HasForeignKey(x => x.OrderId);

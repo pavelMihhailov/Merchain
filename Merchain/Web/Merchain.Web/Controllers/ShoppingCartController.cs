@@ -7,7 +7,6 @@
 
     using Merchain.Common;
     using Merchain.Common.Extensions;
-    using Merchain.Data.Models;
     using Merchain.Services.Data.Interfaces;
     using Merchain.Web.ViewModels.Products;
     using Merchain.Web.ViewModels.ShoppingCart;
@@ -48,6 +47,8 @@
                 SuggestedProducts = suggestedProducts,
             };
 
+            this.ViewData[ViewDataConstants.ErrorMessage] = this.TempData[ViewDataConstants.ErrorMessage];
+
             return this.View(viewModel);
         }
 
@@ -80,7 +81,6 @@
                 this.logger.LogError($"Could not remove product from the cart.\n-{ex.Message}");
             }
 
-            //TODO: Consider redirect or show popuo
             return new StatusCodeResult(200);
         }
 

@@ -8,6 +8,7 @@
     using Merchain.Common.Extensions;
     using Merchain.Data.Models;
     using Merchain.Services.Data.Interfaces;
+    using Merchain.Web.ViewModels.ShoppingCart;
     using Microsoft.AspNetCore.Http;
 
     public class CartService : ICartService
@@ -45,6 +46,11 @@
 
                 SessionExtension.Set(session, SessionConstants.Cart, cart);
             }
+        }
+
+        public void EmptyCart(ISession session)
+        {
+            SessionExtension.Set(session, SessionConstants.Cart, new List<CartItem>());
         }
 
         public int GetCartItemsCount(ISession session)

@@ -28,7 +28,7 @@
 
         public DbSet<Category> Categories { get; set; }
 
-        public DbSet<CartItem> CartItems { get; set; }
+        public DbSet<OrderItem> OrderedItems { get; set; }
 
         public DbSet<Order> Orders { get; set; }
 

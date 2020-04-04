@@ -12,7 +12,7 @@
     {
         public Order()
         {
-            this.OrderedItems = new HashSet<CartItem>();
+            this.OrderedItems = new HashSet<OrderItem>();
             this.OrderDate = DateTime.UtcNow;
         }
 
@@ -25,9 +25,11 @@
 
         public DateTime OrderDate { get; set; }
 
+        public string Status { get; set; }
+
         [MaxLength(Requirements.AddressMaxLength)]
         public string Address { get; set; }
 
-        public virtual ICollection<CartItem> OrderedItems { get; set; }
+        public virtual ICollection<OrderItem> OrderedItems { get; set; }
     }
 }

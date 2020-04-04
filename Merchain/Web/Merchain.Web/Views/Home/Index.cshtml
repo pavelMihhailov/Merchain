@@ -3,6 +3,11 @@
     this.ViewData["Title"] = "Home";
 }
 
+<partial name="/Views/Shared/Partials/_SuccessPopup.cshtml"
+         model="this.ViewData[ViewDataConstants.SucccessMessage]" />
+<partial name="/Views/Shared/Partials/_ErrorPopup.cshtml"
+         model="this.ViewData[ViewDataConstants.ErrorMessage]" />
+
 <section class="top-letest-product-section">
     <div class="container">
         <div class="section-title">

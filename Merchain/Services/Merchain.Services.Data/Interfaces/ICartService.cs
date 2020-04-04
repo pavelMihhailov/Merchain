@@ -10,6 +10,8 @@
 
         void RemoveFromCart(ISession session, int id);
 
+        void EmptyCart(ISession session);
+
         int GetCartItemsCount(ISession session);
     }
 }

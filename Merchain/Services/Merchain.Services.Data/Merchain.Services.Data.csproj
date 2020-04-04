@@ -22,6 +22,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Data\Merchain.Data.Common\Merchain.Data.Common.csproj" />
     <ProjectReference Include="..\..\Data\Merchain.Data.Models\Merchain.Data.Models.csproj" />
+    <ProjectReference Include="..\..\Web\Merchain.Web.ViewModels\Merchain.Web.ViewModels.csproj" />
     <ProjectReference Include="..\Merchain.Services.Mapping\Merchain.Services.Mapping.csproj" />
     <ProjectReference Include="..\Merchain.Services\Merchain.Services.csproj" />
   </ItemGroup>

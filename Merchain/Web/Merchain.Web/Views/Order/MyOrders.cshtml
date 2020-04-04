@@ -1,0 +1,59 @@
+﻿@model IEnumerable<MyOrderViewModel>
+
+@{
+    this.ViewData["Title"] = "My Orders";
+}
+
+<div class="page-top-info">
+    <div class="container">
+        <h4>My Orders</h4>
+        <div class="site-pagination">
+            <a asp-controller="Home" asp-action="Index">Home</a> /
+            <a>My Orders</a>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-3">
+    <table class="table table-striped">
+        <thead class="table-head">
+            <tr>
+                <th width="14%">Order Date</th>
+                <th>Order ID</th>
+                <th>Ordered Products</th>
+                <th>Total Cost</th>
+                <th>Order Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var order in Model)
+            {
+                <tr>
+                    <td>@order.OrderDate.ToLocalTime()</td>
+                    <td>@order.OrderId</td>
+                    <td>
+                        <table class="table table-nostriped">
+                            @foreach (var product in order.ProductsOrdered)
+                            {
+                                <tr>
+                                    <td>@product.Name</td>
+                                    <td>
+                                        <img src="@product.ImageUrl" width="100" />
+                                    </td>
+                                    <td>$@product.Price</td>
+                                    <td>x @product.Quantity</td>
+                                </tr>
+                            }
+                        </table>
+                    </td>
+                    <td>$@order.OrderTotal</td>
+                    <td>@order.OrderStatus</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/orders.css" />
+}

@@ -781,7 +781,6 @@ ol {
 ------------------------*/
 
 .top-letest-product-section {
-	padding-top: 70px;
 	padding-bottom: 60px;
 }
 
@@ -2083,11 +2082,11 @@ ol {
 	margin-bottom: 10px;
 }
 
-.checkout-cart .price-list li span {
-	float: right;
-	width: 60px;
-	text-align: left;
-}
+	.checkout-cart .price-list li span {
+		float: right;
+		width: 27%;
+		text-align: left;
+	}
 
 .checkout-cart .price-list li.total {
 	padding-top: 35px;
