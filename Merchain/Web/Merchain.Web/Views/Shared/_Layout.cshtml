@@ -63,7 +63,14 @@
                 </div>
             </div>
         </div>
-        <partial name="_Navbar" />
+        @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+        {
+            <partial name="_AdminNavbar" />
+        }
+        else
+        {
+            <partial name="_Navbar" />
+        }
     </header>
     <partial name="_CookieConsentPartial" />
 
