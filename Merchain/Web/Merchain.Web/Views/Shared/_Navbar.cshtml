@@ -1,15 +1,28 @@
-﻿@using Merchain.Common;
+﻿@inject ICategoriesService categoryService
+
+@using Merchain.Services.Data.Interfaces
 
 <nav class="main-navbar">
     <div class="container">
         <ul class="main-menu">
-            <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-            <li><a asp-area="" asp-controller="Products" asp-action="Index">Products</a></li>
+            <li><a asp-controller="Home" asp-action="Index">Home</a></li>
+            <li>
+                <a asp-controller="Products" asp-action="Index">Products</a>
+                <ul class="sub-menu">
+                    @foreach (var category in await categoryService.GetAllAsync())
+                    {
+                        <li>
+                            <a asp-controller="Products" asp-action="Index"
+                               asp-route-categoryId="@category.Id">@category.Title</a>
+                        </li>
+                    }
+                </ul>
+            </li>
             @if (this.User.Identity.IsAuthenticated)
             {
-                <li><a asp-area="" asp-controller="Order" asp-action="MyOrders">My Orders</a></li>
+                <li><a asp-controller="Order" asp-action="MyOrders">My Orders</a></li>
             }
-            <li><a asp-area="" asp-controller="Info" asp-action="ContactUs">Contact Us</a></li>
+            <li><a asp-controller="Info" asp-action="ContactUs">Contact Us</a></li>
         </ul>
     </div>
 </nav>

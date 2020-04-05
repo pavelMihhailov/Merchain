@@ -22,20 +22,36 @@
             this.categoriesService = categoriesService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index(int? page = 1, int? categoryId = null)
         {
-            var categories = this.categoriesService.GetAll<CategoryDefaultViewModel>();
-            var products = this.productsService.GetAll<ProductDefaultViewModel>();
+            IEnumerable<ProductDefaultViewModel> products;
 
-            var minPrice = (int)Math.Ceiling(products.Min(x => x.Price));
-            var maxPrice = (int)Math.Ceiling(products.Max(x => x.Price));
+            if (categoryId.HasValue && categoryId.Value > 0)
+            {
+                products = this.productsService.GetProductsByCategory(categoryId)
+                    .AsQueryable().To<ProductDefaultViewModel>();
+            }
+            else
+            {
+                products = await this.productsService.GetAllAsync<ProductDefaultViewModel>();
+            }
+
+            var categories = this.categoriesService.GetAll<CategoryDefaultViewModel>();
+
+            var productsCount = products.Count();
+            var pageSize = 12;
+
+            products = products.Skip(((int)page - 1) * pageSize).Take(pageSize);
+
+            var maxPage = (productsCount / pageSize) + (productsCount % pageSize == 0 ? 0 : 1);
 
             var viewModel = new ProductsIndexViewModel()
             {
                 Categories = categories,
-                Products = products.Take(12),
-                MinPrice = minPrice,
-                MaxPrice = maxPrice,
+                Products = products,
+                CurrentCategoryId = categoryId,
+                CurrentPage = (int)page,
+                MaxPage = maxPage,
             };
 
             return this.View(viewModel);

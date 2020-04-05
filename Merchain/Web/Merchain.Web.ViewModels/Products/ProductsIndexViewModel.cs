@@ -10,8 +10,10 @@
 
         public IEnumerable<ProductDefaultViewModel> Products { get; set; }
 
-        public int MinPrice { get; set; }
+        public int? CurrentCategoryId { get; set; }
 
-        public int MaxPrice { get; set; }
+        public int CurrentPage { get; set; }
+
+        public int MaxPage { get; set; }
     }
 }
