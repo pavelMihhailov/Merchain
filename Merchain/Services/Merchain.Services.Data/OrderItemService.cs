@@ -41,5 +41,19 @@
 
             return;
         }
+
+        public int GetProductOrdersCount(int productId)
+        {
+            if (productId <= 0)
+            {
+                return 0;
+            }
+
+            var productOrdersCount = this.orderItemRepo.All()
+                .Where(x => x.ProductId == productId)
+                .Sum(p => p.Quantity);
+
+            return productOrdersCount;
+        }
     }
 }

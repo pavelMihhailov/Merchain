@@ -3,8 +3,9 @@
     this.ViewData["Title"] = "Admin dashboard";
 }
 
-<div class="container">
+<div class="container text-center mt-4 mb-4">
     <h1>@this.ViewData["Title"]</h1>
-    <a asp-area="@AreaConstants.Administration" asp-controller="Products" asp-action="Index">View All Products</a>
-    <a asp-area="@AreaConstants.Administration" asp-controller="Categories" asp-action="Index">View All Categories</a>
+    <a class="site-btn" asp-area="@AreaConstants.Administration" asp-controller="Products" asp-action="Index">View All Products</a>
+    <a class="site-btn" asp-area="@AreaConstants.Administration" asp-controller="Categories" asp-action="Index">View All Categories</a>
+    <a class="site-btn" asp-area="@AreaConstants.Administration" asp-controller="Orders" asp-action="Index">View All Orders</a>
 </div>

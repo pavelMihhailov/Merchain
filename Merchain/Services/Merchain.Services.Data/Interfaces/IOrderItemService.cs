@@ -12,5 +12,7 @@
         IEnumerable<T> GetAll<T>();
 
         Task AddOrderItemsAsync(IEnumerable<OrderItem> orderItems);
+
+        int GetProductOrdersCount(int productId);
     }
 }

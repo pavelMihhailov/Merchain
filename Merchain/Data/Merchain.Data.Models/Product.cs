@@ -31,9 +31,6 @@
         [DefaultValue(0)]
         public int Likes { get; set; }
 
-        [DefaultValue(0)]
-        public int Orders { get; set; }
-
         public virtual ICollection<ProductCategory> ProductsCategories { get; set; }
 
         public virtual ICollection<OrderItem> CartItems { get; set; }

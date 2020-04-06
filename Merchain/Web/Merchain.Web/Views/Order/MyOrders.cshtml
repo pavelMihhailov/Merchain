@@ -1,4 +1,4 @@
-﻿@model IEnumerable<MyOrderViewModel>
+﻿@model IEnumerable<OrderInfoViewModel>
 
 @{
     this.ViewData["Title"] = "My Orders";
@@ -30,7 +30,7 @@
             {
                 <tr>
                     <td>@order.OrderDate.ToLocalTime()</td>
-                    <td>@order.OrderId</td>
+                    <td>#@order.OrderId</td>
                     <td>
                         <table class="table table-nostriped">
                             @foreach (var product in order.ProductsOrdered)

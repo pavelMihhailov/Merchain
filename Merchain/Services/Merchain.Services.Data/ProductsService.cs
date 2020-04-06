@@ -98,7 +98,6 @@
                     Description = description,
                     Price = price,
                     Likes = 0,
-                    Orders = 0,
                     ImageUrl = await this.cloudinaryService.UploadImage(image),
                     ProductsCategories = new List<ProductCategory>(),
                 };

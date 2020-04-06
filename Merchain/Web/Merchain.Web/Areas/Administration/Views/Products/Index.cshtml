@@ -8,7 +8,6 @@
 
 <div class="container">
     <h1>All Products</h1>
-
     <p>
         <a asp-action="Create">Create New</a>
     </p>
@@ -29,9 +28,6 @@
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Likes)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Orders)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.CreatedOn)
@@ -60,9 +56,6 @@
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => product.Likes)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => product.Orders)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => product.CreatedOn)

@@ -39,7 +39,7 @@
         [HttpGet]
         public async Task<IActionResult> MyOrders()
         {
-            var viewModel = await this.orderService.MyOrders(this.User.Identity.Name);
+            var viewModel = await this.orderService.OrdersOfUser(this.User.Identity.Name);
 
             return this.View(viewModel);
         }

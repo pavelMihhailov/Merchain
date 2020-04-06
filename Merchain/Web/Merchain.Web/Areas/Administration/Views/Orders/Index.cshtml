@@ -1,0 +1,115 @@
+﻿@model IEnumerable<OrderInfoViewModel>
+@{
+    this.ViewData["Title"] = "All Orders";
+    var currPage = ViewBag.CurrPage;
+}
+
+<div class="page-top-info">
+    <div class="container">
+        <h4>All Orders</h4>
+        <div class="site-pagination">
+            <a asp-controller="Home" asp-action="Index">Home</a> /
+            <a>All Orders</a>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-3">
+    <table class="table table-striped">
+        <thead class="table-head">
+            <tr>
+                <th width="14%">Order Date</th>
+                <th>Order ID</th>
+                <th>Ordered Products</th>
+                <th>Total Cost</th>
+                <th>Order Status</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var order in Model)
+            {
+                <tr>
+                    <td>@order.OrderDate.ToLocalTime()</td>
+                    <td>
+                        @order.OrderId
+                    </td>
+                    <td>
+                        <table class="table table-nostriped">
+                            <thead class="table-head">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Price</th>
+                                    <th>Quantity</th>
+                                </tr>
+                            </thead>
+                            @foreach (var product in order.ProductsOrdered)
+                            {
+                                <tr>
+                                    <td>
+                                        <a asp-area="@AreaConstants.Administration" asp-controller="Products"
+                                           asp-action="Details" asp-route-id="@product.ProductId">
+                                            #@product.ProductId
+                                        </a>
+                                    </td>
+                                    <td>@product.Name</td>
+                                    <td>$@product.Price</td>
+                                    <td>x @product.Quantity</td>
+                                </tr>
+                            }
+                        </table>
+                    </td>
+                    <td>$@order.OrderTotal</td>
+                    <td>@order.OrderStatus</td>
+                    <td>
+                        <a asp-area="@AreaConstants.Administration" asp-controller="Orders" asp-action="ReviewOrder" asp-route-id="@order.OrderId">
+                            Review Order
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div class="pagination-wrapper">
+        <div class="pagination">
+            @if (currPage > 1)
+            {
+                <a class="prev page-numbers"
+                   asp-area="@AreaConstants.Administration" asp-controller="Orders" asp-action="Index"
+                   asp-route-page="@(currPage - 1)">Previous</a>
+            }
+            else
+            {
+                <span aria-current="page" class="prev page-numbers">Previous</span>
+            }
+            @for (int i = 1; i <= ViewBag.MaxPage; i++)
+            {
+                if (currPage == i)
+                {
+                    <span aria-current="page" class="page-numbers current">@i</span>
+                }
+                else
+                {
+                    <a class="page-numbers"
+                       asp-area="@AreaConstants.Administration" asp-controller="Orders" asp-action="Index"
+                       asp-route-page="@i">@i</a>
+                }
+            }
+            @if (currPage < ViewBag.MaxPage)
+            {
+                <a class="next page-numbers"
+                   asp-area="@AreaConstants.Administration" asp-controller="Orders" asp-action="Index"
+                   asp-route-page="@(currPage + 1)">Next</a>
+            }
+            else
+            {
+                <span aria-current="page" class="next page-numbers">Next</span>
+            }
+        </div>
+    </div>
+</div>
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/orders.css" />
+}

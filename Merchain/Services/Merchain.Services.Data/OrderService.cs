@@ -5,6 +5,7 @@
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+
     using Merchain.Common.Order;
     using Merchain.Data.Common.Repositories;
     using Merchain.Data.Models;
@@ -65,6 +66,16 @@
             return true;
         }
 
+        public async Task<IEnumerable<OrderInfoViewModel>> AllOrders()
+        {
+            var orders = this.orderRepo.All();
+            var orderItems = await this.orderItemService.GetAllAsync();
+
+            var viewModel = await this.GetOrdersInfo(orders, orderItems);
+
+            return viewModel.OrderByDescending(x => x.OrderDate);
+        }
+
         public async Task<IEnumerable<Order>> AllOrdersOfUser(string username)
         {
             var user = await this.userManager.FindByNameAsync(username);
@@ -74,44 +85,56 @@
             return orders;
         }
 
-        public async Task<IEnumerable<MyOrderViewModel>> MyOrders(string username)
+        public async Task<IEnumerable<OrderInfoViewModel>> OrdersOfUser(string username)
         {
             var orders = await this.AllOrdersOfUser(username);
             var orderItems = await this.orderItemService.GetAllAsync();
 
+            var viewModel = await this.GetOrdersInfo(orders, orderItems);
+
+            return viewModel.OrderByDescending(x => x.OrderDate);
+        }
+
+        private async Task<List<OrderInfoViewModel>> GetOrdersInfo(
+            IEnumerable<Order> orders, IEnumerable<OrderItem> orderItems)
+        {
             var orderInfo = orders
-                .GroupJoin(
-                    orderItems,
-                    order => order.Id,
-                    orderItem => orderItem.OrderId,
-                    (order, orderItems) =>
-                        new
-                        {
-                            OrderId = order.Id,
-                            OrderDate = order.OrderDate,
-                            OrderTotal = order.OrderTotal,
-                            OrderStatus = order.Status,
-                            ProductsOrdered = orderItems
-                            .Select(p =>
-                                new
-                                {
-                                    ProductId = p.ProductId,
-                                    Quantity = p.Quantity,
-                                }),
-                        });
+                            .GroupJoin(
+                                orderItems,
+                                order => order.Id,
+                                orderItem => orderItem.OrderId,
+                                (order, orderItems) =>
+                                    new
+                                    {
+                                        OrderId = order.Id,
+                                        OrderDate = order.OrderDate,
+                                        OrderTotal = order.OrderTotal,
+                                        UserId = order.UserId,
+                                        Address = order.Address,
+                                        OrderStatus = order.Status,
+                                        ProductsOrdered = orderItems
+                                        .Select(p =>
+                                            new
+                                            {
+                                                ProductId = p.ProductId,
+                                                Quantity = p.Quantity,
+                                            }),
+                                    });
 
             var products = await this.productsService.GetAllAsync<ProductDefaultViewModel>();
 
-            var viewModel = new List<MyOrderViewModel>();
+            var viewModel = new List<OrderInfoViewModel>();
 
             foreach (var info in orderInfo)
             {
-                var order = new MyOrderViewModel()
+                var order = new OrderInfoViewModel()
                 {
                     OrderId = info.OrderId,
                     OrderDate = info.OrderDate,
                     OrderTotal = info.OrderTotal,
                     OrderStatus = info.OrderStatus,
+                    UserId = info.UserId,
+                    Address = info.Address,
                 };
 
                 var productsOfOrder = new List<OrderedProductsViewModel>();
@@ -137,7 +160,7 @@
                 viewModel.Add(order);
             }
 
-            return viewModel.OrderByDescending(x => x.OrderDate);
+            return viewModel;
         }
 
         private async Task<Order> CreateOrder(decimal totalSum, ApplicationUser user, OrderAddress? newAddress)

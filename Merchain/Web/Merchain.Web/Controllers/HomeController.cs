@@ -32,8 +32,8 @@
                 .GetAllDescending<ProductDefaultViewModel>(x => x.CreatedOn)
                 .Take(5);
 
-            var bestSellingProducts = this.productsService
-                .GetAllDescending<ProductDefaultViewModel>(x => x.Orders)
+            var mostLikedProducts = this.productsService
+                .GetAllDescending<ProductDefaultViewModel>(x => x.Likes)
                 .Take(5);
 
             var categories = this.categoriesService.GetAll<CategoryViewModel>();
@@ -41,7 +41,7 @@
             var viewModel = new IndexViewModel()
             {
                 LatestProducts = latestProducts,
-                BestSellingProducts = bestSellingProducts,
+                MostLikedProducts = mostLikedProducts,
                 Categories = categories,
             };
 

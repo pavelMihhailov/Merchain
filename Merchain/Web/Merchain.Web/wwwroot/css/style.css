@@ -2588,3 +2588,7 @@ table tbody td {
 .custom-form input[type=checkbox] {
     height: 20px;
 }
+
+table tr:not(.table-head):hover {
+    background-color: #d7d7d7 !important;
+}
