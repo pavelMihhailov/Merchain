@@ -65,8 +65,7 @@
                 this.logger.LogError($"Could not add product to the cart.\n-{ex.Message}");
             }
 
-            //TODO: Remove page redirection, and create pop up for 'Item added'
-            return this.RedirectToAction("Index");
+            return new StatusCodeResult(200);
         }
 
         [HttpGet]

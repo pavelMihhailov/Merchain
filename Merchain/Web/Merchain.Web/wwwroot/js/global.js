@@ -10,6 +10,43 @@ $(document).ready(function () {
             messagePopup.fadeOut("slow");
         }, 8000);
     }
+
+    $(".add-wishlist").on("click", function () {
+        $el = $(this);
+
+        let productId = $el.attr("id");
+
+        $.ajax({
+            type: "GET",
+            url: "/Products/AddToWishList",
+            data: { 'id': productId },
+            success: function (res) {
+                $("#addedToWishList").addClass("show-modal");
+                setTimeout(function () {
+                    $("#addedToWishList").removeClass("show-modal");
+                }, 2850);
+            }
+        });
+    });
+
+    $(".add-card").on("click", function () {
+        $el = $(this);
+
+        let productId = $el.attr("id");
+
+        $.ajax({
+            type: "GET",
+            url: "/ShoppingCart/AddProduct",
+            data: { 'id': productId },
+            success: function (res) {
+                $("#addedToCart").addClass("show-modal");
+                refreshCartItems();
+                setTimeout(function () {
+                    $("#addedToCart").removeClass("show-modal");
+                }, 2850);
+            }
+        });
+    });
 });
 
 function refreshCartItems() {

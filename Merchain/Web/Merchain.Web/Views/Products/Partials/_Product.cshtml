@@ -4,11 +4,13 @@
     <div class="pi-pic">
         <img src="@Model.ImageUrl" alt="@Model.Name">
         <div class="pi-links">
-            <a asp-controller="ShoppingCart" asp-action="AddProduct" asp-route-id="@Model.Id" class="add-card">
+            <a id="@Model.Id" class="add-card pointer">
                 <i class="flaticon-bag"></i>
                 <span>ADD TO CART</span>
             </a>
-            <a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
+            <a class="pointer add-wishlist wishlist-btn" id="@Model.Id">
+                <i class="flaticon-heart"></i>
+            </a>
         </div>
     </div>
     <div class="pi-text">

@@ -1,0 +1,33 @@
+﻿@model List<LikedProduct>
+
+@{
+    this.ViewData["Title"] = "Wish List";
+}
+
+<div class="page-top-info">
+    <div class="container">
+        <h4>Wish List</h4>
+        <div class="site-pagination">
+            <a asp-controller="Home" asp-action="Index">Home</a> /
+            <a>Wish List</a> /
+        </div>
+    </div>
+</div>
+
+<section class="category-section spad">
+    <div class="container">
+        <div class="row">
+            @if (Model != null)
+            {
+                foreach (var likedProduct in Model)
+                {
+                    <div>@likedProduct.Product.Id</div>
+                }
+            }
+            else
+            {
+                <div>Your wish list is empty</div>
+            }
+        </div>
+    </div>
+</section>

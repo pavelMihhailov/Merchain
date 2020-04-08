@@ -2592,3 +2592,15 @@ table tbody td {
 table tr:not(.table-head):hover {
     background-color: #d7d7d7 !important;
 }
+
+.pointer {
+    cursor: pointer;
+}
+
+.table-head {
+    background-color: #f51167;
+}
+
+    .table-head th {
+        text-align: center;
+    }

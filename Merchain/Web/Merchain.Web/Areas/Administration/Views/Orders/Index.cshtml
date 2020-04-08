@@ -63,7 +63,7 @@
                     <td>$@order.OrderTotal</td>
                     <td>@order.OrderStatus</td>
                     <td>
-                        <a asp-area="@AreaConstants.Administration" asp-controller="Orders" asp-action="ReviewOrder" asp-route-id="@order.OrderId">
+                        <a asp-area="@AreaConstants.Administration" asp-controller="Orders" asp-action="Details" asp-route-id="@order.OrderId">
                             Review Order
                         </a>
                     </td>
@@ -109,7 +109,3 @@
         </div>
     </div>
 </div>
-
-@section Styles {
-    <link rel="stylesheet" href="~/css/orders.css" />
-}

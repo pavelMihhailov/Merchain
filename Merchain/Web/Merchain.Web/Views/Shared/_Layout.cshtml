@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="~/css/slicknav.min.css" />
     <link rel="stylesheet" href="~/css/jquery-ui.min.css" />
     <link rel="stylesheet" href="~/css/owl.carousel.min.css" />
+    <link rel="stylesheet" href="~/css/main.css" />
     <link rel="stylesheet" href="~/css/animate.css" />
     <link rel="stylesheet" href="~/css/style.css" />
     @RenderSection("Styles", required: false)
@@ -32,7 +33,7 @@
         <div class="loader"></div>
     </div>
 
-    <header class="header-section">
+    <header class="header-section" id="header">
         <div class="header-top">
             <div class="container">
                 <div class="row">
@@ -56,7 +57,13 @@
                                     <i class="flaticon-bag"></i>
                                     <span>0</span>
                                 </div>
-                                <a asp-controller="ShoppingCart" asp-action="Index">Shopping Cart</a>
+                                <a asp-area="" asp-controller="ShoppingCart" asp-action="Index">Shopping Cart</a>
+                            </div>
+                            <div class="up-item ml-2">
+                                <div class="pointer">
+                                    <i class="flaticon-heart"></i>
+                                    <a asp-area="" asp-controller="Products" asp-action="WishList">Wish List</a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -72,15 +79,28 @@
             <partial name="_Navbar" />
         }
     </header>
-    <partial name="_CookieConsentPartial" />
+    <main class="main-content">
+        <partial name="_CookieConsentPartial" />
 
-    <partial name="/Views/Shared/Partials/_SuccessPopup.cshtml"
-             model="this.ViewData[ViewDataConstants.SucccessMessage]" />
-    <partial name="/Views/Shared/Partials/_ErrorPopup.cshtml"
-             model="this.ViewData[ViewDataConstants.ErrorMessage]" />
+        <partial name="/Views/Shared/Partials/_SuccessPopup.cshtml"
+                 model="this.ViewData[ViewDataConstants.SucccessMessage]" />
+        <partial name="/Views/Shared/Partials/_ErrorPopup.cshtml"
+                 model="this.ViewData[ViewDataConstants.ErrorMessage]" />
 
-    @this.RenderBody()
+        @this.RenderBody()
 
+        <div id="addedToWishList" class="modal-window">
+            <div class="text-center">
+                <h1>You liked this product!</h1>
+                <div>You can find it in your wish list.</div>
+            </div>
+        </div>
+        <div id="addedToCart" class="modal-window">
+            <div class="text-center">
+                <h1>Your product is added to the shopping cart!</h1>
+            </div>
+        </div>
+    </main>
     <partial name="_Footer" />
 
     <environment names="Development">

@@ -7,12 +7,14 @@
     using System.Threading.Tasks;
 
     using AutoMapper;
-
+    using Merchain.Common;
+    using Merchain.Common.Extensions;
     using Merchain.Data.Common.Repositories;
     using Merchain.Data.Models;
     using Merchain.Services.CloudinaryService;
     using Merchain.Services.Data.Interfaces;
     using Merchain.Services.Mapping;
+    using Merchain.Web.ViewModels.Products;
     using Microsoft.AspNetCore.Http;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Logging;
@@ -161,6 +163,18 @@
             return products;
         }
 
+        public async Task AddProductToWishList(ISession session, int id)
+        {
+            var product = await this.GetByIdAsync(id);
+
+            if (product != null)
+            {
+                var wishList = SessionExtension.Get<List<LikedProduct>>(session, SessionConstants.WishList);
+
+                this.SetWishListSession(session, id, product, wishList);
+            }
+        }
+
         private async Task AddCategoriesToProduct(IEnumerable<int> categoryIds, Product product)
         {
             foreach (int categoryId in categoryIds)
@@ -171,6 +185,29 @@
                 {
                     product.ProductsCategories.Add(
                         new ProductCategory { Category = category, Product = product });
+                }
+            }
+        }
+
+        private void SetWishListSession(ISession session, int id, Product product, IEnumerable<LikedProduct> wishList)
+        {
+            if (wishList == null)
+            {
+                var likedPoducts = new List<LikedProduct>();
+                likedPoducts.Add(new LikedProduct { Product = product });
+
+                SessionExtension.Set(session, SessionConstants.WishList, likedPoducts);
+            }
+            else
+            {
+                var likedProduct = wishList.FirstOrDefault(x => x.Product.Id == id);
+
+                if (likedProduct == null)
+                {
+                    var wishListItem = new List<LikedProduct>() { new LikedProduct { Product = product } };
+                    wishList = wishList.Concat(wishListItem);
+
+                    SessionExtension.Set(session, SessionConstants.Cart, wishList);
                 }
             }
         }
