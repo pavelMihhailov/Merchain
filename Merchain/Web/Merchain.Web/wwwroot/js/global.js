@@ -33,11 +33,16 @@ $(document).ready(function () {
         $el = $(this);
 
         let productId = $el.attr("id");
+        let quantity = $("input[name='quantity']").val();
+
+        if (!quantity.length) {
+            quantity = 1;
+        }
 
         $.ajax({
             type: "GET",
             url: "/ShoppingCart/AddProduct",
-            data: { 'id': productId },
+            data: { 'id': productId, 'quantity': quantity },
             success: function (res) {
                 $("#addedToCart").addClass("show-modal");
                 refreshCartItems();

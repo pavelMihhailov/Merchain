@@ -20,7 +20,7 @@
             this.productsService = productsService;
         }
 
-        public async Task<Task> AddToCart(ISession session, int id)
+        public async Task<Task> AddToCart(ISession session, int id, int quantity)
         {
             var product = await this.productsService.GetByIdAsync(id);
 
@@ -28,7 +28,7 @@
             {
                 var cartItems = SessionExtension.Get<List<CartItem>>(session, SessionConstants.Cart);
 
-                this.SetSession(session, id, product, cartItems);
+                this.SetSession(session, id, product, quantity, cartItems);
             }
 
             return Task.CompletedTask;
@@ -60,12 +60,12 @@
             return cart != null ? cart.Count : 0;
         }
 
-        private void SetSession(ISession session, int id, Product product, IEnumerable<CartItem> cartItems)
+        private void SetSession(ISession session, int id, Product product, int quantity, IEnumerable<CartItem> cartItems)
         {
             if (cartItems == null)
             {
                 var cart = new List<CartItem>();
-                cart.Add(new CartItem { Product = product, Quantity = 1 });
+                cart.Add(new CartItem { Product = product, Quantity = quantity });
 
                 SessionExtension.Set(session, SessionConstants.Cart, cart);
             }
@@ -75,11 +75,11 @@
 
                 if (productInCart != null)
                 {
-                    productInCart.Quantity++;
+                    productInCart.Quantity += quantity;
                 }
                 else
                 {
-                    var cartItem = new List<CartItem>() { new CartItem { Product = product, Quantity = 1 } };
+                    var cartItem = new List<CartItem>() { new CartItem { Product = product, Quantity = quantity } };
                     cartItems = cartItems.Concat(cartItem);
                 }
 

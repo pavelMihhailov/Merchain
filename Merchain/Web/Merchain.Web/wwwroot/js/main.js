@@ -182,37 +182,48 @@ $(window).on('load', function() {
 		var oldValue = $button.parent().find('input').val();
 
 		var productId = $($button.closest("tr")).attr("id");
+		
+			if ($button.hasClass('inc')) {
+				var newVal = parseFloat(oldValue) + 1;
+				$.ajax({
+					type: "GET",
+					url: "/ShoppingCart/AddProduct",
+					data: { 'id': productId },
+					success: function () {
+					}
+				});
 
-		if ($button.hasClass('inc')) {
-			var newVal = parseFloat(oldValue) + 1;
-			$.ajax({
-				type: "GET",
-				url: "/ShoppingCart/AddProduct",
-				data: { 'id': productId },
-				success: function () {
+				if ($button.parents('.cart-table').length) {
+					refreshCartPrices(productId, false, true);
 				}
-			});
-			refreshCartPrices(productId, false, true);
-		} else {
-			// Don't allow decrementing below zero
-			$.ajax({
-				type: "GET",
-				url: "/ShoppingCart/RemoveProduct",
-				data: { 'id': productId },
-				success: function () {
-				}
-			});
-			if (oldValue > 1) {
-				var newVal = parseFloat(oldValue) - 1;
 
+				$button.parent().find('input').val(newVal);
 			} else {
-				newVal = 0;
-				$($button.closest("tr")).remove();
-				refreshCartItems();
+				// Don't allow decrementing below zero
+				$.ajax({
+					type: "GET",
+					url: "/ShoppingCart/RemoveProduct",
+					data: { 'id': productId },
+					success: function () {
+					}
+				});
+				if (oldValue > 1) {
+					var newVal = parseFloat(oldValue) - 1;
+
+				} else {
+					newVal = 0;
+					$($button.closest("tr")).remove();
+					refreshCartItems();
+				}
+
+				if ($button.parents('.cart-table').length) {
+					refreshCartPrices(productId, false, false);
+				}
+
+				$button.parent().find('input').val(newVal);
 			}
-			refreshCartPrices(productId, false, false);
-		}
-		$button.parent().find('input').val(newVal);
+		
+		
 	});
 
 
