@@ -81,7 +81,7 @@
                 @Html.DisplayNameFor(model => model.OrderStatus)
             </dt>
             <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.OrderStatus)
+                <span class="badge badge-@Model.BadgeStatusCss">@Model.OrderStatus</span>
             </dd>
         </dl>
     </div>

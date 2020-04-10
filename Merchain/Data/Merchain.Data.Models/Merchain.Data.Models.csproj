@@ -20,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Merchain.Common\Merchain.Common.csproj" />
     <ProjectReference Include="..\Merchain.Data.Common\Merchain.Data.Common.csproj" />
   </ItemGroup>
   

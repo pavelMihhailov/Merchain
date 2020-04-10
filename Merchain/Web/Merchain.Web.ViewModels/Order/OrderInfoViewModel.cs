@@ -24,6 +24,24 @@
         [Display(Name = "Address")]
         public string Address { get; set; }
 
+        public string BadgeStatusCss
+        {
+            get
+            {
+                switch (this.OrderStatus)
+                {
+                    case Common.Order.OrderStatus.Shipped:
+                        return "success";
+                    case Common.Order.OrderStatus.Accepted:
+                        return "primary";
+                    case Common.Order.OrderStatus.Pending:
+                        return "warning";
+                    default:
+                        return string.Empty;
+                }
+            }
+        }
+
         public IEnumerable<OrderedProductsViewModel> ProductsOrdered { get; set; }
     }
 }
