@@ -39,8 +39,10 @@
 
         public void ConfigureServices(IServiceCollection services)
         {
+            var connectionString = this.configuration.GetConnectionString("DefaultConnection");
+
             services.AddDbContext<ApplicationDbContext>(
-                options => options.UseSqlServer(this.configuration.GetConnectionString("DefaultConnection")));
+                options => options.UseSqlServer(connectionString));
 
             services.AddDefaultIdentity<ApplicationUser>(IdentityOptionsProvider.GetIdentityOptions)
                 .AddRoles<ApplicationRole>().AddEntityFrameworkStores<ApplicationDbContext>();
@@ -53,6 +55,15 @@
                     });
 
             services.AddControllersWithViews();
+
+            services.AddDistributedSqlServerCache(
+                options =>
+                {
+                    options.ConnectionString = connectionString;
+                    options.SchemaName = "dbo";
+                    options.TableName = "Cache";
+                });
+
             services.AddSession(options =>
             {
                 options.Cookie.HttpOnly = true;

@@ -38,3 +38,14 @@
         font-size: 150%;
         margin: 0 0 15px;
     }
+
+    .main-content {
+        padding-top: 160px;
+    }
+
+    .header-section {
+        position:fixed;
+        background: white;
+        z-index: 9999;
+        width: 100%;
+    }

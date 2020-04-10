@@ -207,7 +207,7 @@
                     var wishListItem = new List<LikedProduct>() { new LikedProduct { Product = product } };
                     wishList = wishList.Concat(wishListItem);
 
-                    SessionExtension.Set(session, SessionConstants.Cart, wishList);
+                    SessionExtension.Set(session, SessionConstants.WishList, wishList);
                 }
             }
         }
