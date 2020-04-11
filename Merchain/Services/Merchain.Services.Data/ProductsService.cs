@@ -64,6 +64,15 @@
             return await this.productsRepository.GetById(id);
         }
 
+        public T GetById<T>(int id)
+        {
+            var product = this.productsRepository.All()
+                .Where(x => x.Id == id)
+                .To<T>().FirstOrDefault();
+
+            return product;
+        }
+
         public async Task<IEnumerable<Product>> GetAllAsync()
         {
             return await this.productsRepository.All().ToListAsync();

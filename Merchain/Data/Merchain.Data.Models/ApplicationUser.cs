@@ -52,5 +52,7 @@ namespace Merchain.Data.Models
         public virtual ICollection<IdentityUserLogin<string>> Logins { get; set; }
 
         public virtual ICollection<Order> Orders { get; set; }
+
+        public virtual ICollection<Review> Reviews { get; set; }
     }
 }

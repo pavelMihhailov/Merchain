@@ -1286,23 +1286,24 @@ ol {
         .category-menu li a.is-active {
             color: #f51167;
         }
+
             .category-menu li a.is-active:after {
                 color: #f51167;
             }
 
-            .category-menu li .sub-menu {
-                list-style: none;
-                overflow: hidden;
-                height: 0;
-                -webkit-transform: rotateX(90deg);
-                transform: rotateX(90deg);
-                opacity: 0;
-                -webkit-transition: opacity 0.4s, -webkit-transform 0.4s;
-                transition: opacity 0.4s, -webkit-transform 0.4s;
-                -o-transition: transform 0.4s, opacity 0.4s;
-                transition: transform 0.4s, opacity 0.4s;
-                transition: transform 0.4s, opacity 0.4s, -webkit-transform 0.4s;
-            }
+    .category-menu li .sub-menu {
+        list-style: none;
+        overflow: hidden;
+        height: 0;
+        -webkit-transform: rotateX(90deg);
+        transform: rotateX(90deg);
+        opacity: 0;
+        -webkit-transition: opacity 0.4s, -webkit-transform 0.4s;
+        transition: opacity 0.4s, -webkit-transform 0.4s;
+        -o-transition: transform 0.4s, opacity 0.4s;
+        transition: transform 0.4s, opacity 0.4s;
+        transition: transform 0.4s, opacity 0.4s, -webkit-transform 0.4s;
+    }
 
         .category-menu li .sub-menu li a {
             padding-left: 45px;
@@ -1579,13 +1580,13 @@ ol {
     margin-bottom: 15px;
 }
 
-    .product-details .p-rating i {
-        color: #f51167;
-    }
+.p-rating i {
+    color: #f51167;
+}
 
-        .product-details .p-rating i.fa-fade {
-            color: #e6e6e6;
-        }
+    .p-rating i.fa-fade {
+        color: #e6e6e6;
+    }
 
 .product-details .p-review {
     margin-bottom: 30px;
@@ -2585,9 +2586,9 @@ table tbody td {
     text-align: center;
 }
 
-.custom-form input[type=checkbox] {
-    height: 20px;
-}
+    .custom-form input[type=checkbox] {
+        height: 20px;
+    }
 
 table tr:not(.table-head):hover {
     background-color: #d7d7d7 !important;

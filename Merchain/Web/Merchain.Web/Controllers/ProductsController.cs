@@ -17,15 +17,18 @@
     {
         private readonly IProductsService productsService;
         private readonly ICategoriesService categoriesService;
+        private readonly IReviewsService reviewsService;
         private readonly ILogger<ProductsController> logger;
 
         public ProductsController(
             IProductsService productsService,
             ICategoriesService categoriesService,
+            IReviewsService reviewsService,
             ILogger<ProductsController> logger)
         {
             this.productsService = productsService;
             this.categoriesService = categoriesService;
+            this.reviewsService = reviewsService;
             this.logger = logger;
         }
 
@@ -74,10 +77,14 @@
 
             var product = await this.productsService.GetByIdAsync((int)id);
             var relatedProducts = await this.productsService.GetAllAsync<ProductDefaultViewModel>();
+            var reviewsCount = this.reviewsService.GetProductReviewsCount((int)id);
+            var avgStars = this.reviewsService.AvgProductStars((int)id);
 
             var viewModel = new DetailsPageViewModel()
             {
                 Product = product,
+                ReviewsCount = reviewsCount,
+                AvgStars = avgStars,
                 RelatedProducts = relatedProducts.Take(5),
             };
 

@@ -31,14 +31,17 @@
                 <h3 class="p-price">$@Model.Product.Price</h3>
                 <h4 class="p-stock">Available: <span>In Stock</span></h4>
                 <div class="p-rating">
-                    <i class="fa fa-star-o"></i>
-                    <i class="fa fa-star-o"></i>
-                    <i class="fa fa-star-o"></i>
-                    <i class="fa fa-star-o"></i>
-                    <i class="fa fa-star-o fa-fade"></i>
+                    @for (int i = 1; i <= 5; i++)
+                    {
+                        <i class="fa fa-star-o @(Model.AvgStars < i ? "fa-fade" : "")"></i>
+                    }
                 </div>
                 <div class="p-review">
-                    <a href="">0 reviews</a>|<a href="">Add your review</a>
+                    <a asp-controller="Reviews" asp-action="ProductReviews"
+                       asp-route-productId="@Model.Product.Id">@Model.ReviewsCount reviews</a>
+                    |
+                    <a asp-controller="Reviews" asp-action="AddReview"
+                       asp-route-id="@Model.Product.Id">Add your review</a>
                 </div>
                 <div class="quantity">
                     <p>Quantity</p>

@@ -18,6 +18,8 @@
 
         Task<Product> GetByIdAsync(int id);
 
+        T GetById<T>(int id);
+
         Task<IEnumerable<Product>> GetAllAsync();
 
         Task<IEnumerable<T>> GetAllAsync<T>();

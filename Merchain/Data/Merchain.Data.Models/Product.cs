@@ -34,5 +34,7 @@
         public virtual ICollection<ProductCategory> ProductsCategories { get; set; }
 
         public virtual ICollection<OrderItem> CartItems { get; set; }
+
+        public virtual ICollection<Review> Reviews { get; set; }
     }
 }

@@ -102,6 +102,7 @@
             services.AddTransient<IEmailSender, NullMessageSender>();
             services.AddTransient<ISettingsService, SettingsService>();
             services.AddTransient<IProductsService, ProductsService>();
+            services.AddTransient<IReviewsService, ReviewsService>();
             services.AddTransient<ICategoriesService, CategoriesService>();
             services.AddTransient<ICartService, CartService>();
             services.AddTransient<IOrderService, OrderService>();

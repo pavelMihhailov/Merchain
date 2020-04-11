@@ -35,7 +35,7 @@ $(document).ready(function () {
         let productId = $el.attr("id");
         let quantity = $("input[name='quantity']").val();
 
-        if (!quantity.length) {
+        if (quantity === undefined) {
             quantity = 1;
         }
 

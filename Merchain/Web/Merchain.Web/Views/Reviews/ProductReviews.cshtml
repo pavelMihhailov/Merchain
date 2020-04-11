@@ -1,0 +1,62 @@
+﻿@model ProductReviewsViewModel
+
+@{
+    this.ViewData["Title"] = "Product Reviews";
+}
+
+<div class="page-top-info">
+    <div class="container">
+        <h4>Add Review</h4>
+        <div class="site-pagination">
+            <a asp-controller="Home" asp-action="Index">Home</a> /
+            <a asp-controller="Products" asp-action="Index">Products</a> /
+            <a asp-controller="Products" asp-action="Details"
+               asp-route-id="@Model.Product.Id">@Model.Product.Name</a> /
+            <a>Reviews</a>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="mb-3 mt-3">
+        <div class="row">
+            <div class="col-lg-4 col-sm-6">
+                <partial name="/Views/Products/Partials/_Product.cshtml" model="Model.Product" />
+            </div>
+            <div class="col-lg-7 pt-5">
+                <h3>@Model.Reviews.Count() Reviews</h3>
+                <a asp-controller="Reviews" asp-action="AddReview" asp-route-id="@Model.Product.Id" class="mt-2">
+                    Add Review
+                </a>
+                <div class="review-block mt-3">
+                    @foreach (var review in Model.Reviews)
+                    {
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <img src="" class="img-rounded">
+                                <div class="review-block-name"><a>@review.User.UserName</a></div>
+                                <div class="review-block-date">@review.CreatedOn.ToLocalTime()</div>
+                            </div>
+                            <div class="col-sm-9">
+                                <div class="review-block-rate">
+                                    <div class="p-rating">
+                                        @for (int i = 1; i <= 5; i++)
+                                        {
+                                            <i class="fa fa-star-o @(review.Stars < i ? "fa-fade" : "")"></i>
+                                        }
+                                    </div>
+                                </div>
+                                <div class="review-block-title">@review.Title</div>
+                                <div class="review-block-description">@review.Content</div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/reviews.css" />
+}

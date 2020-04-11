@@ -1,0 +1,82 @@
+﻿@model AddReviewInputModel
+
+@{
+    this.ViewData["Title"] = "Add Review";
+}
+
+<div class="page-top-info">
+    <div class="container">
+        <h4>Add Review</h4>
+        <div class="site-pagination">
+            <a asp-controller="Home" asp-action="Index">Home</a> /
+            <a asp-controller="Products" asp-action="Index">Products</a> /
+            <a asp-controller="Products" asp-action="Details" asp-route-id="@Model.Product.Id">@Model.Product.Name</a> /
+            <a>Add Review</a>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="mb-3 mt-3">
+        <form method="post" class="contact-form"
+              asp-controller="Reviews" asp-action="AddReview">
+            <div class="row">
+                <div class="col-lg-4 col-sm-6">
+                    <partial name="/Views/Products/Partials/_Product.cshtml" model="Model.Product" />
+                </div>
+                <div class="col-lg-7 pt-5">
+                    <div class="cf-radio-btns p-rating">
+                        <div class="cfr-item">
+                            <input asp-for="Stars" type="radio" id="oneStar" value="1">
+                            <label for="oneStar">
+                                <i class="fa fa-star-o"></i>
+                            </label>
+                        </div>
+                        <div class="cfr-item">
+                            <input asp-for="Stars" type="radio" id="twoStars" value="2">
+                            <label for="twoStars">
+                                <i class="fa fa-star-o"></i>
+                                <i class="fa fa-star-o"></i>
+                            </label>
+                        </div>
+                        <div class="cfr-item">
+                            <input asp-for="Stars" type="radio" id="threeStars" value="3">
+                            <label for="threeStars">
+                                <i class="fa fa-star-o"></i>
+                                <i class="fa fa-star-o"></i>
+                                <i class="fa fa-star-o"></i>
+                            </label>
+                        </div>
+                        <div class="cfr-item">
+                            <input asp-for="Stars" type="radio" id="fourStars" value="4">
+                            <label for="fourStars">
+                                <i class="fa fa-star-o"></i>
+                                <i class="fa fa-star-o"></i>
+                                <i class="fa fa-star-o"></i>
+                                <i class="fa fa-star-o"></i>
+                            </label>
+                        </div>
+                        <div class="cfr-item">
+                            <input asp-for="Stars" type="radio" id="fiveStars" value="5">
+                            <label for="fiveStars">
+                                <i class="fa fa-star-o"></i>
+                                <i class="fa fa-star-o"></i>
+                                <i class="fa fa-star-o"></i>
+                                <i class="fa fa-star-o"></i>
+                                <i class="fa fa-star-o"></i>
+                            </label>
+                        </div>
+                        <span asp-validation-for="Stars" class="text-danger"></span>
+                    </div>
+                    <div class="text-center">
+                        <input asp-for="Title" placeholder="Title of the review">
+                        <span asp-validation-for="Title" class="text-danger"></span>
+                        <textarea asp-for="Content" placeholder="Content"></textarea>
+                        <input type="hidden" name="ProductId" value="@Model.Product.Id" />
+                        <button class="site-btn" type="submit">Submit Review</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
