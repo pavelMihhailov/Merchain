@@ -28,9 +28,9 @@
                 <a asp-controller="Reviews" asp-action="AddReview" asp-route-id="@Model.Product.Id" class="mt-2">
                     Add Review
                 </a>
-                <div class="review-block mt-3">
-                    @foreach (var review in Model.Reviews)
-                    {
+                @foreach (var review in Model.Reviews)
+                {
+                    <div class="review-block mt-3">
                         <div class="row">
                             <div class="col-sm-3">
                                 <img src="" class="img-rounded">
@@ -50,8 +50,8 @@
                                 <div class="review-block-description">@review.Content</div>
                             </div>
                         </div>
-                    }
-                </div>
+                    </div>
+                }
             </div>
         </div>
     </div>

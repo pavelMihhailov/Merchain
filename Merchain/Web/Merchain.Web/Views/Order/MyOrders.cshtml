@@ -47,7 +47,9 @@
                         </table>
                     </td>
                     <td>$@order.OrderTotal</td>
-                    <td>@order.OrderStatus</td>
+                    <td>
+                        <span class="badge badge-@order.BadgeStatusCss">@order.OrderStatus</span>
+                    </td>
                 </tr>
             }
         </tbody>
