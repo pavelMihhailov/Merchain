@@ -64,6 +64,8 @@
                     options.TableName = "Cache";
                 });
 
+            services.AddResponseCaching();
+
             services.AddSession(options =>
             {
                 options.Cookie.HttpOnly = true;
@@ -108,6 +110,7 @@
             services.AddTransient<IOrderService, OrderService>();
             services.AddTransient<IOrderItemService, OrderItemService>();
             services.AddTransient<CloudinaryService>();
+            services.AddApplicationInsightsTelemetry();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -119,11 +122,7 @@
             using (var serviceScope = app.ApplicationServices.CreateScope())
             {
                 var dbContext = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-
-                if (env.IsDevelopment())
-                {
-                    dbContext.Database.Migrate();
-                }
+                dbContext.Database.Migrate();
 
                 new ApplicationDbContextSeeder().SeedAsync(dbContext, serviceScope.ServiceProvider).GetAwaiter().GetResult();
             }
@@ -145,6 +144,7 @@
 
             app.UseRouting();
 
+            app.UseResponseCaching();
             app.UseSession();
 
             app.UseAuthentication();
