@@ -16,33 +16,6 @@
             }
         });
     });
-
-    $(".checkout-btn").on("click", function () {
-        let items = $(".cart-table-warp").find("tbody tr");
-
-        let form = $("form[id='checkoutForm']");
-
-        items.each(function (i) {
-            $el = $(this);
-
-            let productId = $el.attr("id");
-            let quantity = $($el.find("input[name='Quantity']")[0]).val();
-
-            $('<input>').attr({
-                type: 'hidden',
-                name: 'CartItems[' + i + '].ProductId',
-                value: productId
-            }).appendTo(form);
-
-            $('<input>').attr({
-                type: 'hidden',
-                name: 'CartItems[' + i + '].Quantity',
-                value: quantity
-            }).appendTo(form);
-        });
-
-        form.submit();
-    });
 });
 
 function refreshCartPrices(id, isRemoved, increment) {

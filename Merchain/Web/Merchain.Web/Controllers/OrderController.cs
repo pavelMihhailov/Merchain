@@ -5,6 +5,7 @@
     using System.Threading.Tasks;
 
     using Merchain.Common;
+    using Merchain.Common.Extensions;
     using Merchain.Common.Order;
     using Merchain.Services.Data.Interfaces;
     using Merchain.Web.ViewModels.Order;
@@ -44,20 +45,17 @@
             return this.View(viewModel);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Index(OrderInputModel inputModel)
+        [HttpGet]
+        public IActionResult Index()
         {
-            if (this.ModelState.IsValid)
+            var cartItems = SessionExtension.Get<List<CartItem>>(this.HttpContext.Session, SessionConstants.Cart);
+
+            var viewModel = new OrderViewModel()
             {
-                var viewModel = new OrderViewModel()
-                {
-                    CartItems = await this.FillCartItems(inputModel),
-                };
+                CartItems = cartItems,
+            };
 
-                return this.View(viewModel);
-            }
-
-            return this.NotFound();
+            return this.View(viewModel);
         }
 
         [HttpPost]
@@ -105,23 +103,6 @@
 
                 return this.RedirectToAction("Index", "Home");
             }
-        }
-
-        private async Task<List<CartItem>> FillCartItems(OrderInputModel inputModel)
-        {
-            var cartItems = new List<CartItem>();
-
-            if (inputModel.CartItems != null)
-            {
-                foreach (var item in inputModel.CartItems)
-                {
-                    var product = await this.productsService.GetByIdAsync(item.ProductId);
-
-                    cartItems.Add(new CartItem() { Product = product, Quantity = item.Quantity });
-                }
-            }
-
-            return cartItems;
         }
     }
 }
