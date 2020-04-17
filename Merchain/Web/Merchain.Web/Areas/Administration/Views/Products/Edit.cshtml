@@ -1,4 +1,4 @@
-﻿@model Product
+﻿@model EditProductViewModel
 
 @{
     ViewData["Title"] = "Edit";
@@ -14,31 +14,36 @@
             <form asp-action="Edit">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group">
-                    <label asp-for="Name" class="control-label"></label>
-                    <input asp-for="Name" class="form-control" />
-                    <span asp-validation-for="Name" class="text-danger"></span>
+                    <label asp-for="Product.Name" class="control-label"></label>
+                    <input asp-for="Product.Name" class="form-control" />
+                    <span asp-validation-for="Product.Name" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="Description" class="control-label"></label>
-                    <input asp-for="Description" class="form-control" />
-                    <span asp-validation-for="Description" class="text-danger"></span>
+                    <label asp-for="Product.Description" class="control-label"></label>
+                    <input asp-for="Product.Description" class="form-control" />
+                    <span asp-validation-for="Product.Description" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="ImageUrl" class="control-label"></label>
-                    <input asp-for="ImageUrl" class="form-control" />
-                    <span asp-validation-for="ImageUrl" class="text-danger"></span>
+                    <label asp-for="Product.ImageUrl" class="control-label"></label>
+                    <input asp-for="Product.ImageUrl" class="form-control" />
+                    <span asp-validation-for="Product.ImageUrl" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="Price" class="control-label"></label>
-                    <input asp-for="Price" class="form-control" />
-                    <span asp-validation-for="Price" class="text-danger"></span>
-                </div>
-                <input type="hidden" asp-for="Id" />
-                <div class="form-group">
-                    <label class="control-label">Created On: @Model.CreatedOn</label>
+                    <label asp-for="Product.Price" class="control-label"></label>
+                    <input asp-for="Product.Price" class="form-control" />
+                    <span asp-validation-for="Product.Price" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label class="control-label">Modified On: @Model.ModifiedOn</label>
+                    <label asp-for="Categories">Categories</label>
+                    <select name="selectedCategories" asp-for="SelectedCategories" class="form-control"
+                            asp-items="Model.Categories" multiple=""></select>
+                </div>
+                <input type="hidden" asp-for="Product.Id" />
+                <div class="form-group">
+                    <label class="control-label">Created On: @Model.Product.CreatedOn</label>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Modified On: @Model.Product.ModifiedOn</label>
                 </div>
                 <div class="form-group">
                     <input type="submit" value="Save" class="btn btn-primary" />

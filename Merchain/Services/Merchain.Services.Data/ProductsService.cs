@@ -124,8 +124,13 @@
             }
         }
 
-        public async Task<Task> Edit(Product product)
+        public async Task<Task> Edit(Product product, IEnumerable<int> categoryIds)
         {
+            if (categoryIds != null)
+            {
+                await this.UpdateProductCategories(categoryIds, product);
+            }
+
             this.productsRepository.Update(product);
 
             await this.productsRepository.SaveChangesAsync();
@@ -190,12 +195,40 @@
             {
                 Category category = await this.categoryRepository.GetById(categoryId);
 
-                if (category != null)
+                var isCategoryAlreadyAdded = this.productsCategoriesRepo.All()
+                    .Any(x => x.CategoryId == categoryId && x.ProductId == product.Id);
+
+                if (category != null && !isCategoryAlreadyAdded)
                 {
                     product.ProductsCategories.Add(
                         new ProductCategory { Category = category, Product = product });
                 }
             }
+        }
+
+        private async Task UpdateProductCategories(IEnumerable<int> categoryIds, Product product)
+        {
+            var currentCategories = await this.productsCategoriesRepo.All()
+                .Where(x => x.ProductId == product.Id)
+                .ToListAsync();
+
+            if (categoryIds == null)
+            {
+                categoryIds = new List<int>();
+            }
+
+            // Remove unselected categories if any
+            foreach (var currentCategory in currentCategories)
+            {
+                if (!categoryIds.Contains(currentCategory.CategoryId))
+                {
+                    this.productsCategoriesRepo.Delete(currentCategory);
+                }
+            }
+
+            await this.productsCategoriesRepo.SaveChangesAsync();
+
+            await this.AddCategoriesToProduct(categoryIds, product);
         }
 
         private void SetWishListSession(ISession session, int id, Product product, IEnumerable<LikedProduct> wishList)

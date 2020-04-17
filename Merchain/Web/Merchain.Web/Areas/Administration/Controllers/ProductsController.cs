@@ -1,30 +1,36 @@
 ﻿namespace Merchain.Web.Areas.Administration.Controllers
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
+    using Merchain.Data.Common.Repositories;
     using Merchain.Data.Models;
     using Merchain.Services.Data.Interfaces;
     using Merchain.Web.ViewModels.Administration.Categories;
     using Merchain.Web.ViewModels.Administration.Products;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.Rendering;
+    using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Logging;
 
     public class ProductsController : AdministrationController
     {
         private readonly IProductsService productsService;
         private readonly ICategoriesService categoriesService;
+        private readonly IRepository<ProductCategory> productsCategoriesRepo;
         private readonly ILogger<ProductsController> logger;
 
         public ProductsController(
             IProductsService productsService,
             ICategoriesService categoriesService,
+            IRepository<ProductCategory> productsCategoriesRepo,
             ILogger<ProductsController> logger)
         {
             this.productsService = productsService;
             this.categoriesService = categoriesService;
+            this.productsCategoriesRepo = productsCategoriesRepo;
             this.logger = logger;
         }
 
@@ -109,11 +115,31 @@
                 return this.NotFound();
             }
 
-            return this.View(product);
+            var viewModel = new EditProductViewModel()
+            {
+                Product = product,
+                Categories = this.categoriesService
+                                    .GetAll<CategoriesViewModel>()
+                                    .Select(x =>
+                                        new SelectListItem
+                                        {
+                                            Text = x.Title,
+                                            Value = x.Id.ToString(),
+                                        }),
+                SelectedCategories = await this.productsCategoriesRepo.All()
+                                            .Where(x => x.ProductId == product.Id)
+                                            .Select(x => x.CategoryId)
+                                            .ToArrayAsync(),
+            };
+
+            return this.View(viewModel);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,ImageUrl,Price")] Product product)
+        public async Task<IActionResult> Edit(
+            int id,
+            [Bind("Id,Name,Description,ImageUrl,Price")] Product product,
+            IEnumerable<int> selectedCategories)
         {
             if (id != product.Id)
             {
@@ -122,7 +148,7 @@
 
             if (this.ModelState.IsValid)
             {
-                await this.productsService.Edit(product);
+                await this.productsService.Edit(product, selectedCategories);
 
                 return this.RedirectToAction(nameof(this.Index));
             }

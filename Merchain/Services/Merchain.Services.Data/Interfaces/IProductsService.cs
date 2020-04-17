@@ -33,7 +33,7 @@
             IFormFile image,
             IEnumerable<int> categoryIds);
 
-        Task<Task> Edit(Product product);
+        Task<Task> Edit(Product product, IEnumerable<int> categoryIds);
 
         Task<Task> Delete(Product product);
 
