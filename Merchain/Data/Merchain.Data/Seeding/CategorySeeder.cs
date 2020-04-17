@@ -17,6 +17,7 @@
                 "Shoes",
                 "Underwear",
                 "Polos",
+                "Top",
             };
 
             foreach (var category in categories)
