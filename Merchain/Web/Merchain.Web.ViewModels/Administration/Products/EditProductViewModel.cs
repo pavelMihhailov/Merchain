@@ -1,6 +1,7 @@
 ﻿namespace Merchain.Web.ViewModels.Administration.Products
 {
     using System.Collections.Generic;
+    using System.Linq;
 
     using Merchain.Data.Models;
     using Microsoft.AspNetCore.Mvc.Rendering;
@@ -12,5 +13,13 @@
         public int[] SelectedCategories { get; set; }
 
         public IEnumerable<SelectListItem> Categories { get; set; }
+
+        public IEnumerable<string> Images
+        {
+            get
+            {
+                return this.Product.ImagesUrls.Split(';').ToList();
+            }
+        }
     }
 }

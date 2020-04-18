@@ -10,6 +10,7 @@
     using Merchain.Services.Data.Interfaces;
     using Merchain.Web.ViewModels.Administration.Categories;
     using Merchain.Web.ViewModels.Administration.Products;
+    using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.Rendering;
     using Microsoft.EntityFrameworkCore;
@@ -87,7 +88,7 @@
                         viewModel.Name,
                         viewModel.Description,
                         viewModel.Price,
-                        viewModel.Image,
+                        viewModel.Images,
                         viewModel.Categories);
 
                     this.ViewBag.Message = "Succesfully created product.";
@@ -138,7 +139,8 @@
         [HttpPost]
         public async Task<IActionResult> Edit(
             int id,
-            [Bind("Id,Name,Description,ImageUrl,Price")] Product product,
+            [Bind("Id,Name,Description,ImagesUrls,Price")] Product product,
+            IEnumerable<IFormFile> addedImages,
             IEnumerable<int> selectedCategories)
         {
             if (id != product.Id)
@@ -148,7 +150,7 @@
 
             if (this.ModelState.IsValid)
             {
-                await this.productsService.Edit(product, selectedCategories);
+                await this.productsService.Edit(product, addedImages, selectedCategories);
 
                 return this.RedirectToAction(nameof(this.Index));
             }

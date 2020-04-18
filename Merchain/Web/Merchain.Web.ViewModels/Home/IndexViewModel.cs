@@ -9,8 +9,6 @@
     {
         public IEnumerable<ProductDefaultViewModel> LatestProducts { get; set; }
 
-        public IEnumerable<ProductDefaultViewModel> MostLikedProducts { get; set; }
-
         public IEnumerable<CategoryViewModel> Categories { get; set; }
     }
 }

@@ -21,7 +21,7 @@
                     @Html.DisplayNameFor(model => model.Description)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.ImageUrl)
+                    @Html.DisplayNameFor(model => model.ImagesUrls)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Price)
@@ -46,7 +46,7 @@
                         @Html.DisplayFor(modelItem => product.Description)
                     </td>
                     <td>
-                        <img src="@product.ImageUrl" width="120">
+                        <img src="@product.ImagesUrls.Split(';')[0]" width="120">
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => product.Price)

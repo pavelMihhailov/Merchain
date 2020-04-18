@@ -30,10 +30,10 @@
             string name,
             string description,
             decimal price,
-            IFormFile image,
+            IEnumerable<IFormFile> images,
             IEnumerable<int> categoryIds);
 
-        Task<Task> Edit(Product product, IEnumerable<int> categoryIds);
+        Task<Task> Edit(Product product, IEnumerable<IFormFile> addedImages, IEnumerable<int> categoryIds);
 
         Task<Task> Delete(Product product);
 

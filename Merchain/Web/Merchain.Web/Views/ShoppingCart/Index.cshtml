@@ -48,7 +48,7 @@
                                         <tr id="@product.Id">
                                             <td><img src="~/img/icons/clear.svg" class="remove-icon mr-2" /></td>
                                             <td class="product-col">
-                                                <img src="@product.ImageUrl" alt="@product.Name">
+                                                <img src="@product.ImagesUrls.Split(';')[0]" alt="@product.Name">
                                                 <div class="pc-title">
                                                     <h4>@product.Name</h4>
                                                     <p>$@product.Price</p>

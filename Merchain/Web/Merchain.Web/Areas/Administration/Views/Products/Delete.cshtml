@@ -26,10 +26,13 @@
                 @Html.DisplayFor(model => model.Description)
             </dd>
             <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.ImageUrl)
+                @Html.DisplayNameFor(model => model.ImagesUrls)
             </dt>
             <dd class="col-sm-10">
-                <img src="@Model.ImageUrl"/>
+                @foreach (var image in Model.ImagesUrls.Split(';'))
+                {
+                    <img src="@image" />
+                }
             </dd>
             <dt class="col-sm-2">
                 @Html.DisplayNameFor(model => model.Price)

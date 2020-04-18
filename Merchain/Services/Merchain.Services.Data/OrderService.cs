@@ -148,7 +148,7 @@
                     {
                         ProductId = productItem.ProductId,
                         Name = matchingProduct.Name,
-                        ImageUrl = matchingProduct.ImageUrl,
+                        ImageUrl = matchingProduct.ImagesUrls?.Split(';').ToList().FirstOrDefault(),
                         Price = matchingProduct.Price,
                         Quantity = productItem.Quantity,
                     };

@@ -11,7 +11,7 @@
     <hr />
     <div class="row">
         <div class="col-md-4">
-            <form asp-action="Edit">
+            <form asp-action="Edit" enctype="multipart/form-data">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group">
                     <label asp-for="Product.Name" class="control-label"></label>
@@ -24,9 +24,17 @@
                     <span asp-validation-for="Product.Description" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="Product.ImageUrl" class="control-label"></label>
-                    <input asp-for="Product.ImageUrl" class="form-control" />
-                    <span asp-validation-for="Product.ImageUrl" class="text-danger"></span>
+                    @foreach (var image in Model.Images)
+                    {
+                        <img src="@image" width="300" />
+                        <button class="btn-warning">Remove image</button>
+                    }
+                    <br />
+                    <br />
+                    <input type="hidden" asp-for="Product.ImagesUrls" class="form-control-file">
+                    <label for="addedImages">Add More Images</label>
+                    <input type="file" multiple name="addedImages" class="form-control-file"
+                           id="addedImages" aria-describedby="fileHelp">
                 </div>
                 <div class="form-group">
                     <label asp-for="Product.Price" class="control-label"></label>

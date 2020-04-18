@@ -23,7 +23,17 @@
         <div class="row">
             <div class="col-lg-6">
                 <div class="product-pic-zoom">
-                    <img class="product-big-img" src="@Model.Product.ImageUrl" alt="@Model.Product.Name">
+                    <img class="product-big-img" src="@Model.ImageUrls?.FirstOrDefault()" alt="@Model.Product.Name">
+                </div>
+                <div class="product-thumbs" tabindex="1" style="overflow: hidden; outline: none;">
+                    <div class="product-thumbs-track">
+                        @foreach (var image in Model.ImageUrls)
+                        {
+                            <div class="pt" data-imgbigurl="@image">
+                                <img src="@image" width="116" alt="">
+                            </div>
+                        }
+                    </div>
                 </div>
             </div>
             <div class="col-lg-6 product-details">

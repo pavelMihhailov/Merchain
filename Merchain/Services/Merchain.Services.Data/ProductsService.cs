@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Linq.Expressions;
+    using System.Text;
     using System.Threading.Tasks;
 
     using AutoMapper;
@@ -98,7 +99,7 @@
             string name,
             string description,
             decimal price,
-            IFormFile image,
+            IEnumerable<IFormFile> images,
             IEnumerable<int> categoryIds)
         {
             try
@@ -109,9 +110,18 @@
                     Description = description,
                     Price = price,
                     Likes = 0,
-                    ImageUrl = await this.cloudinaryService.UploadImage(image),
                     ProductsCategories = new List<ProductCategory>(),
                 };
+
+                var imagesUrls = new StringBuilder();
+
+                foreach (var image in images)
+                {
+                    var imageUrl = await this.cloudinaryService.UploadImage(image);
+                    imagesUrls.Append(imageUrl);
+                }
+
+                product.ImagesUrls = imagesUrls.ToString();
 
                 await this.AddCategoriesToProduct(categoryIds, product);
 
@@ -124,11 +134,31 @@
             }
         }
 
-        public async Task<Task> Edit(Product product, IEnumerable<int> categoryIds)
+        public async Task<Task> Edit(Product product, IEnumerable<IFormFile> addedImages, IEnumerable<int> categoryIds)
         {
             if (categoryIds != null)
             {
                 await this.UpdateProductCategories(categoryIds, product);
+            }
+
+            if (addedImages != null)
+            {
+                var imagesUrls = new StringBuilder();
+
+                if (!string.IsNullOrWhiteSpace(product.ImagesUrls))
+                {
+                    imagesUrls.Append(product.ImagesUrls);
+                }
+
+                foreach (var image in addedImages)
+                {
+                    var imageUrl = await this.cloudinaryService.UploadImage(image);
+
+                    imagesUrls.Append(product.ImagesUrls.EndsWith(';') ? string.Empty : ";");
+                    imagesUrls.Append(imageUrl);
+                }
+
+                product.ImagesUrls = imagesUrls.ToString();
             }
 
             this.productsRepository.Update(product);

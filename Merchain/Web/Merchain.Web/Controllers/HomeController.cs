@@ -29,11 +29,7 @@
         public IActionResult Index()
         {
             var latestProducts = this.productsService
-                .GetAllDescending<ProductDefaultViewModel>(x => x.CreatedOn)
-                .Take(5);
-
-            var mostLikedProducts = this.productsService
-                .GetAllDescending<ProductDefaultViewModel>(x => x.Likes)
+                .GetAllDescending<ProductDefaultViewModel>(x => x.ModifiedOn)
                 .Take(5);
 
             var categories = this.categoriesService.GetAll<CategoryViewModel>();
@@ -41,7 +37,6 @@
             var viewModel = new IndexViewModel()
             {
                 LatestProducts = latestProducts,
-                MostLikedProducts = mostLikedProducts,
                 Categories = categories,
             };
 

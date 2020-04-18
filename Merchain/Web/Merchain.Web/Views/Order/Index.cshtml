@@ -110,7 +110,9 @@
                         @foreach (var item in Model.CartItems)
                         {
                             <li>
-                                <div class="pl-thumb"><img src="@item.Product.ImageUrl" alt="@item.Product.Name"></div>
+                                <div class="pl-thumb">
+                                    <img src="@item.Product.ImagesUrls.Split(';')[0]" alt="@item.Product.Name">
+                                </div>
                                 <h6>@item.Product.Name <p style="color: red">x @item.Quantity</p></h6>
                                 <p>$@item.Product.Price</p>
                             </li>

@@ -10,7 +10,7 @@
 
         public string Description { get; set; }
 
-        public IFormFile Image { get; set; }
+        public IEnumerable<IFormFile> Images { get; set; }
 
         public decimal Price { get; set; }
 
