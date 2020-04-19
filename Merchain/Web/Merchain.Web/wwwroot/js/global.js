@@ -52,6 +52,29 @@ $(document).ready(function () {
             }
         });
     });
+
+    $("#removeImage").on("click", function (e) {
+        e.preventDefault();
+
+        $el = $(this);
+
+        var imageUrl = $($el.siblings())[0].src;
+
+        var $inputImages = $("input[name='Product.ImagesUrls']");
+        var inputImagesVal = $inputImages.val();
+
+        var splitterIndex = inputImagesVal.indexOf(";");
+
+        var splitter = "";
+        if (splitterIndex !== -1) {
+            splitter = ";";
+        }
+
+        var resultUrls = inputImagesVal.replace(imageUrl + splitter, "");
+
+        $inputImages.val(resultUrls);
+        $el.parents("div")[0].remove();
+    });
 });
 
 function refreshCartItems() {

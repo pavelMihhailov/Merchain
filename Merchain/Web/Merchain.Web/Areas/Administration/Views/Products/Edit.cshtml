@@ -26,10 +26,14 @@
                 <div class="form-group">
                     @foreach (var image in Model.Images)
                     {
-                        <img src="@image" width="300" />
-                        <button class="btn-warning">Remove image</button>
+                        if (!string.IsNullOrWhiteSpace(image))
+                        {
+                            <div>
+                                <img src="@image" width="300" />
+                                <button id="removeImage" class="btn-warning">Remove image</button>
+                            </div>
+                        }
                     }
-                    <br />
                     <br />
                     <input type="hidden" asp-for="Product.ImagesUrls" class="form-control-file">
                     <label for="addedImages">Add More Images</label>

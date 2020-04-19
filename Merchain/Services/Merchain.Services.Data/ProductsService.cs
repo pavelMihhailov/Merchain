@@ -109,7 +109,6 @@
                     Name = name,
                     Description = description,
                     Price = price,
-                    Likes = 0,
                     ProductsCategories = new List<ProductCategory>(),
                 };
 
@@ -118,7 +117,8 @@
                 foreach (var image in images)
                 {
                     var imageUrl = await this.cloudinaryService.UploadImage(image);
-                    imagesUrls.Append(imageUrl);
+
+                    imagesUrls.Append((imagesUrls.Length > 0 ? ";" : string.Empty) + imageUrl);
                 }
 
                 product.ImagesUrls = imagesUrls.ToString();
@@ -154,7 +154,11 @@
                 {
                     var imageUrl = await this.cloudinaryService.UploadImage(image);
 
-                    imagesUrls.Append(product.ImagesUrls.EndsWith(';') ? string.Empty : ";");
+                    if (!string.IsNullOrWhiteSpace(imagesUrls.ToString()))
+                    {
+                        imagesUrls.Append(";");
+                    }
+
                     imagesUrls.Append(imageUrl);
                 }
 

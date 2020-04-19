@@ -26,10 +26,6 @@
         [Column(TypeName = "decimal(5, 2)")]
         public decimal Price { get; set; }
 
-        [Column(Order = 10)]
-        [DefaultValue(0)]
-        public int Likes { get; set; }
-
         public virtual ICollection<ProductCategory> ProductsCategories { get; set; }
 
         public virtual ICollection<OrderItem> CartItems { get; set; }
