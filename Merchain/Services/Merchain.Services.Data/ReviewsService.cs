@@ -9,7 +9,6 @@
     using Merchain.Data.Models;
     using Merchain.Services.Data.Interfaces;
     using Merchain.Services.Mapping;
-    using Merchain.Web.ViewModels.Reviews;
     using Microsoft.Extensions.Logging;
 
     public class ReviewsService : IReviewsService
@@ -78,7 +77,7 @@
 
             if (productReviews.Count() > 0)
             {
-                avgStars = (int)Math.Floor(productReviews.Average(x => x.Stars));
+                avgStars = (int)Math.Round(productReviews.Average(x => x.Stars), MidpointRounding.AwayFromZero);
             }
 
             return avgStars;
