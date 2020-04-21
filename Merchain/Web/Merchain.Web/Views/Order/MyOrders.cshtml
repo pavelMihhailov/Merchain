@@ -15,43 +15,50 @@
 </div>
 
 <div class="container mt-3">
-    <table class="table table-striped">
-        <thead class="table-head">
-            <tr>
-                <th width="14%">Order Date</th>
-                <th>Order ID</th>
-                <th>Ordered Products</th>
-                <th>Total Cost</th>
-                <th>Order Status</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var order in Model)
-            {
+    @if (!Model.Any())
+    {
+        <h2>You haven't made any orders.</h2>
+    }
+    else
+    {
+        <table class="table table-striped">
+            <thead class="table-head">
                 <tr>
-                    <td>@order.OrderDate.ToLocalTime()</td>
-                    <td>#@order.OrderId</td>
-                    <td>
-                        <table class="table table-nostriped">
-                            @foreach (var product in order.ProductsOrdered)
-                            {
-                                <tr>
-                                    <td>@product.Name</td>
-                                    <td>
-                                        <img src="@product.ImageUrl" width="100" />
-                                    </td>
-                                    <td>$@product.Price</td>
-                                    <td>x @product.Quantity</td>
-                                </tr>
-                            }
-                        </table>
-                    </td>
-                    <td>$@order.OrderTotal</td>
-                    <td>
-                        <span class="badge badge-@order.BadgeStatusCss">@order.OrderStatus</span>
-                    </td>
+                    <th width="14%">Order Date</th>
+                    <th>Order ID</th>
+                    <th>Ordered Products</th>
+                    <th>Total Cost</th>
+                    <th>Order Status</th>
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach (var order in Model)
+                {
+                    <tr>
+                        <td>@order.OrderDate.ToLocalTime()</td>
+                        <td>#@order.OrderId</td>
+                        <td>
+                            <table class="table table-nostriped">
+                                @foreach (var product in order.ProductsOrdered)
+                                {
+                                    <tr>
+                                        <td>@product.Name</td>
+                                        <td>
+                                            <img src="@product.ImageUrl" width="100" />
+                                        </td>
+                                        <td>$@product.Price</td>
+                                        <td>x @product.Quantity</td>
+                                    </tr>
+                                }
+                            </table>
+                        </td>
+                        <td>$@order.OrderTotal</td>
+                        <td>
+                            <span class="badge badge-@order.BadgeStatusCss">@order.OrderStatus</span>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
 </div>

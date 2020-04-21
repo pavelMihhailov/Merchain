@@ -223,6 +223,20 @@
             }
         }
 
+        public void RemoveProductFromWishList(ISession session, int id)
+        {
+            var wishList = SessionExtension.Get<List<LikedProduct>>(session, SessionConstants.WishList);
+
+            if (wishList != null)
+            {
+                int productListId = this.GetProductListId(session, id);
+
+                wishList.RemoveAt(productListId);
+
+                SessionExtension.Set(session, SessionConstants.WishList, wishList);
+            }
+        }
+
         private async Task AddCategoriesToProduct(IEnumerable<int> categoryIds, Product product)
         {
             foreach (int categoryId in categoryIds)
@@ -286,6 +300,21 @@
                     SessionExtension.Set(session, SessionConstants.WishList, wishList);
                 }
             }
+        }
+
+        private int GetProductListId(ISession session, int id)
+        {
+            var wishList = SessionExtension.Get<List<LikedProduct>>(session, SessionConstants.WishList);
+
+            for (int i = 0; i < wishList.Count; i++)
+            {
+                if (wishList[i].Product.Id.Equals(id))
+                {
+                    return i;
+                }
+            }
+
+            return -1;
         }
     }
 }

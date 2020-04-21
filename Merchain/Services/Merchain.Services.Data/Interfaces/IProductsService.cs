@@ -42,5 +42,7 @@
         IEnumerable<Product> GetProductsByCategory(string categoryName);
 
         Task AddProductToWishList(ISession session, int id);
+
+        void RemoveProductFromWishList(ISession session, int id);
     }
 }

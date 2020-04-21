@@ -1206,17 +1206,18 @@ ol {
 
 .page-top-info {
     background: #f8f7f7;
-    padding: 60px 0 70px;
+    padding: 13px 0 13px;
 }
 
     .page-top-info h4 {
         color: #414141;
         font-weight: 700;
         text-transform: uppercase;
+        font-size: 20px;
     }
 
 .site-pagination {
-    font-size: 14px;
+    font-size: 10px;
     font-weight: 600;
     color: #414141;
 }
@@ -1503,7 +1504,7 @@ ol {
 ------------------*/
 
 .product-section {
-    padding-top: 70px;
+    padding-top: 13px;
     padding-bottom: 65px;
 }
 
@@ -2607,10 +2608,6 @@ table tr:not(.table-head):hover {
     }
 
 @media only screen and (max-width: 991px) {
-    .main-content {
-        padding-top: 251px;
-    }
-
     .site-logo img {
         max-width: 50%;
     }

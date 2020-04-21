@@ -135,5 +135,19 @@
 
             return new StatusCodeResult(200);
         }
+
+        public IActionResult RemoveFromWishList(int id)
+        {
+            try
+            {
+                this.productsService.RemoveProductFromWishList(this.HttpContext.Session, id);
+            }
+            catch (Exception ex)
+            {
+                this.logger.LogError($"Could not remove product from the wish list.\n-{ex.Message}");
+            }
+
+            return new StatusCodeResult(200);
+        }
     }
 }

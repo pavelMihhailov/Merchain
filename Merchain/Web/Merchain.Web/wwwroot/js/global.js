@@ -29,6 +29,24 @@ $(document).ready(function () {
         });
     });
 
+    $(".remove-wishlist").on("click", function () {
+        $el = $(this);
+
+        let productId = $el.attr("id");
+
+        $.ajax({
+            type: "GET",
+            url: "/Products/RemoveFromWishList",
+            data: { 'id': productId },
+            success: function () {
+                $el.parents(".col-lg-3")[0].remove();
+                if ($(".col-lg-3").length === 0) {
+                    $($("section .row")[0]).html("<h1>Your wishlist is empty.</h1>");
+                }
+            }
+        });
+    });
+
     $(".add-card").on("click", function () {
         $el = $(this);
 
