@@ -20,6 +20,11 @@
             this.logger = logger;
         }
 
+        public IActionResult PrivacyPolicy()
+        {
+            return this.View();
+        }
+
         public IActionResult ContactUs()
         {
             this.ViewData[ViewDataConstants.SucccessMessage] = this.TempData[ViewDataConstants.SucccessMessage];

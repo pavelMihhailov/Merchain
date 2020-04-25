@@ -66,6 +66,13 @@
             return true;
         }
 
+        public Order GetOrderById(int id)
+        {
+            var order = this.orderRepo.All().FirstOrDefault(x => x.Id == id);
+
+            return order;
+        }
+
         public async Task<IEnumerable<OrderInfoViewModel>> AllOrders()
         {
             var orders = this.orderRepo.All();
@@ -83,6 +90,19 @@
             var orders = this.orderRepo.All().Where(x => x.UserId == user.Id);
 
             return orders;
+        }
+
+        public async Task<Task> UpdateOrder(Order order)
+        {
+            if (order == null)
+            {
+                return null;
+            }
+
+            this.orderRepo.Update(order);
+            await this.orderRepo.SaveChangesAsync();
+
+            return Task.CompletedTask;
         }
 
         public async Task<IEnumerable<OrderInfoViewModel>> OrdersOfUser(string username)

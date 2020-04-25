@@ -13,9 +13,13 @@
 
         Task<bool> PlaceOrder(IEnumerable<CartItem> cartItems, decimal totalSum, string username, OrderAddress address);
 
+        Order GetOrderById(int id);
+
         Task<IEnumerable<OrderInfoViewModel>> AllOrders();
 
         Task<IEnumerable<Order>> AllOrdersOfUser(string userId);
+
+        Task<Task> UpdateOrder(Order order);
 
         Task<IEnumerable<OrderInfoViewModel>> OrdersOfUser(string username);
     }

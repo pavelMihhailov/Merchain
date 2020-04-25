@@ -2,9 +2,8 @@
 {
     using System.Diagnostics;
     using System.Linq;
+
     using Merchain.Common;
-    using Merchain.Data.Common.Repositories;
-    using Merchain.Data.Models;
     using Merchain.Services.Data.Interfaces;
     using Merchain.Services.Mapping;
     using Merchain.Web.ViewModels;

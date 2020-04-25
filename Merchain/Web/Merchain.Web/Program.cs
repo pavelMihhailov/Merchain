@@ -15,7 +15,8 @@
                 .ConfigureWebHostDefaults(webBuilder =>
                     {
                         webBuilder
-                            .UseStartup<Startup>();
+                            .UseStartup<Startup>()
+                            .UseIIS();
                     });
     }
 }

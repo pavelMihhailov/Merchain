@@ -91,11 +91,12 @@
                         viewModel.Images,
                         viewModel.Categories);
 
-                    this.ViewBag.Message = "Succesfully created product.";
+                    this.ViewBag.SuccessMessage = "Succesfully created product.";
                 }
                 catch (Exception ex)
                 {
                     this.logger.LogWarning($"Could not add product to the database.\n-{ex.Message}");
+                    this.ViewBag.ErrorMessage = "There was a problem creating product.";
                 }
             }
 
@@ -185,7 +186,7 @@
             {
                 await this.productsService.Delete(product);
 
-                this.ViewBag.Message = "Succesfully Deleted Product.";
+                this.ViewBag.SuccessMessage = "Succesfully Deleted Product.";
             }
             catch (Exception ex)
             {

@@ -106,3 +106,20 @@ function refreshCartItems() {
         }
     });
 }
+
+window.onscroll = function () { scrollFunction(); };
+
+var topBtn = document.getElementsByClassName("topBtn")[0];
+
+function scrollFunction() {
+    if (document.body.scrollTop > 30 || document.documentElement.scrollTop > 30) {
+        topBtn.style.display = "block";
+    } else {
+        topBtn.style.display = "none";
+    }
+}
+
+function topFunction() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+}

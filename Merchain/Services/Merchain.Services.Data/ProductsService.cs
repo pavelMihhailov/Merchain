@@ -134,6 +134,20 @@
             }
         }
 
+        public async Task<Task> Edit(Product product)
+        {
+            if (product == null)
+            {
+                return Task.CompletedTask;
+            }
+
+            this.productsRepository.Update(product);
+
+            await this.productsRepository.SaveChangesAsync();
+
+            return Task.CompletedTask;
+        }
+
         public async Task<Task> Edit(Product product, IEnumerable<IFormFile> addedImages, IEnumerable<int> categoryIds)
         {
             if (categoryIds != null)

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<OrderInfoViewModel>
+﻿@model AllOrdersViewModel
 @{
     this.ViewData["Title"] = "All Orders";
     var currPage = ViewBag.CurrPage;
@@ -15,6 +15,10 @@
 </div>
 
 <div class="container mt-3">
+    <figure class="highcharts-figure mb-3">
+        <div id="chartContainer"></div>
+    </figure>
+
     <table class="table table-striped">
         <thead class="table-head">
             <tr>
@@ -27,7 +31,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var order in Model)
+            @foreach (var order in Model.Orders)
             {
                 <tr>
                     <td>@order.OrderDate.ToLocalTime()</td>
@@ -111,3 +115,73 @@
         </div>
     </div>
 </div>
+
+@section Scripts {
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/series-label.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
+    <script>
+        Highcharts.chart('chartContainer', {
+
+            title: {
+                text: 'All orders in last week'
+            },
+
+            yAxis: {
+                title: {
+                    text: 'Number of Orders'
+                }
+            },
+
+            xAxis: {
+                accessibility: {
+                    rangeDescription: 'Range: 1 to 7'
+                }
+            },
+
+            legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'middle'
+            },
+
+            plotOptions: {
+                series: {
+                    label: {
+                        connectorAllowed: false
+                    },
+                    pointStart: 1
+                }
+            },
+
+            series: [{
+                name: 'Orders',
+                data: [
+                    @foreach (var orderCount in Model.OrdersCountInLast7Days)
+                    {
+                        @orderCount@:,
+                    }
+                ]
+            }],
+
+            responsive: {
+                rules: [{
+                    condition: {
+                        maxWidth: 500
+                    },
+                    chartOptions: {
+                        legend: {
+                            layout: 'horizontal',
+                            align: 'center',
+                            verticalAlign: 'bottom'
+                        }
+                    }
+                }]
+            }
+
+        });
+    </script>
+}
