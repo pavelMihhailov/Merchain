@@ -1,0 +1,103 @@
+﻿@model IEnumerable<PromoCode>
+
+@{
+    ViewData["Title"] = "Promo Codes";
+    var currPage = ViewBag.CurrPage;
+}
+
+<div class="container mt-3">
+    <h2>Unused Promo Codes</h2>
+    @if (!Model.Any())
+    {
+        <p>There are 0 promo codes available.</p>
+        <p>You can generate new ones on this link <a asp-action="GenerateCodes">Generate New Codes</a></p>
+    }
+    else
+    {
+        <a asp-action="GenerateCodes">Generate New Codes</a>
+        <table class="table table-striped mt-3">
+            <thead class="table-head">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Code)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.PercentageDiscount)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ValidUntil)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.IsUsed)
+                    </th>
+                    <th>
+                        Assigned To User#
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var promoCode in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => promoCode.Code)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => promoCode.PercentageDiscount)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => promoCode.ValidUntil)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => promoCode.IsUsed)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => promoCode.UserId)
+                        </td>
+                        <td>
+                            <a asp-action="Delete" asp-route-id="@promoCode.Id">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <div class="pagination-wrapper">
+            <div class="pagination">
+                @if (currPage > 1)
+                {
+                    <a class="prev page-numbers"
+                       asp-area="@AreaConstants.Administration" asp-controller="PromoCodes" asp-action="Index"
+                       asp-route-page="@(currPage - 1)">Previous</a>
+                }
+                else
+                {
+                    <span aria-current="page" class="prev page-numbers">Previous</span>
+                }
+                @for (int i = 1; i <= ViewBag.MaxPage; i++)
+                {
+                    if (currPage == i)
+                    {
+                        <span aria-current="page" class="page-numbers current">@i</span>
+                    }
+                    else
+                    {
+                        <a class="page-numbers"
+                           asp-area="@AreaConstants.Administration" asp-controller="PromoCodes" asp-action="Index"
+                           asp-route-page="@i">@i</a>
+                    }
+                }
+                @if (currPage < ViewBag.MaxPage)
+                {
+                    <a class="next page-numbers"
+                       asp-area="@AreaConstants.Administration" asp-controller="PromoCodes" asp-action="Index"
+                       asp-route-page="@(currPage + 1)">Next</a>
+                }
+                else
+                {
+                    <span aria-current="page" class="next page-numbers">Next</span>
+                }
+            </div>
+        </div>
+    }
+</div>

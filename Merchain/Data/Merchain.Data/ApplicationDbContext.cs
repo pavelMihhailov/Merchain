@@ -34,6 +34,8 @@
 
         public DbSet<Order> Orders { get; set; }
 
+        public DbSet<PromoCode> PromoCodes { get; set; }
+
         public DbSet<ProductCategory> ProductsCategories { get; set; }
 
         public DbSet<UserOrder> UsersOrders { get; set; }

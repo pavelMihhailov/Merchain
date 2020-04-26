@@ -18,6 +18,7 @@ namespace Merchain.Data.Models
             this.Claims = new HashSet<IdentityUserClaim<string>>();
             this.Logins = new HashSet<IdentityUserLogin<string>>();
             this.Orders = new HashSet<Order>();
+            this.PromoCodes = new HashSet<PromoCode>();
         }
 
         // Audit info
@@ -54,5 +55,7 @@ namespace Merchain.Data.Models
         public virtual ICollection<Order> Orders { get; set; }
 
         public virtual ICollection<Review> Reviews { get; set; }
+
+        public virtual ICollection<PromoCode> PromoCodes { get; set; }
     }
 }

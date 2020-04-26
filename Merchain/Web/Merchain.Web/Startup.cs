@@ -109,6 +109,7 @@
             services.AddTransient<ICartService, CartService>();
             services.AddTransient<IOrderService, OrderService>();
             services.AddTransient<IOrderItemService, OrderItemService>();
+            services.AddTransient<IPromoCodesService, PromoCodesService>();
             services.AddTransient<CloudinaryService>();
             services.AddApplicationInsightsTelemetry();
         }

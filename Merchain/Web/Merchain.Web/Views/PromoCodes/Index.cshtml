@@ -1,0 +1,46 @@
+﻿@using Merchain.Web.ViewModels.PromoCodes
+
+@model IEnumerable<MyPromoCodesViewModel>
+
+@{
+    this.ViewData["Title"] = "My Promo Codes";
+}
+
+<div class="page-top-info">
+    <div class="container">
+        <h4>My Promo Codes</h4>
+        <div class="site-pagination">
+            <a asp-controller="Home" asp-action="Index">Home</a> /
+            <a>My Promo Codes</a>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-3">
+    @if (!Model.Any())
+    {
+        <h2>You don't have any promo codes.</h2>
+    }
+    else
+    {
+        <table class="table table-striped">
+            <thead class="table-head">
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.Code)</th>
+                    <th>@Html.DisplayNameFor(model => model.PercentageDiscount)%</th>
+                    <th>@Html.DisplayNameFor(model => model.ValidUntil)</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var code in Model)
+                {
+                    <tr>
+                        <td>@code.Code</td>
+                        <td>@code.PercentageDiscount</td>
+                        <td>@code.ValidUntil.ToLocalTime()</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>
