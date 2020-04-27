@@ -5,10 +5,12 @@
 
     public class PromoCodesGenerateViewModel
     {
+        [Range(1, 1000000)]
         [Required]
         public int Count { get; set; }
 
         [Display(Name = "% Discount")]
+        [Range(1, 99)]
         [Required]
         public int PercentageDiscount { get; set; }
 
