@@ -35,6 +35,14 @@
             return await this.promoCodesRepo.GetById(id);
         }
 
+        public PromoCode GetByCodeAsync(string forUserId, string code)
+        {
+            var promoCode = this.promoCodesRepo.All()
+                .FirstOrDefault(x => x.UserId == forUserId && x.Code == code && !x.IsUsed);
+
+            return promoCode;
+        }
+
         public IEnumerable<T> GetAllOfUserId<T>(string userId)
         {
             var promoCodes = this.promoCodesRepo.All()
@@ -53,6 +61,19 @@
             return Task.CompletedTask;
         }
 
+        public async Task<PromoCode> Edit(PromoCode promoCode)
+        {
+            if (promoCode == null)
+            {
+                return null;
+            }
+
+            this.promoCodesRepo.Update(promoCode);
+            await this.promoCodesRepo.SaveChangesAsync();
+
+            return promoCode;
+        }
+
         public async Task GenerateNewCodes(int count, int percentageDiscount, DateTime validUntil)
         {
             for (int i = 0; i < count; i++)
@@ -67,6 +88,26 @@
             }
 
             await this.promoCodesRepo.SaveChangesAsync();
+        }
+
+        public async Task<PromoCode> AssignCode(string toUserId)
+        {
+            var promoCode = this.promoCodesRepo.All()
+                .FirstOrDefault(x => !x.IsUsed && string.IsNullOrWhiteSpace(x.UserId));
+
+            promoCode.UserId = toUserId;
+
+            var assignedCode = await this.Edit(promoCode);
+
+            return assignedCode;
+        }
+
+        public async Task MarkAsUsed(int id)
+        {
+            var promoCode = await this.promoCodesRepo.GetById(id);
+            promoCode.IsUsed = true;
+
+            await this.Edit(promoCode);
         }
     }
 }

@@ -1894,7 +1894,7 @@ ol {
         border-radius: 80px;
     }
 
-    .promo-code-form button {
+    .promo-code-form a {
         position: absolute;
         right: 24px;
         top: 0;

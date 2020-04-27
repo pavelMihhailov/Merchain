@@ -13,5 +13,7 @@
         public bool UseRegularAddress { get; set; }
 
         public bool ShippingPaid { get; set; }
+
+        public int? PromoCodeId { get; set; }
     }
 }

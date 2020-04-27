@@ -2,15 +2,18 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
 
     using Merchain.Common;
     using Merchain.Common.Extensions;
     using Merchain.Common.Order;
+    using Merchain.Data.Models;
     using Merchain.Services.Data.Interfaces;
     using Merchain.Web.ViewModels.Order;
     using Merchain.Web.ViewModels.ShoppingCart;
     using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Logging;
 
@@ -21,6 +24,8 @@
         private readonly IOrderService orderService;
         private readonly IOrderItemService orderItemService;
         private readonly ICartService cartService;
+        private readonly IPromoCodesService promoCodesService;
+        private readonly UserManager<ApplicationUser> userManager;
         private readonly ILogger<OrderController> logger;
 
         public OrderController(
@@ -28,12 +33,16 @@
             IOrderService orderService,
             IOrderItemService orderItemService,
             ICartService cartService,
+            IPromoCodesService promoCodesService,
+            UserManager<ApplicationUser> userManager,
             ILogger<OrderController> logger)
         {
             this.productsService = productsService;
             this.orderService = orderService;
             this.orderItemService = orderItemService;
             this.cartService = cartService;
+            this.promoCodesService = promoCodesService;
+            this.userManager = userManager;
             this.logger = logger;
         }
 
@@ -46,14 +55,27 @@
         }
 
         [HttpGet]
-        public IActionResult Index()
+        public async Task<IActionResult> Index(string promoCode)
         {
             var cartItems = SessionExtension.Get<List<CartItem>>(this.HttpContext.Session, SessionConstants.Cart);
 
             var viewModel = new OrderViewModel()
             {
                 CartItems = cartItems,
+                Total = cartItems.Sum(x => x.Product.Price * x.Quantity),
             };
+
+            if (!string.IsNullOrWhiteSpace(promoCode))
+            {
+                var user = await this.userManager.FindByNameAsync(this.User.Identity.Name);
+
+                var promoCodeFromDb = this.promoCodesService.GetByCodeAsync(user.Id, promoCode);
+                if (promoCodeFromDb != null)
+                {
+                    viewModel.Total -= Math.Round(viewModel.Total * promoCodeFromDb.PercentageDiscount / 100, 2);
+                    viewModel.AppliedPromoCode = promoCodeFromDb;
+                }
+            }
 
             return this.View(viewModel);
         }
@@ -86,6 +108,11 @@
 
                 if (success)
                 {
+                    if (inputModel.PromoCodeId != null)
+                    {
+                        await this.promoCodesService.MarkAsUsed((int)inputModel.PromoCodeId);
+                    }
+
                     this.cartService.EmptyCart(this.HttpContext.Session);
                     this.TempData[ViewDataConstants.SucccessMessage] = "Thank you for your order.";
                 }

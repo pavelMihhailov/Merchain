@@ -100,6 +100,10 @@
                         <input type="hidden" name="CartItems[@i].Quantity" value="@Model.CartItems[i].Quantity" />
                     }
                     <input type="hidden" name="Total" value="@Model.Total" />
+                    @if (Model.AppliedPromoCode != null)
+                    {
+                        <input type="hidden" name="PromoCodeId" value="@Model.AppliedPromoCode.Id" />
+                    }
                     <button type="submit" class="site-btn submit-order-btn">Place Order</button>
                 </form>
             </div>
@@ -121,6 +125,10 @@
                     <ul class="price-list">
                         <li>Total<span>$@Model.Total</span></li>
                         <li>Shipping<span>free</span></li>
+                        @if (Model.AppliedPromoCode != null)
+                        {
+                            <li>Promo Code Applied: <strong>@Model.AppliedPromoCode.PercentageDiscount% Discount</strong></li>
+                        }
                         <li class="total">Total<span>$@Model.Total</span></li>
                     </ul>
                 </div>

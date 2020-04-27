@@ -1,8 +1,8 @@
 ﻿namespace Merchain.Web.ViewModels.Order
 {
     using System.Collections.Generic;
-    using System.Linq;
 
+    using Merchain.Data.Models;
     using Merchain.Web.ViewModels.ShoppingCart;
 
     public class OrderViewModel
@@ -14,6 +14,8 @@
 
         public List<CartItem> CartItems { get; set; }
 
-        public decimal Total => this.CartItems.Sum(x => x.Product.Price * x.Quantity);
+        public decimal Total { get; set; }
+
+        public PromoCode AppliedPromoCode { get; set; }
     }
 }

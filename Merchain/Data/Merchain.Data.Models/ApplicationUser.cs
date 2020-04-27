@@ -46,6 +46,9 @@ namespace Merchain.Data.Models
         [DefaultValue("")]
         public override string PhoneNumber { get; set; }
 
+        [DefaultValue(false)]
+        public bool IsSubscribed { get; set; }
+
         public virtual ICollection<IdentityUserRole<string>> Roles { get; set; }
 
         public virtual ICollection<IdentityUserClaim<string>> Claims { get; set; }

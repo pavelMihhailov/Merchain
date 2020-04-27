@@ -10,6 +10,8 @@
     {
         Task<PromoCode> GetByIdAsync(int id);
 
+        PromoCode GetByCodeAsync(string forUserId, string code);
+
         IEnumerable<T> GetAllOfUserId<T>(string userId);
 
         IEnumerable<PromoCode> GetAll();
@@ -18,6 +20,12 @@
 
         Task<Task> Delete(PromoCode promoCode);
 
+        Task<PromoCode> Edit(PromoCode promoCode);
+
         Task GenerateNewCodes(int count, int percentageDiscount, DateTime validUntil);
+
+        Task<PromoCode> AssignCode(string toUserId);
+
+        Task MarkAsUsed(int id);
     }
 }
