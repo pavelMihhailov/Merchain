@@ -57,7 +57,7 @@
             services.AddDistributedSqlServerCache(
                 options =>
                 {
-                    options.ConnectionString = connectionString;
+                    options.ConnectionString = this.configuration.GetConnectionString("DefaultConnection");
                     options.SchemaName = "dbo";
                     options.TableName = "Cache";
                 });
