@@ -39,8 +39,7 @@
                 Categories = categories,
             };
 
-            this.ViewData[ViewDataConstants.SucccessMessage] = this.TempData[ViewDataConstants.SucccessMessage];
-            this.ViewData[ViewDataConstants.ErrorMessage] = this.TempData[ViewDataConstants.ErrorMessage];
+            this.HandlePopupMessages();
 
             return this.View(viewModel);
         }

@@ -11,7 +11,8 @@
     {
         public async Task SeedAsync(ApplicationDbContext dbContext, IServiceProvider serviceProvider)
         {
-            await SeedProducts(dbContext);
+            // Uncomment if you want initial seeding of products
+            // await SeedProducts(dbContext);
         }
 
         private static async Task SeedProducts(ApplicationDbContext dbContext)

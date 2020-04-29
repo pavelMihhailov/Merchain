@@ -6,35 +6,16 @@
 
         if ($el.val() === 'true') {
             $('.address-inputs').hide();
+            $('.address-inputs input').each(function (i, e) {
+                $(e).attr("type", "hidden");
+            });
+
         }
         else {
             $('.address-inputs').show();
+            $('.address-inputs input').each(function (i, e) {
+                $(e).attr("type", "text");
+            });
         }
     });
-
-    //$("form[name='orderForm']").submit(function (event) {
-    //    let isRegular = $('#regularTrue').is(':checked');
-
-    //    if (!isRegular) {
-    //        $("form[name='orderForm']").validate({
-    //            rules: {
-    //                Address: "required",
-    //                Country: "required",
-    //                ZipCode: "required",
-    //                Phone: "required"
-    //            },
-    //            messages: {
-    //                Address: "Please enter this required field",
-    //                Country: "Please enter this required field",
-    //                ZipCode: "Please enter this required field",
-    //                Phone: "Please enter this required field"
-    //            },
-    //            submitHandler: function (form) {
-    //                form.submit();
-    //            }
-    //        });
-    //    }
-
-    //    return true;
-    //});
 });

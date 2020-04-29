@@ -5,6 +5,7 @@
     using System.Linq;
     using System.Threading.Tasks;
 
+    using Merchain.Common;
     using Merchain.Data.Models;
     using Merchain.Services.Data.Interfaces;
     using Merchain.Web.ViewModels.Order;
@@ -54,6 +55,8 @@
                 OrdersCountInLast7Days = ordersInLast7Days,
             };
 
+            this.HandlePopupMessages();
+
             return this.View(viewModel);
         }
 
@@ -82,6 +85,8 @@
 
             order.Status = markedAs;
             await this.orderService.UpdateOrder(order);
+
+            this.TempData[ViewDataConstants.SucccessMessage] = "Order status has been updated.";
 
             return this.RedirectToAction("Details", new { id });
         }

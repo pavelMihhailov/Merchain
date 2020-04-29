@@ -2,6 +2,7 @@
 {
     using System.Threading.Tasks;
 
+    using Merchain.Common;
     using Merchain.Data.Models;
     using Merchain.Services.Data.Interfaces;
     using Merchain.Web.ViewModels.Products;
@@ -11,7 +12,7 @@
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Logging;
 
-    public class ReviewsController : Controller
+    public class ReviewsController : BaseController
     {
         private readonly IReviewsService reviewService;
         private readonly IProductsService productsService;
@@ -45,6 +46,8 @@
                 Product = product,
             };
 
+            this.HandlePopupMessages();
+
             return this.View(viewModel);
         }
 
@@ -64,8 +67,11 @@
 
             if (reviewId == -1)
             {
+                this.TempData[ViewDataConstants.ErrorMessage] = "There was a problem adding review.";
                 return this.View(inputModel.ProductId);
             }
+
+            this.TempData[ViewDataConstants.SucccessMessage] = "Successfully added review.";
 
             return this.RedirectToAction("ProductReviews", new { productId = inputModel.ProductId });
         }
@@ -80,6 +86,8 @@
                 Product = product,
                 Reviews = reviews,
             };
+
+            this.HandlePopupMessages();
 
             return this.View(viewModel);
         }

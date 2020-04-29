@@ -59,6 +59,13 @@
         {
             var cartItems = SessionExtension.Get<List<CartItem>>(this.HttpContext.Session, SessionConstants.Cart);
 
+            if (cartItems == null)
+            {
+                this.TempData[ViewDataConstants.ErrorMessage] = "You do not have any products added in cart.";
+
+                return this.RedirectToAction("Index", "ShoppingCart");
+            }
+
             var viewModel = new OrderViewModel()
             {
                 CartItems = cartItems,

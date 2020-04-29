@@ -20,6 +20,7 @@
             this.logger = logger;
         }
 
+        [ResponseCache(Duration = 60 * 60 * 24 * 3, Location = ResponseCacheLocation.Any)]
         public IActionResult PrivacyPolicy()
         {
             return this.View();
@@ -27,8 +28,7 @@
 
         public IActionResult ContactUs()
         {
-            this.ViewData[ViewDataConstants.SucccessMessage] = this.TempData[ViewDataConstants.SucccessMessage];
-            this.ViewData[ViewDataConstants.ErrorMessage] = this.TempData[ViewDataConstants.ErrorMessage];
+            this.HandlePopupMessages();
 
             return this.View();
         }

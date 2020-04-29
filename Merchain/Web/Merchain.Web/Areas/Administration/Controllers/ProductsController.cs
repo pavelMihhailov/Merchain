@@ -5,6 +5,7 @@
     using System.Linq;
     using System.Threading.Tasks;
 
+    using Merchain.Common;
     using Merchain.Data.Common.Repositories;
     using Merchain.Data.Models;
     using Merchain.Services.Data.Interfaces;
@@ -44,6 +45,8 @@
 
             this.ViewBag.CurrPage = page;
             this.ViewBag.MaxPage = (productsCount / pageSize) + (productsCount % pageSize == 0 ? 0 : 1);
+
+            this.HandlePopupMessages();
 
             return this.View(products.Skip(((int)page - 1) * pageSize).Take(pageSize).ToList());
         }
@@ -91,12 +94,12 @@
                         viewModel.Images,
                         viewModel.Categories);
 
-                    this.ViewBag.SuccessMessage = "Succesfully created product.";
+                    this.TempData[ViewDataConstants.SucccessMessage] = "Successfully created product.";
                 }
                 catch (Exception ex)
                 {
                     this.logger.LogWarning($"Could not add product to the database.\n-{ex.Message}");
-                    this.ViewBag.ErrorMessage = "There was a problem creating product.";
+                    this.TempData[ViewDataConstants.ErrorMessage] = "There was a problem creating product.";
                 }
             }
 

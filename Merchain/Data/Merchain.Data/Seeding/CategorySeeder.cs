@@ -14,7 +14,6 @@
             var categories = new List<string>()
             {
                 "Shirts",
-                "Shoes",
                 "Underwear",
                 "Polos",
                 "Top",

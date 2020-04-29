@@ -41,12 +41,12 @@
                     </div>
                     <div class="row address-inputs">
                         <div class="col-md-12">
-                            <input type="text" placeholder="Address" name="Address">
-                            <input type="text" placeholder="Address line 2" name="Address2">
-                            <input type="text" placeholder="Country" name="Country">
+                            <input type="text" required placeholder="Address" name="Address">
+                            <input type="text" required placeholder="Address line 2" name="Address2">
+                            <input type="text" required placeholder="Country" name="Country">
                         </div>
                         <div class="col-md-6">
-                            <input type="text" placeholder="Zip code" name="ZipCode">
+                            <input type="text" required placeholder="Zip code" name="ZipCode">
                         </div>
                         <div class="col-md-6">
                             <input type="text" placeholder="Phone no." name="Phone">
@@ -80,7 +80,7 @@
                     <div class="cf-title">Payment</div>
                     <ul class="payment-list">
                         <li>
-                            <input type="radio" name="PayType" id="paypal" value="PayPal" />
+                            <input type="radio" name="PayType" id="paypal" value="PayPal" required/>
                             <label class="mr-2" for="paypal">Paypal</label>
                             <img src="img/paypal.png" alt="">
                         </li>
@@ -139,4 +139,5 @@
 
 @section Scripts {
     <script src="~/js/order.js"></script>
+    <partial name="_ValidationScriptsPartial" />
 }
