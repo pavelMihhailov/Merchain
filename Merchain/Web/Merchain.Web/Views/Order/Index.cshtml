@@ -8,10 +8,10 @@
 
 <div class="page-top-info">
     <div class="container">
-        <h4>Confirm Order</h4>
+        <h4>Потвърди Поръчката</h4>
         <div class="site-pagination">
-            <a asp-controller="Home" asp-action="Index">Home</a> /
-            <a>Confirm Order</a>
+            <a asp-controller="Home" asp-action="Index">Начало</a> /
+            <a>Потвърди Поръчката</a>
         </div>
     </div>
 </div>
@@ -61,7 +61,7 @@
                             <div class="cf-radio-btns">
                                 <div class="cfr-item">
                                     <input type="radio" name="ShippingPaid" checked="checked" id="ship-1" value="false">
-                                    <label for="ship-1">$@ShippingConstants.Free</label>
+                                    <label for="ship-1">@ShippingConstants.Free лв.</label>
                                 </div>
                             </div>
                         </div>
@@ -72,7 +72,7 @@
                             <div class="cf-radio-btns">
                                 <div class="cfr-item">
                                     <input type="radio" name="ShippingPaid" id="ship-2" value="true">
-                                    <label for="ship-2">$@ShippingConstants.NextDay</label>
+                                    <label for="ship-2">@ShippingConstants.NextDay лв.</label>
                                 </div>
                             </div>
                         </div>
@@ -91,7 +91,7 @@
                         </li>
                         <li>
                             <input type="radio" name="PayType" id="later" value="Later" />
-                            <label class="mr-2" for="later">Pay when you get the package</label>
+                            <label class="mr-2" for="later">Наложен Платеж</label>
                         </li>
                     </ul>
                     @for (int i = 0; i < Model.CartItems.Count; i++)
@@ -104,12 +104,12 @@
                     {
                         <input type="hidden" name="PromoCodeId" value="@Model.AppliedPromoCode.Id" />
                     }
-                    <button type="submit" class="site-btn submit-order-btn">Place Order</button>
+                    <button type="submit" class="site-btn submit-order-btn">Направи Поръчката</button>
                 </form>
             </div>
             <div class="col-lg-4 order-1 order-lg-2">
                 <div class="checkout-cart">
-                    <h3>Your Cart</h3>
+                    <h3>Твоята Количка</h3>
                     <ul class="product-list">
                         @foreach (var item in Model.CartItems)
                         {
@@ -123,13 +123,13 @@
                         }
                     </ul>
                     <ul class="price-list">
-                        <li>Total<span>$@Model.Total</span></li>
+                        <li>Общо<span>@Model.Total лв.</span></li>
                         <li>Shipping<span>free</span></li>
                         @if (Model.AppliedPromoCode != null)
                         {
-                            <li>Promo Code Applied: <strong>@Model.AppliedPromoCode.PercentageDiscount% Discount</strong></li>
+                            <li>Приложен Промо Код: <strong>@Model.AppliedPromoCode.PercentageDiscount% Отстъпка</strong></li>
                         }
-                        <li class="total">Total<span>$@Model.Total</span></li>
+                        <li class="total">Общо <span>@Model.Total лв.</span></li>
                     </ul>
                 </div>
             </div>

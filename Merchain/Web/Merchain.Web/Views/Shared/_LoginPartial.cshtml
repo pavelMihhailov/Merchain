@@ -8,19 +8,19 @@
 {
     <div class="up-item">
         <i class="flaticon-profile"></i>
-        <a asp-area="Identity" asp-page="/Account/Manage/Index">Hello @(this.User.Identity.Name)!</a>
+        <a asp-area="Identity" asp-page="/Account/Manage/Index">Здравей, @(this.User.Identity.Name)!</a>
     </div>
     if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
     {
         <div class="up-item">
             <i class="flaticon-profile"></i>
-            <a asp-area="Administration" asp-controller="Dashboard" asp-action="Index">Admin</a>
+            <a asp-area="Administration" asp-controller="Dashboard" asp-action="Index">Админ</a>
         </div>
     }
     <div class="up-item">
         <form asp-area="Identity" asp-page="/Account/Logout"
               asp-route-returnUrl="@(this.Url.Action("Index", "Home", new { area = string.Empty }))">
-            <button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
+            <button type="submit" class="nav-link btn btn-link text-dark">Излез</button>
         </form>
     </div>
 }
@@ -28,6 +28,6 @@ else
 {
     <div class="up-item">
         <i class="flaticon-profile"></i>
-        <a asp-area="Identity" asp-page="/Account/Login">Sign In</a> or <a asp-area="Identity" asp-page="/Account/Register">Create Account</a>
+        <a asp-area="Identity" asp-page="/Account/Login">Влез</a> или <a asp-area="Identity" asp-page="/Account/Register">Създай Акаунт</a>
     </div>
 }

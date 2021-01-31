@@ -5,6 +5,7 @@
     public class SubscribeViewModel
     {
         [Required]
+        [Display(Name = "Имейл")]
         public string Email { get; set; }
     }
 }

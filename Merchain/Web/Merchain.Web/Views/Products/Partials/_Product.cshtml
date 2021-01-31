@@ -6,7 +6,7 @@
         <div class="pi-links">
             <a id="@Model.Id" class="add-card pointer">
                 <i class="flaticon-bag"></i>
-                <span>ADD TO CART</span>
+                <span>В Кошницата</span>
             </a>
             <a class="pointer add-wishlist wishlist-btn" id="@Model.Id">
                 <i class="flaticon-heart"></i>
@@ -14,7 +14,7 @@
         </div>
     </div>
     <div class="pi-text">
-        <h6>$@Model.Price</h6>
+        <h6>@Model.Price лв.</h6>
         <a asp-controller="Products" asp-action="Details" asp-route-id="@Model.Id">
             <p>@Model.Name</p>
         </a>

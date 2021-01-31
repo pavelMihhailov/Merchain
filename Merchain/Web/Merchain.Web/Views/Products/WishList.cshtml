@@ -1,15 +1,14 @@
 ﻿@model List<LikedProduct>
-
 @{
-    this.ViewData["Title"] = "Wish List";
+    this.ViewData["Title"] = "Харесани Продукти";
 }
 
 <div class="page-top-info">
     <div class="container">
-        <h4>Wish List</h4>
+        <h4>Харесани Продукти</h4>
         <div class="site-pagination">
-            <a asp-controller="Home" asp-action="Index">Home</a> /
-            <a>Wish List</a> /
+            <a asp-controller="Home" asp-action="Index">Начало</a> /
+            <a>Харесани Продукти</a> /
         </div>
     </div>
 </div>
@@ -30,7 +29,7 @@
                                 <div class="pi-links">
                                     <a id="@product.Id" class="add-card pointer">
                                         <i class="flaticon-bag"></i>
-                                        <span>ADD TO CART</span>
+                                        <span>Добави в Количката</span>
                                     </a>
                                     <a class="pointer add-wishlist wishlist-btn" id="@product.Id">
                                         <i class="flaticon-heart"></i>
@@ -52,7 +51,7 @@
             }
             else
             {
-                <div>Your wish list is empty</div>
+                <div>Нямате харесани продукти към момента.</div>
             }
         </div>
     </div>

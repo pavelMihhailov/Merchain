@@ -6,22 +6,22 @@
 
     public class OrderInfoViewModel
     {
-        [Display(Name = "Order ID")]
+        [Display(Name = "Поръчка ID")]
         public int OrderId { get; set; }
 
-        [Display(Name = "Date Of Order")]
+        [Display(Name = "Дата на Поръчване")]
         public DateTime OrderDate { get; set; }
 
-        [Display(Name = "Total Cost")]
+        [Display(Name = "Обща Сума")]
         public decimal OrderTotal { get; set; }
 
-        [Display(Name = "Order Status")]
+        [Display(Name = "Статус")]
         public string OrderStatus { get; set; }
 
-        [Display(Name = "User Id")]
+        [Display(Name = "User ID")]
         public string UserId { get; set; }
 
-        [Display(Name = "Address")]
+        [Display(Name = "Адрес")]
         public string Address { get; set; }
 
         public string BadgeStatusCss

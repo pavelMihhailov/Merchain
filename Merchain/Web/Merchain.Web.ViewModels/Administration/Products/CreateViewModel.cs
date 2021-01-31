@@ -8,14 +8,18 @@
     public class CreateViewModel
     {
         [Required]
+        [Display(Name = "Име")]
         public string Name { get; set; }
 
+        [Display(Name = "Описание")]
         public string Description { get; set; }
 
         [Required]
-        [Range(typeof(decimal), "0.00", "79228162514264337593543950335", ErrorMessage = "Please enter a valid price!")]
+        [Display(Name = "Цена")]
+        [Range(typeof(decimal), "0.00", "79228162514264337593543950335", ErrorMessage = "Моля въведете валидна цена!")]
         public decimal Price { get; set; }
 
+        [Display(Name = "Категории")]
         public IEnumerable<SelectListItem> Categories { get; set; }
     }
 }

@@ -1,13 +1,13 @@
 ﻿@model CreateViewModel
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Създай Продукт";
 }
 
 <div class="container">
-    <h1>Create</h1>
+    <h1>Създай</h1>
 
-    <h4>Product</h4>
+    <h4>Продукт</h4>
     <hr />
     <div class="row">
         <div class="col-md-4">
@@ -34,19 +34,19 @@
                     <span asp-validation-for="Price" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="Categories">Categories</label>
+                    <label asp-for="Categories">Категории</label>
                     <select asp-for="Categories" class="form-control"
                             asp-items="Model.Categories" multiple=""></select>
                 </div>
                 <div class="form-group">
-                    <input type="submit" value="Create" class="btn btn-primary" />
+                    <input type="submit" value="Създай" class="btn btn-primary" />
                 </div>
             </form>
         </div>
     </div>
 
     <div>
-        <a asp-action="Index">Back to List</a>
+        <a asp-action="Index">Върни се обратно</a>
     </div>
 </div>
 

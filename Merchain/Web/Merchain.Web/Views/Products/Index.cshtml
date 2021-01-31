@@ -1,16 +1,15 @@
 ﻿@model ProductsIndexViewModel
 
 @{
-    this.ViewData["Title"] = "Products";
+    this.ViewData["Title"] = "Продукти";
     var currPage = Model.CurrentPage;
 }
 
 <div class="page-top-info">
     <div class="container">
-        <h4>Products Page</h4>
         <div class="site-pagination">
-            <a asp-controller="Home" asp-action="Index">Home</a> /
-            <a>Products</a> /
+            <a asp-controller="Home" asp-action="Index">Начало</a> /
+            <a>Продукти</a> /
         </div>
     </div>
 </div>
@@ -48,11 +47,11 @@
                                 <a class="prev page-numbers"
                                    asp-controller="Products" asp-action="Index"
                                    asp-route-page="@(currPage - 1)"
-                                   asp-route-categoryId="@Model.CurrentCategoryId">Previous</a>
+                                   asp-route-categoryId="@Model.CurrentCategoryId">Назад</a>
                             }
                             else
                             {
-                                <span aria-current="page" class="prev page-numbers">Previous</span>
+                                <span aria-current="page" class="prev page-numbers">Назад</span>
                             }
                             @for (int i = 1; i <= Model.MaxPage; i++)
                             {
@@ -73,11 +72,11 @@
                                 <a class="next page-numbers"
                                    asp-controller="Products" asp-action="Index"
                                    asp-route-page="@(currPage + 1)"
-                                   asp-route-categoryId="@Model.CurrentCategoryId">Next</a>
+                                   asp-route-categoryId="@Model.CurrentCategoryId">Напред</a>
                             }
                             else
                             {
-                                <span aria-current="page" class="next page-numbers">Next</span>
+                                <span aria-current="page" class="next page-numbers">Напред</span>
                             }
                         </div>
                     </div>

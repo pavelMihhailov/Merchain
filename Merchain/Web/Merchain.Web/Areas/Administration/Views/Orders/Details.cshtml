@@ -2,22 +2,22 @@
 
 @model OrderInfoViewModel
 @{
-    this.ViewData["Title"] = "Order Details";
+    this.ViewData["Title"] = "Детайли За Поръчката";
 }
 
 <div class="page-top-info">
     <div class="container">
         <h4>Order Details</h4>
         <div class="site-pagination">
-            <a asp-controller="Home" asp-action="Index">Home</a> /
-            <a>Order Details</a>
+            <a asp-controller="Home" asp-action="Index">Начало</a> /
+            <a>Детайли За Поръчката</a>
         </div>
     </div>
 </div>
 
 <div class="container">
     <div>
-        <h4>Order #@Model.OrderId</h4>
+        <h4>Поръчка #@Model.OrderId</h4>
         <hr />
         <table class="table table-striped">
             <thead class="table-head">
@@ -39,14 +39,14 @@
                 </tr>
             </tbody>
         </table>
-        <h4>Products Ordered</h4>
+        <h4>Поръчани Продукти</h4>
         <table class="table table-striped">
             <thead class="table-head">
                 <tr>
-                    <th scope="col">Product Id</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Price</th>
-                    <th scope="col">Quantity</th>
+                    <th scope="col">Продукт ID</th>
+                    <th scope="col">Име</th>
+                    <th scope="col">Цена</th>
+                    <th scope="col">Количество</th>
                 </tr>
             </thead>
             <tbody>
@@ -73,7 +73,7 @@
         <div class="row">
             <div class="col-md-4">
                 <form asp-area="@AreaConstants.Administration" asp-controller="Orders" asp-action="MarkOrderAs" method="post">
-                    <h3>Mark order as:</h3>
+                    <h3>Маркирай Поръчката Като:</h3>
                     <input type="hidden" name="id" value="@Model.OrderId" />
                     <div class="form-group">
                         <input type="radio" name="markedAs" id="shipped" value="@OrderStatus.Shipped" />
@@ -93,12 +93,12 @@
                             <span class="badge badge-warning">@OrderStatus.Pending</span>
                         </label>
                     </div>
-                    <button type="submit" class="btn btn-primary">Update</button>
+                    <button type="submit" class="btn btn-primary">Запази</button>
                 </form>
             </div>
         </div>
     </div>
     <div>
-        <a asp-action="Index">Back to List</a>
+        <a asp-action="Index">Върни се обратно</a>
     </div>
 </div>

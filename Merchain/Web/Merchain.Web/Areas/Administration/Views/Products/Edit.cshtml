@@ -1,13 +1,11 @@
 ﻿@model EditProductViewModel
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Промени";
 }
 
 <div class="container">
-    <h1>Edit</h1>
-
-    <h4>Product</h4>
+    <h1>Промени</h1>
     <hr />
     <div class="row">
         <div class="col-md-4">
@@ -30,13 +28,13 @@
                         {
                             <div>
                                 <img src="@image" width="300" />
-                                <button id="removeImage" class="btn-warning">Remove image</button>
+                                <button id="removeImage" class="btn-warning">Изтрий Снимката</button>
                             </div>
                         }
                     }
                     <br />
                     <input type="hidden" asp-for="Product.ImagesUrls" class="form-control-file">
-                    <label for="addedImages">Add More Images</label>
+                    <label for="addedImages">Добави Още Снимки</label>
                     <input type="file" multiple name="addedImages" class="form-control-file"
                            id="addedImages" aria-describedby="fileHelp">
                 </div>
@@ -46,26 +44,26 @@
                     <span asp-validation-for="Product.Price" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="Categories">Categories</label>
+                    <label asp-for="Categories">Категории</label>
                     <select name="selectedCategories" asp-for="SelectedCategories" class="form-control"
                             asp-items="Model.Categories" multiple=""></select>
                 </div>
                 <input type="hidden" asp-for="Product.Id" />
                 <div class="form-group">
-                    <label class="control-label">Created On: @Model.Product.CreatedOn</label>
+                    <label class="control-label">Създаден на: @Model.Product.CreatedOn</label>
                 </div>
                 <div class="form-group">
-                    <label class="control-label">Modified On: @Model.Product.ModifiedOn</label>
+                    <label class="control-label">Променен на: @Model.Product.ModifiedOn</label>
                 </div>
                 <div class="form-group">
-                    <input type="submit" value="Save" class="btn btn-primary" />
+                    <input type="submit" value="Запази" class="btn btn-primary" />
                 </div>
             </form>
         </div>
     </div>
 
     <div>
-        <a asp-action="Index">Back to List</a>
+        <a asp-action="Index">Върни се обратно</a>
     </div>
 </div>
 

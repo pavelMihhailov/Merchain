@@ -13,6 +13,7 @@
         }
 
         [Required]
+        [Display(Name = "Име")]
         public string Title { get; set; }
 
         public virtual ICollection<ProductCategory> ProductsCategories { get; set; }

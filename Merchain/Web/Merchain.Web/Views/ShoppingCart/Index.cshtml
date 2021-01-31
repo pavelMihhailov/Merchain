@@ -1,15 +1,15 @@
 ﻿@model CartViewModel
 
 @{
-    this.ViewData["Title"] = "Cart";
+    this.ViewData["Title"] = "Твоята Количка";
 }
 
 <div class="page-top-info">
     <div class="container">
-        <h4>Your cart</h4>
+        <h4>Твоята Количка</h4>
         <div class="site-pagination">
-            <a asp-controller="Home" asp-action="Index">Home</a> /
-            <a>Your cart</a>
+            <a asp-controller="Home" asp-action="Index">Начало</a> /
+            <a>Твоята Количка</a>
         </div>
     </div>
 </div>
@@ -21,19 +21,19 @@
                 <div class="cart-table">
                     @if (!Model.Cart.Any())
                     {
-                        <h3>Your cart is empty</h3>
+                        <h3>Количката е празна.</h3>
                     }
                     else
                     {
-                        <h3>Your Cart</h3>
+                        <h3>Твоята количка</h3>
                         <div class="cart-table-warp">
                             <table>
                                 <thead>
                                     <tr>
                                         <th></th>
-                                        <th class="product-th">Product</th>
-                                        <th class="quy-th">Quantity</th>
-                                        <th class="total-th">Price</th>
+                                        <th class="product-th">Продукт</th>
+                                        <th class="quy-th">Количество</th>
+                                        <th class="total-th">Цена</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -46,7 +46,7 @@
                                                 <img src="@product.ImagesUrls.Split(';')[0]" alt="@product.Name">
                                                 <div class="pc-title">
                                                     <h4>@product.Name</h4>
-                                                    <p>$@product.Price</p>
+                                                    <p>@product.Price лв.</p>
                                                 </div>
                                             </td>
                                             <td class="quy-col">
@@ -56,25 +56,25 @@
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td class="total-col"><h4>$@(item.Quantity * product.Price)</h4></td>
+                                            <td class="total-col"><h4>@(item.Quantity * product.Price) лв.</h4></td>
                                         </tr>
                                     }
                                 </tbody>
                             </table>
                         </div>
                         <div class="total-cost">
-                            <h6>Total <span>$@Model.SumTotal</span></h6>
+                            <h6>Общо <span>@Model.SumTotal лв.</span></h6>
                         </div>
                     }
                 </div>
             </div>
             <div class="col-lg-4 card-right">
                 <form class="promo-code-form">
-                    <input type="text" placeholder="Enter promo code" name="PromoCode">
-                    <a class="applyPromoCode" href="javascript:;">Submit</a>
+                    <input type="text" placeholder="Добави Промо Код" name="PromoCode">
+                    <a class="applyPromoCode" href="javascript:;">Добави</a>
                 </form>
-                <a asp-area="" asp-controller="Order" asp-action="Index" class="site-btn checkout-btn">Proceed to checkout</a>
-                <a asp-controller="Products" asp-action="Index" class="site-btn sb-dark">Continue shopping</a>
+                <a asp-area="" asp-controller="Order" asp-action="Index" class="site-btn checkout-btn">Финализирай Поръчката</a>
+                <a asp-controller="Products" asp-action="Index" class="site-btn sb-dark">Продължи Пазаруването</a>
             </div>
         </div>
     </div>
@@ -83,7 +83,7 @@
 <section class="related-product-section">
     <div class="container">
         <div class="section-title text-uppercase">
-            <h2>Continue Shopping</h2>
+            <h2>Предложени Продукти</h2>
         </div>
         <div class="row">
             <partial name="/Views/Products/Partials/_ListProducts.cshtml" model="Model.SuggestedProducts" />

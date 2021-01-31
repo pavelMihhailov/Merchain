@@ -1,13 +1,13 @@
 ﻿@{
-    this.ViewData["Title"] = "Contact Us";
+    this.ViewData["Title"] = "Контакти";
 }
 
 <div class="page-top-info">
     <div class="container">
-        <h4>Contact Us</h4>
+        <h4>Контакти</h4>
         <div class="site-pagination">
-            <a href="">Home</a> /
-            <a href="">Contact Us</a>
+            <a href="">Начало</a> /
+            <a href="">Контакти</a>
         </div>
     </div>
 </div>
@@ -17,24 +17,21 @@
         <div id="map" class="map"></div>
         <div class="row">
             <div class="col-lg-6 contact-info mb-3">
-                <h3>Get in touch</h3>
-                <p>Sofia, Bulgaria</p>
+                <h3>Свържете се с нас</h3>
+                <p>София, България</p>
                 <p>+555 55555 555</p>
                 <p>merchain@yopmail.com</p>
                 <div class="contact-social">
-                    <a href="#"><i class="fa fa-pinterest"></i></a>
                     <a href="#"><i class="fa fa-facebook"></i></a>
-                    <a href="#"><i class="fa fa-twitter"></i></a>
-                    <a href="#"><i class="fa fa-dribbble"></i></a>
                     <a href="#"><i class="fa fa-behance"></i></a>
                 </div>
-                <h3>Write us an email</h3>
+                <h3>Пишете ни имейл</h3>
                 <form method="post" class="contact-form" asp-controller="Info" asp-action="SendEmailToUs">
-                    <input type="text" name="Name" placeholder="Your name">
-                    <input type="text" name="Email" placeholder="Your e-mail">
-                    <input type="text" name="Subject" placeholder="Subject">
-                    <textarea name="Content" placeholder="Message"></textarea>
-                    <button class="site-btn" type="submit">SEND NOW</button>
+                    <input type="text" name="Name" placeholder="Вашето Име">
+                    <input type="text" name="Email" placeholder="Вашият Имейл">
+                    <input type="text" name="Subject" placeholder="Относно">
+                    <textarea name="Content" placeholder="Съобщение"></textarea>
+                    <button class="site-btn" type="submit">Изпрати</button>
                 </form>
             </div>
         </div>

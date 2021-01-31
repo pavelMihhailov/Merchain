@@ -6,11 +6,11 @@
 
 <div class="page-top-info">
     <div class="container">
-        <h4>Details</h4>
+        <h4>Детайли</h4>
         <div class="site-pagination">
-            <a asp-controller="Home" asp-action="Index">Home</a> /
-            <a asp-controller="Products" asp-action="Index">Products</a> /
-            <a>Details</a> /
+            <a asp-controller="Home" asp-action="Index">Начало</a> /
+            <a asp-controller="Products" asp-action="Index">Продукти</a> /
+            <a>Детайли</a> /
         </div>
     </div>
 </div>
@@ -18,7 +18,7 @@
 <section class="product-section">
     <div class="container">
         <div class="back-link">
-            <a asp-controller="Products" asp-action="Index"> &lt;&lt; Back to Products</a>
+            <a asp-controller="Products" asp-action="Index"> &lt;&lt; Обратно към Продукти</a>
         </div>
         <div class="row">
             <div class="col-lg-6">
@@ -38,8 +38,8 @@
             </div>
             <div class="col-lg-6 product-details">
                 <h2 class="p-title">@Model.Product.Name</h2>
-                <h3 class="p-price">$@Model.Product.Price</h3>
-                <h4 class="p-stock">Available: <span>In Stock</span></h4>
+                <h3 class="p-price">@Model.Product.Price лв.</h3>
+                <h4 class="p-stock">Налично: <span>Да</span></h4>
                 <h4 class="p-stock">ID: @Model.Product.Id</h4>
                 <div class="p-rating">
                     @for (int i = 1; i <= 5; i++)
@@ -49,20 +49,21 @@
                 </div>
                 <div class="p-review">
                     <a asp-controller="Reviews" asp-action="ProductReviews"
-                       asp-route-productId="@Model.Product.Id">@Model.ReviewsCount reviews</a>
+                       asp-route-productId="@Model.Product.Id">@Model.ReviewsCount ревюта</a>
                     |
                     <a asp-controller="Reviews" asp-action="AddReview"
-                       asp-route-id="@Model.Product.Id">Add your review</a>
+                       asp-route-id="@Model.Product.Id">Добави Ревю</a>
                 </div>
                 <div class="quantity">
-                    <p>Quantity</p>
+                    <p>Количество</p>
                     <div class="pro-qty"><input type="text" name="quantity" value="1"></div>
                 </div>
-                <a id="@Model.Product.Id" class="add-card pointer site-btn">ADD TO CART</a>
+                <a id="@Model.Product.Id" class="add-card pointer site-btn">Добави в Количката</a>
                 <div id="accordion" class="accordion-area">
                     <div class="panel">
                         <div class="panel-header" id="headingOne">
-                            <button class="panel-link active" data-toggle="collapse" data-target="#collapse1" aria-expanded="true" aria-controls="collapse1">information</button>
+                            <button class="panel-link active" data-toggle="collapse" data-target="#collapse1"
+                                    aria-expanded="true" aria-controls="collapse1">допълнителна информация</button>
                         </div>
                         <div id="collapse1" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
                             <div class="panel-body">
@@ -72,7 +73,8 @@
                     </div>
                     <div class="panel">
                         <div class="panel-header" id="headingTwo">
-                            <button class="panel-link" data-toggle="collapse" data-target="#collapse2" aria-expanded="false" aria-controls="collapse2">paying details </button>
+                            <button class="panel-link" data-toggle="collapse" data-target="#collapse2" aria-expanded="false"
+                                    aria-controls="collapse2">плащане</button>
                         </div>
                         <div id="collapse2" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
                             <div class="panel-body">
@@ -83,7 +85,7 @@
                     </div>
                     <div class="panel">
                         <div class="panel-header" id="headingThree">
-                            <button class="panel-link" data-toggle="collapse" data-target="#collapse3" aria-expanded="false" aria-controls="collapse3">shipping & Returns</button>
+                            <button class="panel-link" data-toggle="collapse" data-target="#collapse3" aria-expanded="false" aria-controls="collapse3">Доставка</button>
                         </div>
                         <div id="collapse3" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
                             <div class="panel-body">
@@ -109,7 +111,7 @@
 <section class="related-product-section">
     <div class="container">
         <div class="section-title">
-            <h2>RELATED PRODUCTS</h2>
+            <h2>Свързани Продукти</h2>
         </div>
         <div class="product-slider owl-carousel">
             @foreach (var product in Model.RelatedProducts)

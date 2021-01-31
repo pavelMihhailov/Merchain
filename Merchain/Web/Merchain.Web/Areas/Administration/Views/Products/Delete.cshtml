@@ -1,15 +1,14 @@
 ﻿@model Product
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "Изтрий Продукта";
 }
 
 <div class="container mb-3 mt-3">
-    <h1>Delete</h1>
+    <h1>Изтрий</h1>
 
-    <h3>Are you sure you want to delete this?</h3>
+    <h3>Наистина ли искате да изтриете този продукт?</h3>
     <div>
-        <h4>Product</h4>
         <hr />
         <dl class="row">
             <dt class="col-sm-2">
@@ -37,7 +36,7 @@
                 @Html.DisplayNameFor(model => model.Price)
             </dt>
             <dd class="col-sm-10">
-                $@Html.DisplayFor(model => model.Price)
+                @Html.DisplayFor(model => model.Price) лв.
             </dd>
             <dt class="col-sm-2">
                 @Html.DisplayNameFor(model => model.CreatedOn)
@@ -55,8 +54,8 @@
 
         <form asp-action="Delete">
             <input type="hidden" asp-for="Id" />
-            <input type="submit" value="Delete" class="btn btn-danger" /> |
-            <a asp-action="Index">Back to List</a>
+            <input type="submit" value="Изтрий" class="btn btn-danger" /> |
+            <a asp-action="Index">Върни се обратно</a>
         </form>
     </div>
 </div>

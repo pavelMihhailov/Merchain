@@ -2,11 +2,11 @@
 
 @model SubscribeViewModel
 @{
-    ViewData["Title"] = "Subscribe";
+    ViewData["Title"] = "Абониране";
 }
 
 <div class="container mt-3 mb-2">
-    <h4>Subscribe To Get Discount Promo Codes</h4>
+    <h4>Абонирай се за нашия седмичен бюлетин и получи промо код за отстъпка.</h4>
     <hr />
     <div class="row">
         <div class="col-md-4">
@@ -18,14 +18,14 @@
                     <span asp-validation-for="Email" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <input type="submit" value="Subscribe" class="btn btn-primary" />
+                    <input type="submit" value="Абонирай Се" class="btn btn-primary" />
                 </div>
             </form>
         </div>
     </div>
 
     <div>
-        <a asp-action="Index">Back to List</a>
+        <a asp-action="Index">Върни се обратно</a>
     </div>
 </div>
 

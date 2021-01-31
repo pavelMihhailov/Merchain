@@ -23,23 +23,6 @@
             return this.View(categories);
         }
 
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return this.NotFound();
-            }
-
-            var category = await this.categoriesService.GetByIdAsync((int)id);
-
-            if (category == null)
-            {
-                return this.NotFound();
-            }
-
-            return this.View(category);
-        }
-
         public IActionResult Create()
         {
             return this.View();

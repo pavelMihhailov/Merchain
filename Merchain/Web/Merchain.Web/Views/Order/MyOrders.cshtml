@@ -1,15 +1,15 @@
 ﻿@model IEnumerable<OrderInfoViewModel>
 
 @{
-    this.ViewData["Title"] = "My Orders";
+    this.ViewData["Title"] = "Моите Поръчки";
 }
 
 <div class="page-top-info">
     <div class="container">
-        <h4>My Orders</h4>
+        <h4>Моите Поръчки</h4>
         <div class="site-pagination">
-            <a asp-controller="Home" asp-action="Index">Home</a> /
-            <a>My Orders</a>
+            <a asp-controller="Home" asp-action="Index">Начало</a> /
+            <a>Моите Поръчки</a>
         </div>
     </div>
 </div>
@@ -17,18 +17,18 @@
 <div class="container mt-3">
     @if (!Model.Any())
     {
-        <h2>You haven't made any orders.</h2>
+        <h2>Нямате направени поръчки към момента.</h2>
     }
     else
     {
         <table class="table table-striped">
             <thead class="table-head">
                 <tr>
-                    <th width="14%">Order Date</th>
-                    <th>Order ID</th>
-                    <th>Ordered Products</th>
-                    <th>Total Cost</th>
-                    <th>Order Status</th>
+                    <th width="14%">Дата</th>
+                    <th>ID на поръчката</th>
+                    <th>Поръчани Продукти</th>
+                    <th>Общо</th>
+                    <th>Статус на Поръчката</th>
                 </tr>
             </thead>
             <tbody>
@@ -46,7 +46,7 @@
                                         <td>
                                             <img src="@product.ImageUrl" width="100" />
                                         </td>
-                                        <td>$@product.Price</td>
+                                        <td>@product.Price лв.</td>
                                         <td>x @product.Quantity</td>
                                     </tr>
                                 }

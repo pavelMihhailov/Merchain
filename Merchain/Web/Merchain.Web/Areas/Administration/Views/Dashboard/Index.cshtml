@@ -1,12 +1,12 @@
 ﻿@model IndexViewModel
 @{
-    this.ViewData["Title"] = "Admin dashboard";
+    this.ViewData["Title"] = "Админ Секция";
 }
 
 <div class="container text-center mt-4 mb-4">
     <h1>@this.ViewData["Title"]</h1>
-    <a class="site-btn" asp-area="@AreaConstants.Administration" asp-controller="Products" asp-action="Index">View All Products</a>
-    <a class="site-btn" asp-area="@AreaConstants.Administration" asp-controller="Categories" asp-action="Index">View All Categories</a>
-    <a class="site-btn" asp-area="@AreaConstants.Administration" asp-controller="Orders" asp-action="Index">View All Orders</a>
-    <a class="site-btn" asp-area="@AreaConstants.Administration" asp-controller="PromoCodes" asp-action="Index">Manage Promo Codes</a>
+    <a class="site-btn" asp-area="@AreaConstants.Administration" asp-controller="Products" asp-action="Index">Виж Всички Продукти</a>
+    <a class="site-btn" asp-area="@AreaConstants.Administration" asp-controller="Categories" asp-action="Index">Виж Всички Категории</a>
+    <a class="site-btn" asp-area="@AreaConstants.Administration" asp-controller="Orders" asp-action="Index">Виж Всички Поръчки</a>
+    <a class="site-btn" asp-area="@AreaConstants.Administration" asp-controller="PromoCodes" asp-action="Index">Менажирай Промо Кодовете</a>
 </div>

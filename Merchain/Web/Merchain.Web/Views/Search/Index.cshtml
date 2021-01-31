@@ -1,20 +1,11 @@
 ﻿@model IEnumerable<ProductDefaultViewModel>
 
 @{
-    this.ViewData["Title"] = "Seach Results";
+    this.ViewData["Title"] = "Намерени Резултати";
 }
 
-<div class="page-top-info">
-    <div class="container">
-        <h4>Search Results</h4>
-        <div class="site-pagination">
-            <a>Search Results</a>
-        </div>
-    </div>
-</div>
-
 <div class="container">
-    <h3>Search Results Found: @Model.Count()</h3>
+    <h3>Намерени резултати: @Model.Count()</h3>
     <div class="row mt-3">
         <partial name="/Views/Products/Partials/_ListProducts.cshtml" model="Model" />
     </div>

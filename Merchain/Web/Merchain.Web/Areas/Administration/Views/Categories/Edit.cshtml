@@ -1,13 +1,13 @@
 ﻿@model Category
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Промени Категория";
 }
 
 <div class="container mt-3 mb-3">
-    <h1>Edit</h1>
+    <h1>Промени</h1>
 
-    <h4>@Model.Title Category</h4>
+    <h4>Категория '@Model.Title'</h4>
     <hr />
     <div class="row">
         <div class="col-md-4">
@@ -20,13 +20,13 @@
                     <span asp-validation-for="Title" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <input type="submit" value="Save" class="btn btn-primary" />
+                    <input type="submit" value="Запази" class="btn btn-primary" />
                 </div>
             </form>
         </div>
     </div>
 
     <div>
-        <a asp-action="Index">Back to List</a>
+        <a asp-action="Index">Върни се обратно</a>
     </div>
 </div>

@@ -1,7 +1,6 @@
 ﻿namespace Merchain.Data.Models
 {
     using System.Collections.Generic;
-    using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
@@ -16,14 +15,17 @@
         }
 
         [Required]
+        [Display(Name = "Име")]
         public string Name { get; set; }
 
+        [Display(Name = "Описание")]
         public string Description { get; set; }
 
-        [Display(Name = "Images")]
+        [Display(Name = "Снимки")]
         public string ImagesUrls { get; set; }
 
         [Column(TypeName = "decimal(5, 2)")]
+        [Display(Name = "Цена")]
         public decimal Price { get; set; }
 
         public virtual ICollection<ProductCategory> ProductsCategories { get; set; }

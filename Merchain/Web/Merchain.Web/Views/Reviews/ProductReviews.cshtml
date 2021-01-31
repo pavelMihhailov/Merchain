@@ -1,18 +1,18 @@
 ﻿@model ProductReviewsViewModel
 
 @{
-    this.ViewData["Title"] = "Product Reviews";
+    this.ViewData["Title"] = "Ревю за продукт";
 }
 
 <div class="page-top-info">
     <div class="container">
-        <h4>Add Review</h4>
+        <h4>Добави Ревю</h4>
         <div class="site-pagination">
-            <a asp-controller="Home" asp-action="Index">Home</a> /
-            <a asp-controller="Products" asp-action="Index">Products</a> /
+            <a asp-controller="Home" asp-action="Index">Начало</a> /
+            <a asp-controller="Products" asp-action="Index">Продукти</a> /
             <a asp-controller="Products" asp-action="Details"
                asp-route-id="@Model.Product.Id">@Model.Product.Name</a> /
-            <a>Reviews</a>
+            <a>Ревюта</a>
         </div>
     </div>
 </div>
@@ -26,7 +26,7 @@
             <div class="col-lg-7 pt-5">
                 <h3>@Model.Reviews.Count() Reviews</h3>
                 <a asp-controller="Reviews" asp-action="AddReview" asp-route-id="@Model.Product.Id" class="mt-2">
-                    Add Review
+                    Добави Ревю
                 </a>
                 @foreach (var review in Model.Reviews)
                 {

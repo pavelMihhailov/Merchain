@@ -1,17 +1,17 @@
 ﻿@model AddReviewInputModel
 
 @{
-    this.ViewData["Title"] = "Add Review";
+    this.ViewData["Title"] = "Добави Ревю";
 }
 
 <div class="page-top-info">
     <div class="container">
-        <h4>Add Review</h4>
+        <h4>Добави Ревю</h4>
         <div class="site-pagination">
-            <a asp-controller="Home" asp-action="Index">Home</a> /
-            <a asp-controller="Products" asp-action="Index">Products</a> /
+            <a asp-controller="Home" asp-action="Index">Начало</a> /
+            <a asp-controller="Products" asp-action="Index">Продукти</a> /
             <a asp-controller="Products" asp-action="Details" asp-route-id="@Model.Product.Id">@Model.Product.Name</a> /
-            <a>Add Review</a>
+            <a>Добави Ревю</a>
         </div>
     </div>
 </div>
@@ -69,11 +69,11 @@
                         <span asp-validation-for="Stars" class="text-danger"></span>
                     </div>
                     <div class="text-center">
-                        <input asp-for="Title" placeholder="Title of the review">
+                        <input asp-for="Title" placeholder="Заглавие">
                         <span asp-validation-for="Title" class="text-danger"></span>
-                        <textarea asp-for="Content" placeholder="Content"></textarea>
+                        <textarea asp-for="Content" placeholder="Съдържание"></textarea>
                         <input type="hidden" name="ProductId" value="@Model.Product.Id" />
-                        <button class="site-btn" type="submit">Submit Review</button>
+                        <button class="site-btn" type="submit">Изпрати Ревю</button>
                     </div>
                 </div>
             </div>

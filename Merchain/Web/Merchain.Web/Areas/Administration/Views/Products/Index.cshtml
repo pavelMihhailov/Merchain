@@ -1,15 +1,15 @@
 ﻿@model IEnumerable<Product>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Всички Продукти";
 
     var currPage = ViewBag.CurrPage;
 }
 
 <div class="container mt-3">
-    <h1>All Products</h1>
+    <h1>Всички Продукти</h1>
     <p>
-        <a asp-action="Create">Create New</a>
+        <a asp-action="Create">Създай Нов</a>
     </p>
     <table class="table table-striped">
         <thead class="table-head">
@@ -58,9 +58,9 @@
                         @Html.DisplayFor(modelItem => product.ModifiedOn)
                     </td>
                     <td>
-                        <a asp-action="Edit" asp-route-id="@product.Id">Edit</a> |
-                        <a asp-action="Details" asp-route-id="@product.Id">Details</a> |
-                        <a asp-action="Delete" asp-route-id="@product.Id">Delete</a>
+                        <a asp-action="Edit" asp-route-id="@product.Id">Промени</a> |
+                        <a asp-action="Details" asp-route-id="@product.Id">Детайли</a> |
+                        <a asp-action="Delete" asp-route-id="@product.Id">Изтрий</a>
                     </td>
                 </tr>
             }
@@ -72,11 +72,11 @@
             {
                 <a class="prev page-numbers"
                    asp-area="@AreaConstants.Administration" asp-controller="Products" asp-action="Index"
-                   asp-route-page="@(currPage - 1)">Previous</a>
+                   asp-route-page="@(currPage - 1)">Назад</a>
             }
             else
             {
-                <span aria-current="page" class="prev page-numbers">Previous</span>
+                <span aria-current="page" class="prev page-numbers">Назад</span>
             }
             @for (int i = 1; i <= ViewBag.MaxPage; i++)
             {
@@ -95,11 +95,11 @@
             {
                 <a class="next page-numbers"
                    asp-area="@AreaConstants.Administration" asp-controller="Products" asp-action="Index"
-                   asp-route-page="@(currPage + 1)">Next</a>
+                   asp-route-page="@(currPage + 1)">Напред</a>
             }
             else
             {
-                <span aria-current="page" class="next page-numbers">Next</span>
+                <span aria-current="page" class="next page-numbers">Напред</span>
             }
         </div>
     </div>

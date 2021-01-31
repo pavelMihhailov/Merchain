@@ -1,15 +1,15 @@
 ﻿@model AllOrdersViewModel
 @{
-    this.ViewData["Title"] = "All Orders";
+    this.ViewData["Title"] = "Всички Поръчки";
     var currPage = ViewBag.CurrPage;
 }
 
 <div class="page-top-info">
     <div class="container">
-        <h4>All Orders</h4>
+        <h4>Всички Поръчки</h4>
         <div class="site-pagination">
-            <a asp-controller="Home" asp-action="Index">Home</a> /
-            <a>All Orders</a>
+            <a asp-controller="Home" asp-action="Index">Начало</a> /
+            <a>Всички Поръчки</a>
         </div>
     </div>
 </div>
@@ -22,11 +22,11 @@
     <table class="table table-striped">
         <thead class="table-head">
             <tr>
-                <th width="14%">Order Date</th>
-                <th>Order ID</th>
-                <th>Ordered Products</th>
-                <th>Total Cost</th>
-                <th>Order Status</th>
+                <th width="14%">Дата На Поръчване</th>
+                <th>Продукт ID</th>
+                <th>Поръчани Продукти</th>
+                <th>Обща Сума</th>
+                <th>Статус</th>
                 <th></th>
             </tr>
         </thead>
@@ -43,9 +43,9 @@
                             <thead class="table-head">
                                 <tr>
                                     <th>ID</th>
-                                    <th>Name</th>
-                                    <th>Price</th>
-                                    <th>Quantity</th>
+                                    <th>Име</th>
+                                    <th>Цена</th>
+                                    <th>Количество</th>
                                 </tr>
                             </thead>
                             @foreach (var product in order.ProductsOrdered)
@@ -58,7 +58,7 @@
                                         </a>
                                     </td>
                                     <td>@product.Name</td>
-                                    <td>$@product.Price</td>
+                                    <td>@product.Price лв.</td>
                                     <td>x @product.Quantity</td>
                                 </tr>
                             }
@@ -70,7 +70,7 @@
                     </td>
                     <td>
                         <a asp-area="@AreaConstants.Administration" asp-controller="Orders" asp-action="Details" asp-route-id="@order.OrderId">
-                            Review Order
+                            Прегледай Поръчката
                         </a>
                     </td>
                 </tr>
@@ -83,11 +83,11 @@
             {
                 <a class="prev page-numbers"
                    asp-area="@AreaConstants.Administration" asp-controller="Orders" asp-action="Index"
-                   asp-route-page="@(currPage - 1)">Previous</a>
+                   asp-route-page="@(currPage - 1)">Назад</a>
             }
             else
             {
-                <span aria-current="page" class="prev page-numbers">Previous</span>
+                <span aria-current="page" class="prev page-numbers">Назад</span>
             }
             @for (int i = 1; i <= ViewBag.MaxPage; i++)
             {
@@ -106,11 +106,11 @@
             {
                 <a class="next page-numbers"
                    asp-area="@AreaConstants.Administration" asp-controller="Orders" asp-action="Index"
-                   asp-route-page="@(currPage + 1)">Next</a>
+                   asp-route-page="@(currPage + 1)">Следваща</a>
             }
             else
             {
-                <span aria-current="page" class="next page-numbers">Next</span>
+                <span aria-current="page" class="next page-numbers">Следваща</span>
             }
         </div>
     </div>
@@ -127,18 +127,18 @@
         Highcharts.chart('chartContainer', {
 
             title: {
-                text: 'All orders in last week'
+                text: 'Всички поръчки през последната седмица'
             },
 
             yAxis: {
                 title: {
-                    text: 'Number of Orders'
+                    text: 'Брой Поръчки'
                 }
             },
 
             xAxis: {
                 accessibility: {
-                    rangeDescription: 'Range: 1 to 7'
+                    rangeDescription: 'Обхват: 1 до 7'
                 }
             },
 
@@ -158,7 +158,7 @@
             },
 
             series: [{
-                name: 'Orders',
+                name: 'Поръчки',
                 data: [
                     @foreach (var orderCount in Model.OrdersCountInLast7Days)
                     {

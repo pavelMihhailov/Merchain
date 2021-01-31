@@ -1,20 +1,20 @@
 ﻿@model IEnumerable<PromoCode>
 
 @{
-    ViewData["Title"] = "Promo Codes";
+    ViewData["Title"] = "Промо Кодове";
     var currPage = ViewBag.CurrPage;
 }
 
 <div class="container mt-3">
-    <h2>Unused Promo Codes</h2>
+    <h2>Неизползвани Промо Кодове</h2>
     @if (!Model.Any())
     {
-        <p>There are 0 promo codes available.</p>
-        <p>You can generate new ones on this link <a asp-action="GenerateCodes">Generate New Codes</a></p>
+        <p>Има 0 неизползвани промо кодове.</p>
+        <p>Може да генерирате нови промо кодове от следния линк - <a asp-action="GenerateCodes">Нови Промо Кодове</a></p>
     }
     else
     {
-        <a asp-action="GenerateCodes">Generate New Codes</a>
+        <a asp-action="GenerateCodes">Генерирай Нови Промо Кодове</a>
         <table class="table table-striped mt-3">
             <thead class="table-head">
                 <tr>
@@ -28,7 +28,7 @@
                         @Html.DisplayNameFor(model => model.ValidUntil)
                     </th>
                     <th>
-                        Assigned To User#
+                        Приложено към User#
                     </th>
                     <th></th>
                 </tr>
@@ -50,7 +50,7 @@
                             @Html.DisplayFor(modelItem => promoCode.UserId)
                         </td>
                         <td>
-                            <a asp-action="Delete" asp-route-id="@promoCode.Id">Delete</a>
+                            <a asp-action="Delete" asp-route-id="@promoCode.Id">Изтрий</a>
                         </td>
                     </tr>
                 }
@@ -62,11 +62,11 @@
                 {
                     <a class="prev page-numbers"
                        asp-area="@AreaConstants.Administration" asp-controller="PromoCodes" asp-action="Index"
-                       asp-route-page="@(currPage - 1)">Previous</a>
+                       asp-route-page="@(currPage - 1)">Назад</a>
                 }
                 else
                 {
-                    <span aria-current="page" class="prev page-numbers">Previous</span>
+                    <span aria-current="page" class="prev page-numbers">Назад</span>
                 }
                 @for (int i = 1; i <= ViewBag.MaxPage; i++)
                 {
@@ -85,11 +85,11 @@
                 {
                     <a class="next page-numbers"
                        asp-area="@AreaConstants.Administration" asp-controller="PromoCodes" asp-action="Index"
-                       asp-route-page="@(currPage + 1)">Next</a>
+                       asp-route-page="@(currPage + 1)">Напред</a>
                 }
                 else
                 {
-                    <span aria-current="page" class="next page-numbers">Next</span>
+                    <span aria-current="page" class="next page-numbers">Напред</span>
                 }
             </div>
         </div>

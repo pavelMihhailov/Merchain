@@ -5,9 +5,9 @@
 <nav class="main-navbar">
     <div class="container">
         <ul class="main-menu">
-            <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+            <li><a asp-area="" asp-controller="Home" asp-action="Index">Начало</a></li>
             <li>
-                <a asp-area="" asp-controller="Products" asp-action="Index">Products</a>
+                <a asp-area="" asp-controller="Products" asp-action="Index">Продукти</a>
                 <ul class="sub-menu">
                     @foreach (var category in await categoryService.GetAllAsync())
                     {
@@ -20,12 +20,12 @@
             </li>
             @if (this.User.Identity.IsAuthenticated)
             {
-                <li><a asp-area="" asp-controller="Order" asp-action="MyOrders">My Orders</a></li>
-                <li><a asp-area="" asp-controller="PromoCodes" asp-action="Index">My Promo Codes</a></li>
-                <li><a asp-area="" asp-controller="Subscribe" asp-action="Index">Subscribe</a></li>
+                <li><a asp-area="" asp-controller="Order" asp-action="MyOrders">Моите Поръчки</a></li>
+                <li><a asp-area="" asp-controller="PromoCodes" asp-action="Index">Моите промо кодове</a></li>
+                <li><a asp-area="" asp-controller="Subscribe" asp-action="Index">Абонирай се</a></li>
             }
-            <li><a asp-area="" asp-controller="Info" asp-action="ContactUs">Contact Us</a></li>
-            <li><a asp-area="" asp-controller="Info" asp-action="PrivacyPolicy">Privacy Policy</a></li>
+            <li><a asp-area="" asp-controller="Info" asp-action="ContactUs">Контакти</a></li>
+            <li><a asp-area="" asp-controller="Info" asp-action="PrivacyPolicy">Политика за поверителност</a></li>
         </ul>
     </div>
 </nav>
