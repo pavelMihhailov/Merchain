@@ -53,15 +53,16 @@
         }
 
         [HttpGet]
-        public async Task<IActionResult> AddProduct(int id, int quantity = 1)
+        public async Task<IActionResult> AddProduct(int id)
         {
             try
             {
-                await this.cartService.AddToCart(this.HttpContext.Session, id, quantity);
+                await this.cartService.AddToCart(this.HttpContext.Session, id);
             }
             catch (Exception ex)
             {
                 this.logger.LogError($"Could not add product to the cart.\n-{ex.Message}");
+                return new StatusCodeResult(500);
             }
 
             return new StatusCodeResult(200);
@@ -77,6 +78,23 @@
             catch (Exception ex)
             {
                 this.logger.LogError($"Could not remove product from the cart.\n-{ex.Message}");
+                return new StatusCodeResult(500);
+            }
+
+            return new StatusCodeResult(200);
+        }
+
+        [HttpGet]
+        public IActionResult DecreaseQuantity(int id)
+        {
+            try
+            {
+                this.cartService.DecreaseQuantity(this.HttpContext.Session, id);
+            }
+            catch (Exception ex)
+            {
+                this.logger.LogError($"Could not decrease quantity of product in the cart.\n-{ex.Message}");
+                return new StatusCodeResult(500);
             }
 
             return new StatusCodeResult(200);

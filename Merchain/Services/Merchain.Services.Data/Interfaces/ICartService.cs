@@ -1,14 +1,17 @@
 ﻿namespace Merchain.Services.Data.Interfaces
 {
+    using System.Net;
     using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Http;
 
     public interface ICartService
     {
-        Task<Task> AddToCart(ISession session, int id, int quantity);
+        Task<Task> AddToCart(ISession session, int id);
 
         void RemoveFromCart(ISession session, int id);
+
+        HttpStatusCode DecreaseQuantity(ISession session, int id);
 
         void EmptyCart(ISession session);
 

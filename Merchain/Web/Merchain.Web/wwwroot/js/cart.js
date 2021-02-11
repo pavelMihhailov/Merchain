@@ -33,8 +33,8 @@ function refreshCartPrices(id, isRemoved, increment) {
     let productPriceHtml = $(productPriceTag)[0].innerText;
     let totalPriceHtml = totalPriceTag.innerText;
 
-    let productTotalPrice = parseFloat(productPriceHtml.substring(1, productPriceHtml.length));
-    let totalPrice = parseFloat(totalPriceHtml.substring(1, totalPriceHtml.length));
+    let productTotalPrice = parseFloat(productPriceHtml.substring(0, productPriceHtml.length - 3));
+    let totalPrice = parseFloat(totalPriceHtml.substring(0, totalPriceHtml.length - 3));
 
     let quantity = $(productRow).find('input').val();
 
@@ -54,6 +54,6 @@ function refreshCartPrices(id, isRemoved, increment) {
         }
     }
 
-    $(productPriceTag).html("$" + productTotalPrice.toFixed(2));
-    $(totalPriceTag).html("$" + totalPrice.toFixed(2));
+    $(productPriceTag).html(productTotalPrice.toFixed(2) + " лв.");
+    $(totalPriceTag).html(totalPrice.toFixed(2) + " лв.");
 }

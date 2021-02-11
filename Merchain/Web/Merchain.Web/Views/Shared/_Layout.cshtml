@@ -5,8 +5,8 @@
 <head>
     <title>@this.ViewData["Title"] - @GlobalConstants.SystemName</title>
     <meta charset="UTF-8">
-    <meta name="description" content="Merchain">
-    <meta name="keywords" content="merchain, eCommerce, creative, html">
+    <meta name="description" content="Coding Life">
+    <meta name="keywords" content="coding, eCommerce, t-shirts, hoodies">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <environment names="Development">
@@ -39,22 +39,18 @@
         <div class="header-top">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-2 text-center text-lg-left">
+                    <div class="col-lg-2 text-center text-lg-left mobile-none">
                         <a asp-area="" asp-controller="Home" asp-action="Index" class="site-logo">
-                            <img src="~/img/merchain-logo.png" alt="">
+                            <img src="~/img/coding-life-logo.png" alt="" height="52">
                         </a>
                     </div>
-                    <div class="col-xl-6 col-lg-5">
-                        <form class="header-search-form" asp-area="" asp-controller="Search" asp-action="Index" method="get">
-                            <input type="text" name="query" placeholder="Търси по име на продукт или ID ...">
-                            <button><i class="flaticon-search"></i></button>
-                        </form>
+                    <div class="col-xl-5 col-lg-4">
                     </div>
-                    <div class="col-xl-4 col-lg-5">
+                    <div class="col-xl-5 col-lg-5">
                         <div class="user-panel">
                             <partial name="_LoginPartial" />
 
-                            <div class="up-item">
+                            <div class="up-item ml-2">
                                 <div class="shopping-card">
                                     <i class="flaticon-bag"></i>
                                     <span>0</span>

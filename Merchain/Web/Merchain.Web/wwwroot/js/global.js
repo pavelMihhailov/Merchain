@@ -62,11 +62,16 @@ $(document).ready(function () {
             url: "/ShoppingCart/AddProduct",
             data: { 'id': productId, 'quantity': quantity },
             success: function (res) {
-                $("#addedToCart").addClass("show-modal");
-                refreshCartItems();
-                setTimeout(function () {
-                    $("#addedToCart").removeClass("show-modal");
-                }, 2850);
+                if ($(".cart-table").length) {
+                    location.reload();
+                }
+                else {
+                    $("#addedToCart").addClass("show-modal");
+                    refreshCartItems();
+                    setTimeout(function () {
+                        $("#addedToCart").removeClass("show-modal");
+                    }, 2850);
+                }
             }
         });
     });

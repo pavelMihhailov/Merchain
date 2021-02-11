@@ -17,29 +17,22 @@
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Logging;
 
-    [Authorize]
     public class OrderController : Controller
     {
-        private readonly IProductsService productsService;
         private readonly IOrderService orderService;
-        private readonly IOrderItemService orderItemService;
         private readonly ICartService cartService;
         private readonly IPromoCodesService promoCodesService;
         private readonly UserManager<ApplicationUser> userManager;
         private readonly ILogger<OrderController> logger;
 
         public OrderController(
-            IProductsService productsService,
             IOrderService orderService,
-            IOrderItemService orderItemService,
             ICartService cartService,
             IPromoCodesService promoCodesService,
             UserManager<ApplicationUser> userManager,
             ILogger<OrderController> logger)
         {
-            this.productsService = productsService;
             this.orderService = orderService;
-            this.orderItemService = orderItemService;
             this.cartService = cartService;
             this.promoCodesService = promoCodesService;
             this.userManager = userManager;

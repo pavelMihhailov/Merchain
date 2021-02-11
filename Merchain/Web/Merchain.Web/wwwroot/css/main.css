@@ -58,3 +58,10 @@
 .topBtn:hover {
     background-color: #555;
 }
+
+
+@media (max-width: 766px) {
+    .mobile-none {
+        display: none;
+    }
+}

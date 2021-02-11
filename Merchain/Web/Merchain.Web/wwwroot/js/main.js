@@ -202,7 +202,7 @@ $(window).on('load', function() {
 				// Don't allow decrementing below zero
 				$.ajax({
 					type: "GET",
-					url: "/ShoppingCart/RemoveProduct",
+					url: "/ShoppingCart/DecreaseQuantity",
 					data: { 'id': productId },
 					success: function () {
 					}
