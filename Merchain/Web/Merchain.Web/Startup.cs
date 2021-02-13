@@ -53,7 +53,7 @@
                     });
 
             services.AddControllersWithViews();
-
+             
             services.AddDistributedSqlServerCache(
                 options =>
                 {
