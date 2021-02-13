@@ -6,7 +6,6 @@
 
 <div class="page-top-info">
     <div class="container">
-        <h4>Добави Ревю</h4>
         <div class="site-pagination">
             <a asp-controller="Home" asp-action="Index">Начало</a> /
             <a asp-controller="Products" asp-action="Index">Продукти</a> /
@@ -24,7 +23,7 @@
                 <partial name="/Views/Products/Partials/_Product.cshtml" model="Model.Product" />
             </div>
             <div class="col-lg-7 pt-5">
-                <h3>@Model.Reviews.Count() Reviews</h3>
+                <h3>Ревюта</h3>
                 <a asp-controller="Reviews" asp-action="AddReview" asp-route-id="@Model.Product.Id" class="mt-2">
                     Добави Ревю
                 </a>

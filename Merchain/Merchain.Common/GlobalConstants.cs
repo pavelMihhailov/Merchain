@@ -2,7 +2,7 @@
 {
     public static class GlobalConstants
     {
-        public const string SystemName = "Merchain";
+        public const string SystemName = "CodingLife()";
 
         public const string AdministratorRoleName = "Administrator";
 

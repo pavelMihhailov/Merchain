@@ -12,21 +12,15 @@
     </div>
     if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
     {
-        <div class="up-item">
+        <div class="up-item ml-2">
             <i class="flaticon-profile"></i>
             <a asp-area="Administration" asp-controller="Dashboard" asp-action="Index">Админ</a>
         </div>
     }
-    <div class="up-item">
-        <form asp-area="Identity" asp-page="/Account/Logout"
-              asp-route-returnUrl="@(this.Url.Action("Index", "Home", new { area = string.Empty }))">
-            <button type="submit" class="nav-link btn btn-link text-dark">Излез</button>
-        </form>
-    </div>
 }
 else
 {
-    <div class="up-item">
+    <div class="up-item ml-2">
         <i class="flaticon-profile"></i>
         <a asp-area="Identity" asp-page="/Account/Login">Влез</a> или <a asp-area="Identity" asp-page="/Account/Register">Създай Акаунт</a>
     </div>

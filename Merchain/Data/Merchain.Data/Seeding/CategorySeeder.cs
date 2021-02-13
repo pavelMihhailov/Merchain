@@ -11,12 +11,17 @@
     {
         public async Task SeedAsync(ApplicationDbContext dbContext, IServiceProvider serviceProvider)
         {
+            // Uncomment if you want initial seeding of categories
+            // await SeedCategories(dbContext);
+        }
+
+        public async Task SeedCategories(ApplicationDbContext dbContext)
+        {
             var categories = new List<string>()
             {
-                "Shirts",
-                "Underwear",
-                "Polos",
-                "Top",
+                "Мъжки Тениски",
+                "Дамски Тениски",
+                "Суитшърти",
             };
 
             foreach (var category in categories)

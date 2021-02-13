@@ -1,9 +1,6 @@
-﻿@using Merchain.Common.Order
-
-@model OrderViewModel
-
+﻿@model OrderViewModel
 @{
-    this.ViewData["Title"] = "Confirm Order";
+    this.ViewData["Title"] = "Потвърди Поръчката";
 }
 
 <div class="page-top-info">
@@ -21,22 +18,18 @@
         <div class="row">
             <div class="col-lg-8 order-2 order-lg-1">
                 <form class="checkout-form" name="orderForm" asp-controller="Order" asp-action="MakeOrder">
-                    <div class="cf-title">Billing Address</div>
-                    <div class="row">
-                        <div class="col-md-7">
-                            <p>*Billing Information</p>
-                        </div>
-                        <div class="col-md-5">
-                            <div class="cf-radio-btns address-rb">
-                                <div class="cfr-item">
-                                    <input type="radio" name="UseRegularAddress" id="regularTrue" checked="checked" value="true">
-                                    <label for="regularTrue">Use my regular address</label>
-                                </div>
-                                <div class="cfr-item">
-                                    <input type="radio" name="UseRegularAddress" id="regularFalse" value="false">
-                                    <label for="regularFalse">Use a different address</label>
-                                </div>
+                    <div class="cf-title">*Адрес за доставка</div>
+                    <div class="cf-radio-btns ml-4 shipping-btns">
+                        @if (Model.UserHasAddressByDefault)
+                        {
+                            <div class="cfr-item">
+                                <input type="radio" name="UseRegularAddress" id="regularTrue" value="true">
+                                <label for="regularTrue">Използвай адреса ми по подразбиране</label>
                             </div>
+                        }
+                        <div class="cfr-item">
+                            <input type="radio" name="UseRegularAddress" id="regularFalse" checked="checked" value="false">
+                            <label for="regularFalse">Използвай друг адрес</label>
                         </div>
                     </div>
                     <div class="row address-inputs">
@@ -48,52 +41,26 @@
                         <div class="col-md-6">
                             <input type="text" required placeholder="Zip code" name="ZipCode">
                         </div>
+                    </div>
+                    <div class="cf-title">*Информация за доставка</div>
+                    <div class="row">
                         <div class="col-md-6">
-                            <input type="text" placeholder="Phone no." name="Phone">
+                            <input type="text" required placeholder="Име" name="FirstName">
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" required placeholder="Фамилия" name="LastName">
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" required placeholder="Телефон" name="Phone">
                         </div>
                     </div>
-                    <div class="cf-title">Delievery Info</div>
-                    <div class="row shipping-btns">
-                        <div class="col-6">
-                            <h4>Standard</h4>
-                        </div>
-                        <div class="col-6">
-                            <div class="cf-radio-btns">
-                                <div class="cfr-item">
-                                    <input type="radio" name="ShippingPaid" checked="checked" id="ship-1" value="false">
-                                    <label for="ship-1">@ShippingConstants.Free лв.</label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <h4>Next day delievery  </h4>
-                        </div>
-                        <div class="col-6">
-                            <div class="cf-radio-btns">
-                                <div class="cfr-item">
-                                    <input type="radio" name="ShippingPaid" id="ship-2" value="true">
-                                    <label for="ship-2">@ShippingConstants.NextDay лв.</label>
-                                </div>
-                            </div>
+                    <div class="cf-title">Начин на плащане</div>
+                    <div class="cf-radio-btns ml-4 shipping-btns">
+                        <div class="cfr-item">
+                            <input type="radio" name="PayType" id="later" value="Later" required checked>
+                            <label for="later">Наложен Платеж</label>
                         </div>
                     </div>
-                    <div class="cf-title">Payment</div>
-                    <ul class="payment-list">
-                        <li>
-                            <input type="radio" name="PayType" id="paypal" value="PayPal" required/>
-                            <label class="mr-2" for="paypal">Paypal</label>
-                            <img src="img/paypal.png" alt="">
-                        </li>
-                        <li>
-                            <input type="radio" name="PayType" id="card" value="Card" />
-                            <label class="mr-2" for="card">Credit / Debit card</label>
-                            <img src="img/mastercart.png" alt="">
-                        </li>
-                        <li>
-                            <input type="radio" name="PayType" id="later" value="Later" />
-                            <label class="mr-2" for="later">Наложен Платеж</label>
-                        </li>
-                    </ul>
                     @for (int i = 0; i < Model.CartItems.Count; i++)
                     {
                         <input type="hidden" name="CartItems[@i].ProductId" value="@Model.CartItems[i].Product.Id" />
@@ -118,13 +85,12 @@
                                     <img src="@item.Product.ImagesUrls.Split(';')[0]" alt="@item.Product.Name">
                                 </div>
                                 <h6>@item.Product.Name <p style="color: red">x @item.Quantity</p></h6>
-                                <p>$@item.Product.Price</p>
+                                <p>@item.Product.Price лв.</p>
                             </li>
                         }
                     </ul>
                     <ul class="price-list">
                         <li>Общо<span>@Model.Total лв.</span></li>
-                        <li>Shipping<span>free</span></li>
                         @if (Model.AppliedPromoCode != null)
                         {
                             <li>Приложен Промо Код: <strong>@Model.AppliedPromoCode.PercentageDiscount% Отстъпка</strong></li>

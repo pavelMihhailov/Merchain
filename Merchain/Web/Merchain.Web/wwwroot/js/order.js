@@ -1,6 +1,4 @@
 ﻿$(document).ready(function () {
-    $('.address-inputs').hide();
-
     $("input[name='UseRegularAddress']").on("click", function () {
         $el = $(this);
 

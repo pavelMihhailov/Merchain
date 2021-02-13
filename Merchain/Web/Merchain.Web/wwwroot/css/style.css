@@ -1,7 +1,7 @@
 html,
 body {
     height: 100%;
-    font-family: 'Josefin Sans', sans-serif;
+    font-family: cursive;
     -webkit-font-smoothing: antialiased;
     font-smoothing: antialiased;
 }
@@ -14,7 +14,7 @@ h5,
 h6 {
     margin: 0;
     color: #111111;
-    font-weight: 600;
+    font-weight: 300;
 }
 
 h1 {
@@ -325,10 +325,6 @@ ol {
   Header section
 ---------------------*/
 
-.header-top {
-    padding: 18px 0 14px;
-}
-
 .site-logo {
     display: inline-block;
 }
@@ -360,6 +356,10 @@ ol {
         cursor: pointer;
         background-color: transparent;
     }
+
+.user-panel {
+    padding-top: 11px;
+}
 
 .user-panel .up-item {
     display: inline-block;
@@ -1751,7 +1751,8 @@ ol {
 
 .cf-radio-btns label {
     display: block;
-    font-size: 16px;
+    font-size: 18px;
+    font-weight: 300;
     color: #414141;
     margin-bottom: 0;
     padding-left: 30px;
@@ -2022,7 +2023,6 @@ ol {
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
     .site-logo {
-        margin-bottom: 20px;
     }
 
     .header-search-form {
@@ -2350,8 +2350,11 @@ table tbody td {
         text-align: center;
     }
 
-@media only screen and (max-width: 991px) {
-    .site-logo img {
-        max-width: 50%;
-    }
+.font-weight-300 {
+    font-weight: 300;
+}
+
+.mark-order {
+    background-color: lightgray;
+    border-radius: 30px;
 }

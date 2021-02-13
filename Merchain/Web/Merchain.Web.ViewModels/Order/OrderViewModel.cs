@@ -17,5 +17,7 @@
         public decimal Total { get; set; }
 
         public PromoCode AppliedPromoCode { get; set; }
+
+        public bool UserHasAddressByDefault { get; set; }
     }
 }

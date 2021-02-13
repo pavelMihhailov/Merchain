@@ -15,11 +15,17 @@ $(document).ready(function () {
         $el = $(this);
 
         let productId = $el.attr("id");
+        let quantityTag = $("input[name='quantity']");
+        let quantity = null;
+
+        if (quantityTag.length) {
+            quantity = quantityTag.val();
+        }
 
         $.ajax({
             type: "GET",
             url: "/Products/AddToWishList",
-            data: { 'id': productId },
+            data: { 'id': productId, 'quantity': quantity },
             success: function (res) {
                 $("#addedToWishList").addClass("show-modal");
                 setTimeout(function () {
@@ -41,7 +47,7 @@ $(document).ready(function () {
             success: function () {
                 $el.parents(".col-lg-3")[0].remove();
                 if ($(".col-lg-3").length === 0) {
-                    $($("section .row")[0]).html("<h1>Your wishlist is empty.</h1>");
+                    $($("section .row")[0]).html("<div>Нямате харесани продукти към момента.</div>");
                 }
             }
         });

@@ -7,7 +7,7 @@
 
     public interface ICartService
     {
-        Task<Task> AddToCart(ISession session, int id);
+        Task<Task> AddToCart(ISession session, int id, int quantity);
 
         void RemoveFromCart(ISession session, int id);
 

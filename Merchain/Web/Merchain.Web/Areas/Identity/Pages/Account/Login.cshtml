@@ -2,11 +2,11 @@
 @model LoginModel
 
 @{
-    ViewData["Title"] = "Log in";
+    ViewData["Title"] = "Влез в профила";
 }
 
 <div class="container custom-form">
-    <h1>@ViewData["Title"]</h1>
+    <h2 class="p-4">@ViewData["Title"]</h2>
     <div>
         <section>
             <form id="account" method="post" class="contact-form">
@@ -28,14 +28,14 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <button class="site-btn" type="submit">Log In</button>
+                    <button class="site-btn" type="submit">Влез</button>
                 </div>
                 <div class="form-group">
                     <p>
-                        <a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
+                        <a id="forgot-password" asp-page="./ForgotPassword">Забравил съм си паролата</a>
                     </p>
                     <p>
-                        <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
+                        <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Нова регистрация</a>
                     </p>
                 </div>
             </form>

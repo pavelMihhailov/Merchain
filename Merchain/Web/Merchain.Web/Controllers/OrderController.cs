@@ -7,12 +7,10 @@
 
     using Merchain.Common;
     using Merchain.Common.Extensions;
-    using Merchain.Common.Order;
     using Merchain.Data.Models;
     using Merchain.Services.Data.Interfaces;
     using Merchain.Web.ViewModels.Order;
     using Merchain.Web.ViewModels.ShoppingCart;
-    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Logging;
@@ -59,22 +57,18 @@
                 return this.RedirectToAction("Index", "ShoppingCart");
             }
 
+            var user = await this.userManager.FindByNameAsync(this.User.Identity.Name);
+
             var viewModel = new OrderViewModel()
             {
                 CartItems = cartItems,
                 Total = cartItems.Sum(x => x.Product.Price * x.Quantity),
+                UserHasAddressByDefault = this.UserHasDefaultAddress(user),
             };
 
             if (!string.IsNullOrWhiteSpace(promoCode))
             {
-                var user = await this.userManager.FindByNameAsync(this.User.Identity.Name);
-
-                var promoCodeFromDb = this.promoCodesService.GetByCodeAsync(user.Id, promoCode);
-                if (promoCodeFromDb != null)
-                {
-                    viewModel.Total -= Math.Round(viewModel.Total * promoCodeFromDb.PercentageDiscount / 100, 2);
-                    viewModel.AppliedPromoCode = promoCodeFromDb;
-                }
+                this.ApplyPromoCode(promoCode, viewModel, user.Id);
             }
 
             return this.View(viewModel);
@@ -92,10 +86,8 @@
 
             try
             {
-                inputModel.Total += inputModel.ShippingPaid ? ShippingConstants.NextDay : ShippingConstants.Free;
-
                 var username = this.User.Identity.Name;
-                var success = false;
+                bool success = false;
 
                 if (inputModel.UseRegularAddress)
                 {
@@ -114,7 +106,7 @@
                     }
 
                     this.cartService.EmptyCart(this.HttpContext.Session);
-                    this.TempData[ViewDataConstants.SucccessMessage] = "Thank you for your order.";
+                    this.TempData[ViewDataConstants.SucccessMessage] = "Поръчката Ви беше приета успешно.";
                 }
                 else
                 {
@@ -131,5 +123,28 @@
                 return this.RedirectToAction("Index", "Home");
             }
         }
+
+        private void ApplyPromoCode(string promoCode, OrderViewModel viewModel, string userId)
+        {
+            var promoCodeFromDb = this.promoCodesService.GetByCodeAsync(userId, promoCode);
+            if (promoCodeFromDb != null)
+            {
+                viewModel.Total -= Math.Round(viewModel.Total * promoCodeFromDb.PercentageDiscount / 100, 2);
+                viewModel.AppliedPromoCode = promoCodeFromDb;
+            }
+        }
+
+        private bool UserHasDefaultAddress(ApplicationUser user)
+        {
+            if (!string.IsNullOrWhiteSpace(user.Address) &&
+                !string.IsNullOrWhiteSpace(user.PhoneNumber) &&
+                !string.IsNullOrWhiteSpace(user.Country))
+            {
+                return true;
+            }
+
+            return false;
+        }
+
     }
 }

@@ -1,17 +1,15 @@
 ﻿@using Merchain.Web.ViewModels.PromoCodes
 
 @model IEnumerable<MyPromoCodesViewModel>
-
 @{
-    this.ViewData["Title"] = "My Promo Codes";
+    this.ViewData["Title"] = "Моите Промо Кодове";
 }
 
 <div class="page-top-info">
     <div class="container">
-        <h4>My Promo Codes</h4>
         <div class="site-pagination">
             <a asp-controller="Home" asp-action="Index">Home</a> /
-            <a>My Promo Codes</a>
+            <a>Моите Промо Кодове</a>
         </div>
     </div>
 </div>
@@ -19,7 +17,7 @@
 <div class="container mt-3">
     @if (!Model.Any())
     {
-        <h2>You don't have any promo codes.</h2>
+        <h2>Нямате неизползвани промо кодове.</h2>
     }
     else
     {

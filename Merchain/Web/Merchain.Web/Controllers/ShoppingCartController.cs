@@ -53,11 +53,16 @@
         }
 
         [HttpGet]
-        public async Task<IActionResult> AddProduct(int id)
+        public async Task<IActionResult> AddProduct(int id, int quantity)
         {
             try
             {
-                await this.cartService.AddToCart(this.HttpContext.Session, id);
+                if (quantity == 0)
+                {
+                    return new StatusCodeResult(404);
+                }
+
+                await this.cartService.AddToCart(this.HttpContext.Session, id, quantity);
             }
             catch (Exception ex)
             {

@@ -188,7 +188,7 @@ $(window).on('load', function() {
 				$.ajax({
 					type: "GET",
 					url: "/ShoppingCart/AddProduct",
-					data: { 'id': productId },
+					data: { 'id': productId, 'quantity': 1 },
 					success: function () {
 					}
 				});

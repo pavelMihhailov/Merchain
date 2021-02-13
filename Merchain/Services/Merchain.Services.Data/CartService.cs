@@ -20,7 +20,7 @@
             this.productsService = productsService;
         }
 
-        public async Task<Task> AddToCart(ISession session, int id)
+        public async Task<Task> AddToCart(ISession session, int id, int quantity)
         {
             var product = await this.productsService.GetByIdAsync(id);
 
@@ -32,11 +32,11 @@
 
                 if (productInCart != null)
                 {
-                    productInCart.Quantity++;
+                    productInCart.Quantity += quantity;
                 }
                 else
                 {
-                    var cartItem = new List<CartItem>() { new CartItem { Product = product, Quantity = 1 } };
+                    var cartItem = new List<CartItem>() { new CartItem { Product = product, Quantity = quantity } };
                     cartItems = cartItems.Concat(cartItem);
                 }
 

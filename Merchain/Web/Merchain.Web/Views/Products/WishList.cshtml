@@ -16,7 +16,7 @@
 <section class="category-section spad">
     <div class="container">
         <div class="row">
-            @if (Model != null)
+            @if (Model != null && Model.Any())
             {
                 @foreach (var likedProduct in Model)
                 {
