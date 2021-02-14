@@ -9,6 +9,10 @@
     using Merchain.Common.Extensions;
     using Merchain.Data.Models;
     using Merchain.Services.Data.Interfaces;
+    using Merchain.Services.Econt.Models.Response;
+    using Merchain.Services.Interfaces;
+    using Merchain.Services.Mapping;
+    using Merchain.Web.ViewModels.Econt;
     using Merchain.Web.ViewModels.Order;
     using Merchain.Web.ViewModels.ShoppingCart;
     using Microsoft.AspNetCore.Identity;
@@ -20,6 +24,7 @@
         private readonly IOrderService orderService;
         private readonly ICartService cartService;
         private readonly IPromoCodesService promoCodesService;
+        private readonly IEcontService econtService;
         private readonly UserManager<ApplicationUser> userManager;
         private readonly ILogger<OrderController> logger;
 
@@ -27,12 +32,14 @@
             IOrderService orderService,
             ICartService cartService,
             IPromoCodesService promoCodesService,
+            IEcontService econtService,
             UserManager<ApplicationUser> userManager,
             ILogger<OrderController> logger)
         {
             this.orderService = orderService;
             this.cartService = cartService;
             this.promoCodesService = promoCodesService;
+            this.econtService = econtService;
             this.userManager = userManager;
             this.logger = logger;
         }
@@ -57,7 +64,11 @@
                 return this.RedirectToAction("Index", "ShoppingCart");
             }
 
-            var user = await this.userManager.FindByNameAsync(this.User.Identity.Name);
+            ApplicationUser user = null;
+            if (this.User.Identity.IsAuthenticated)
+            {
+                user = await this.userManager.FindByNameAsync(this.User.Identity.Name);
+            }
 
             var viewModel = new OrderViewModel()
             {
@@ -65,6 +76,9 @@
                 Total = cartItems.Sum(x => x.Product.Price * x.Quantity),
                 UserHasAddressByDefault = this.UserHasDefaultAddress(user),
             };
+
+            IQueryable<Office> econtOffices = await this.econtService.GetOffices();
+            viewModel.Offices = econtOffices.To<OfficeViewModel>();
 
             if (!string.IsNullOrWhiteSpace(promoCode))
             {
@@ -136,7 +150,8 @@
 
         private bool UserHasDefaultAddress(ApplicationUser user)
         {
-            if (!string.IsNullOrWhiteSpace(user.Address) &&
+            if (user != null &&
+                !string.IsNullOrWhiteSpace(user.Address) &&
                 !string.IsNullOrWhiteSpace(user.PhoneNumber) &&
                 !string.IsNullOrWhiteSpace(user.Country))
             {

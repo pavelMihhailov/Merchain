@@ -1,8 +1,9 @@
 ﻿namespace Merchain.Web.ViewModels.Order
 {
     using System.Collections.Generic;
-
+    using System.Linq;
     using Merchain.Data.Models;
+    using Merchain.Web.ViewModels.Econt;
     using Merchain.Web.ViewModels.ShoppingCart;
 
     public class OrderViewModel
@@ -19,5 +20,7 @@
         public PromoCode AppliedPromoCode { get; set; }
 
         public bool UserHasAddressByDefault { get; set; }
+
+        public IQueryable<OfficeViewModel> Offices { get; set; }
     }
 }

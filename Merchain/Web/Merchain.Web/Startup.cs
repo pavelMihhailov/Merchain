@@ -14,6 +14,8 @@
     using Merchain.Services.CloudinaryService;
     using Merchain.Services.Data;
     using Merchain.Services.Data.Interfaces;
+    using Merchain.Services.Econt;
+    using Merchain.Services.Interfaces;
     using Merchain.Services.Mapping;
     using Merchain.Services.Messaging;
     using Merchain.Web.ViewModels;
@@ -108,6 +110,7 @@
             services.AddTransient<IOrderService, OrderService>();
             services.AddTransient<IOrderItemService, OrderItemService>();
             services.AddTransient<IPromoCodesService, PromoCodesService>();
+            services.AddTransient<IEcontService, EcontService>();
             services.AddTransient<CloudinaryService>();
             services.AddApplicationInsightsTelemetry();
         }
@@ -156,6 +159,26 @@
                             name: "cart",
                             pattern: "cart/{action=Index}",
                             defaults: new { controller = "ShoppingCart", action = "Index", });
+                    endpoints.MapControllerRoute(
+                            name: "contactUs",
+                            pattern: "contact-us",
+                            defaults: new { controller = "Info", action = "ContactUs", });
+                    endpoints.MapControllerRoute(
+                            name: "product details",
+                            pattern: "products/info",
+                            defaults: new { controller = "Products", action = "Details", });
+                    endpoints.MapControllerRoute(
+                            name: "liked products",
+                            pattern: "products/liked",
+                            defaults: new { controller = "Products", action = "WishList", });
+                    endpoints.MapControllerRoute(
+                            name: "products admin",
+                            pattern: "{area:exists}/products/{action=Index}",
+                            defaults: new { controller = "Products", action = "Index", });
+                    endpoints.MapControllerRoute(
+                            name: "products",
+                            pattern: "products/{action=Index}",
+                            defaults: new { controller = "Products", action = "Index", });
                     endpoints.MapControllerRoute("areaRoute", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
                     endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
                     endpoints.MapRazorPages();
