@@ -16,4 +16,22 @@
             });
         }
     });
+
+    $("#citySelection").change(function () {
+        var citySelected = $($('#citySelection')[0]).find(":selected");
+
+        if (citySelected.text().length) {
+            var cityId = $(citySelected[0]).val();
+
+            $('#officeSelection').val("");
+            $('#officeSelection option').removeClass("d-none");
+            $('#officeSelection option').filter(":not([data-cityId='" + cityId + "'])").addClass("d-none");
+
+            $("#officeSelection").attr("disabled", false);
+        }
+        else {
+            $('#officeSelection').val("");
+            $("#officeSelection").attr("disabled", true);
+        }
+    });
 });

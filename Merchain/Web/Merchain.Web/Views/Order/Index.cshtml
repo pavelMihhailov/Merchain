@@ -33,13 +33,25 @@
                         </div>
                     </div>
                     <div class="row address-inputs">
-                        <div class="col-md-12">
-                            <input type="text" required placeholder="Address" name="Address">
-                            <input type="text" required placeholder="Address line 2" name="Address2">
-                            <input type="text" required placeholder="Country" name="Country">
+                        <div class="cfr-item ml-4">
+                            <label for="citySelection">Избери град:</label>
+                            <select id="citySelection" class="econt-dropdown econt-city">
+                                <option></option>
+                                @foreach (var city in Model.Cities)
+                                {
+                                    <option value="@city.Id">@city.Name</option>
+                                }
+                            </select>
                         </div>
-                        <div class="col-md-6">
-                            <input type="text" required placeholder="Zip code" name="ZipCode">
+                        <div class="cfr-item ml-4">
+                            <label for="officeSelection">Избери офис:</label>
+                            <select id="officeSelection" class="econt-dropdown econt-office" disabled>
+                                <option></option>
+                                @foreach (var office in Model.Offices)
+                                {
+                                    <option value="@office.Id" data-cityId="@office.CityId">@office.Name</option>
+                                }
+                            </select>
                         </div>
                     </div>
                     <div class="cf-title">*Информация за доставка</div>

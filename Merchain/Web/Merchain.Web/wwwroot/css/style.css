@@ -2358,3 +2358,17 @@ table tbody td {
     background-color: lightgray;
     border-radius: 30px;
 }
+
+.econt-dropdown {
+    border-radius: 30px;
+    height: 30px;
+    text-align: center;
+}
+
+.econt-city {
+    width: 250px;
+}
+
+.econt-office {
+    width: 300px;
+}

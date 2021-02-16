@@ -17,6 +17,7 @@
     using Merchain.Web.ViewModels.ShoppingCart;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Mvc.Rendering;
     using Microsoft.Extensions.Logging;
 
     public class OrderController : Controller
@@ -70,15 +71,27 @@
                 user = await this.userManager.FindByNameAsync(this.User.Identity.Name);
             }
 
+            IQueryable<Office> econtOffices = await this.econtService.GetOffices();
+
+            var officesInBG = econtOffices
+                .Where(x => x.CountryCode.Equals("BGR"))
+                .To<OfficeViewModel>();
+
             var viewModel = new OrderViewModel()
             {
                 CartItems = cartItems,
                 Total = cartItems.Sum(x => x.Product.Price * x.Quantity),
                 UserHasAddressByDefault = this.UserHasDefaultAddress(user),
+                Offices = officesInBG,
             };
 
-            IQueryable<Office> econtOffices = await this.econtService.GetOffices();
-            viewModel.Offices = econtOffices.To<OfficeViewModel>();
+            foreach (var office in officesInBG)
+            {
+                if (!viewModel.Cities.Any(x => x.Id.Equals(office.CityId)))
+                {
+                    viewModel.Cities.Add(new CityViewModel { Id = office.CityId, Name = office.CityName });
+                }
+            }
 
             if (!string.IsNullOrWhiteSpace(promoCode))
             {

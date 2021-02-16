@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Linq;
+
     using Merchain.Data.Models;
     using Merchain.Web.ViewModels.Econt;
     using Merchain.Web.ViewModels.ShoppingCart;
@@ -11,6 +12,7 @@
         public OrderViewModel()
         {
             this.CartItems = new List<CartItem>();
+            this.Cities = new List<CityViewModel>();
         }
 
         public List<CartItem> CartItems { get; set; }
@@ -21,6 +23,10 @@
 
         public bool UserHasAddressByDefault { get; set; }
 
+        public string SelectedOffice { get; set; }
+
         public IQueryable<OfficeViewModel> Offices { get; set; }
+
+        public IList<CityViewModel> Cities { get; set; }
     }
 }
