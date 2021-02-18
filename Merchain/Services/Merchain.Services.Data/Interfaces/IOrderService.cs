@@ -9,9 +9,7 @@
 
     public interface IOrderService
     {
-        Task<bool> PlaceOrder(IEnumerable<CartItem> cartItems, decimal totalSum, string username);
-
-        Task<bool> PlaceOrder(IEnumerable<CartItem> cartItems, decimal totalSum, string username, OrderAddress address);
+        Task<bool> PlaceOrder(IEnumerable<CartItem> cartItems, string username, OrderAddress address = null);
 
         Order GetOrderById(int id);
 

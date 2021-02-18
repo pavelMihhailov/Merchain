@@ -17,7 +17,6 @@
     using Merchain.Web.ViewModels.ShoppingCart;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
-    using Microsoft.AspNetCore.Mvc.Rendering;
     using Microsoft.Extensions.Logging;
 
     public class OrderController : Controller
@@ -71,27 +70,14 @@
                 user = await this.userManager.FindByNameAsync(this.User.Identity.Name);
             }
 
-            IQueryable<Office> econtOffices = await this.econtService.GetOffices();
-
-            var officesInBG = econtOffices
-                .Where(x => x.CountryCode.Equals("BGR"))
-                .To<OfficeViewModel>();
-
             var viewModel = new OrderViewModel()
             {
                 CartItems = cartItems,
                 Total = cartItems.Sum(x => x.Product.Price * x.Quantity),
                 UserHasAddressByDefault = this.UserHasDefaultAddress(user),
-                Offices = officesInBG,
             };
 
-            foreach (var office in officesInBG)
-            {
-                if (!viewModel.Cities.Any(x => x.Id.Equals(office.CityId)))
-                {
-                    viewModel.Cities.Add(new CityViewModel { Id = office.CityId, Name = office.CityName });
-                }
-            }
+            await this.AddEcontOffices(viewModel);
 
             if (!string.IsNullOrWhiteSpace(promoCode))
             {
@@ -106,7 +92,7 @@
         {
             if (!this.ModelState.IsValid)
             {
-                this.TempData[ViewDataConstants.ErrorMessage] = "The submitted form was not OK.";
+                this.TempData[ViewDataConstants.ErrorMessage] = "Попълнените данни не бяха правилни. Моля опитайте отново.";
 
                 return this.RedirectToAction("Index", "ShoppingCart");
             }
@@ -116,13 +102,13 @@
                 var username = this.User.Identity.Name;
                 bool success = false;
 
-                if (inputModel.UseRegularAddress)
+                if (addressModel.ShipToOffice)
                 {
-                    success = await this.orderService.PlaceOrder(inputModel.CartItems, inputModel.Total, username);
+                    success = await this.orderService.PlaceOrder(inputModel.CartItems, username);
                 }
                 else
                 {
-                    success = await this.orderService.PlaceOrder(inputModel.CartItems, inputModel.Total, username, addressModel);
+                    success = await this.orderService.PlaceOrder(inputModel.CartItems, username, addressModel);
                 }
 
                 if (success)
@@ -145,7 +131,7 @@
             catch (Exception ex)
             {
                 this.logger.LogCritical($"Could not complete the order!!!\n{ex.Message}");
-                this.TempData[ViewDataConstants.ErrorMessage] = "There was a problem submiting your order.";
+                this.TempData[ViewDataConstants.ErrorMessage] = "Възникна проблем при обработването на вашата поръчка. Моля опитайте отново.";
 
                 return this.RedirectToAction("Index", "Home");
             }
@@ -174,5 +160,23 @@
             return false;
         }
 
+        private async Task AddEcontOffices(OrderViewModel viewModel)
+        {
+            IQueryable<Office> econtOffices = await this.econtService.GetOffices();
+
+            var officesInBG = econtOffices
+                .Where(x => x.CountryCode.Equals("BGR"))
+                .To<OfficeViewModel>();
+
+            foreach (var office in officesInBG)
+            {
+                if (!viewModel.Cities.Any(x => x.Id.Equals(office.CityId)))
+                {
+                    viewModel.Cities.Add(new CityViewModel { Id = office.CityId, Name = office.CityName });
+                }
+            }
+
+            viewModel.Offices = officesInBG;
+        }
     }
 }

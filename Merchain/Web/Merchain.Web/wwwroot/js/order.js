@@ -1,18 +1,30 @@
 ﻿$(document).ready(function () {
-    $("input[name='UseRegularAddress']").on("click", function () {
+    $('.shipping-info').hide();
+    $('.shipping-info input').each(function (i, e) {
+        $(e).attr("type", "hidden");
+    });
+
+    $("input[name='ShipToOffice']").on("click", function () {
         $el = $(this);
 
         if ($el.val() === 'true') {
-            $('.address-inputs').hide();
-            $('.address-inputs input').each(function (i, e) {
+            $('.shipping-info').hide();
+            $('.econt-info').show();
+            $('.shipping-info input').each(function (i, e) {
                 $(e).attr("type", "hidden");
             });
-
+            $('.econt-info select').each(function (i, e) {
+                $(e).attr("hidden", false);
+            });
         }
         else {
-            $('.address-inputs').show();
-            $('.address-inputs input').each(function (i, e) {
+            $('.shipping-info').show();
+            $('.econt-info').hide();
+            $('.shipping-info input').each(function (i, e) {
                 $(e).attr("type", "text");
+            });
+            $('.econt-info select').each(function (i, e) {
+                $(e).attr("hidden", true);
             });
         }
     });

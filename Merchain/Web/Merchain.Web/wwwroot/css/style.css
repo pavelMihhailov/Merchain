@@ -1708,7 +1708,7 @@ ol {
     border-radius: 50px;
     background: #3b3b3b;
     padding: 21px 29px 20px;
-    margin-bottom: 66px;
+    margin-bottom: 40px;
 }
 
 .checkout-form p {
@@ -1732,8 +1732,12 @@ ol {
     font-size: 14px;
 }
 
-.checkout-form .address-inputs {
-    margin-bottom: 54px;
+.checkout-form .input-fields {
+    margin-bottom: 40px;
+}
+
+.checkout-form .user-info.input-fields {
+    margin-bottom: 20px;
 }
 
 .address-rb {
@@ -1886,7 +1890,7 @@ ol {
 
             .checkout-cart .price-list li span {
                 float: right;
-                width: 27%;
+                width: 40%;
                 text-align: left;
             }
 

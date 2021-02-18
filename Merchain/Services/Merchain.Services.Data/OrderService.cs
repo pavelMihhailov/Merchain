@@ -34,7 +34,7 @@
             this.userManager = userManager;
         }
 
-        public async Task<bool> PlaceOrder(IEnumerable<CartItem> cartItems, decimal totalSum, string username)
+        public async Task<bool> PlaceOrder(IEnumerable<CartItem> cartItems, string username, OrderAddress address = null)
         {
             var user = await this.userManager.FindByNameAsync(username);
 
@@ -43,23 +43,7 @@
                 return false;
             }
 
-            var order = await this.CreateOrder(totalSum, user, null);
-
-            await this.CreateOrderedItems(order.OrderDate, cartItems, user);
-
-            return true;
-        }
-
-        public async Task<bool> PlaceOrder(IEnumerable<CartItem> cartItems, decimal totalSum, string username, OrderAddress address)
-        {
-            var user = await this.userManager.FindByNameAsync(username);
-
-            if (user == null)
-            {
-                return false;
-            }
-
-            var order = await this.CreateOrder(totalSum, user, address);
+            var order = await this.CreateOrder(this.TotalSum(cartItems), user, address);
 
             await this.CreateOrderedItems(order.OrderDate, cartItems, user);
 
@@ -113,6 +97,11 @@
             var viewModel = await this.GetOrdersInfo(orders, orderItems);
 
             return viewModel.OrderByDescending(x => x.OrderDate);
+        }
+
+        private decimal TotalSum(IEnumerable<CartItem> cartItems)
+        {
+            return cartItems.Sum(x => x.Product.Price * x.Quantity);
         }
 
         private async Task<List<OrderInfoViewModel>> GetOrdersInfo(
@@ -185,19 +174,18 @@
 
         private async Task<Order> CreateOrder(decimal totalSum, ApplicationUser user, OrderAddress? newAddress)
         {
-            string address = string.Empty;
+            string address;
             if (newAddress != null)
             {
                 address = this.ConcatenateAddress(
                     newAddress.Address,
                     newAddress.Address2,
                     newAddress.Country,
-                    newAddress.ZipCode,
                     newAddress.Phone);
             }
             else
             {
-                address = this.ConcatenateAddress(user.Address, user.Address2, user.Country, user.ZipCode, user.PhoneNumber);
+                address = this.ConcatenateAddress(user.Address, user.Address2, user.Country, user.PhoneNumber);
             }
 
             var order = new Order()
@@ -232,14 +220,13 @@
             await this.orderItemService.AddOrderItemsAsync(orderedItems);
         }
 
-        private string ConcatenateAddress(string address, string address2, string country, string zipCode, string phone)
+        private string ConcatenateAddress(string address, string address2, string country, string phone)
         {
             StringBuilder sb = new StringBuilder();
             sb.Append(address);
 
             this.AddFieldToAddress(sb, address2);
             this.AddFieldToAddress(sb, country);
-            this.AddFieldToAddress(sb, zipCode);
             this.AddFieldToAddress(sb, phone);
 
             return sb.ToString();
