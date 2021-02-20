@@ -30,7 +30,7 @@ $(document).ready(function () {
                 $("#addedToWishList").addClass("show-modal");
                 setTimeout(function () {
                     $("#addedToWishList").removeClass("show-modal");
-                }, 2850);
+                }, 2400);
             }
         });
     });
@@ -76,7 +76,7 @@ $(document).ready(function () {
                     refreshCartItems();
                     setTimeout(function () {
                         $("#addedToCart").removeClass("show-modal");
-                    }, 2850);
+                    }, 2000);
                 }
             }
         });

@@ -15,6 +15,7 @@
             });
             $('.econt-info select').each(function (i, e) {
                 $(e).attr("hidden", false);
+                $(e).attr("required", true);
             });
         }
         else {
@@ -25,6 +26,7 @@
             });
             $('.econt-info select').each(function (i, e) {
                 $(e).attr("hidden", true);
+                $(e).attr("required", false);
             });
         }
     });

@@ -6,6 +6,6 @@
 
         public const string AdministratorRoleName = "Administrator";
 
-        public const string CompanyEmail = "merchain@yopmail.com";
+        public const string CompanyEmail = "pavel.nm@abv.bg";
     }
 }

@@ -99,17 +99,8 @@
 
             try
             {
-                var username = this.User.Identity.Name;
-                bool success = false;
-
-                if (addressModel.ShipToOffice)
-                {
-                    success = await this.orderService.PlaceOrder(inputModel.CartItems, username);
-                }
-                else
-                {
-                    success = await this.orderService.PlaceOrder(inputModel.CartItems, username, addressModel);
-                }
+                string username = this.User.Identity.Name;
+                bool success = await this.orderService.PlaceOrder(inputModel.CartItems, username ?? string.Empty, addressModel);
 
                 if (success)
                 {

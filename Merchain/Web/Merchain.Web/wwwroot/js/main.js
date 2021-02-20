@@ -1,6 +1,5 @@
 'use strict';
 
-
 $(window).on('load', function() {
 	/*------------------
 		Preloder
@@ -20,7 +19,6 @@ $(window).on('load', function() {
 		openedSymbol: '<i class="flaticon-down-arrow"></i>'
 	});
 
-
 	/*------------------
 		ScrollBar
 	--------------------*/
@@ -29,7 +27,6 @@ $(window).on('load', function() {
 		cursorcolor:"#afafaf",
 		boxzoom:false
 	});
-
 
 	/*------------------
 		Category menu
@@ -43,7 +40,6 @@ $(window).on('load', function() {
 		e.preventDefault();
 	});
 
-
 	/*------------------
 		Background Set
 	--------------------*/
@@ -51,8 +47,6 @@ $(window).on('load', function() {
 		var bg = $(this).data('setbg');
 		$(this).css('background-image', 'url(' + bg + ')');
 	});
-
-
 
 	/*------------------
 		Hero Slider
@@ -83,8 +77,6 @@ $(window).on('load', function() {
 	hero_s.append('<div class="slider-nav-warp"><div class="slider-nav"></div></div>');
 	$(".hero-slider .owl-nav, .hero-slider .owl-dots").appendTo('.slider-nav');
 
-
-
 	/*------------------
 		Brands Slider
 	--------------------*/
@@ -111,7 +103,6 @@ $(window).on('load', function() {
 		}
 	});
 
-
 	/*------------------
 		Popular Services
 	--------------------*/
@@ -135,7 +126,6 @@ $(window).on('load', function() {
 		}
 	});
 
-
 	/*------------------
 		Accordions
 	--------------------*/
@@ -147,7 +137,6 @@ $(window).on('load', function() {
 		}
 		e.preventDefault();
 	});
-
 
 	/*-------------------
 		Range Slider
@@ -169,7 +158,6 @@ $(window).on('load', function() {
 	});
 	minamount.val('$' + rangeSlider.slider("values", 0));
 	maxamount.val('$' + rangeSlider.slider("values", 1));
-
 
 	/*-------------------
 		Quantity change
@@ -226,8 +214,6 @@ $(window).on('load', function() {
 		
 	});
 
-
-
 	/*------------------
 		Single Product
 	--------------------*/
@@ -236,7 +222,7 @@ $(window).on('load', function() {
 		$(this).addClass('active');
 		var imgurl = $(this).data('imgbigurl');
 		var bigImg = $('.product-big-img').attr('src');
-		if(imgurl != bigImg) {
+		if(imgurl !== bigImg) {
 			$('.product-big-img').attr({src: imgurl});
 			$('.zoomImg').attr({src: imgurl});
 		}
@@ -244,7 +230,4 @@ $(window).on('load', function() {
 
 
 	$('.product-pic-zoom').zoom();
-
-
-
 })(jQuery);

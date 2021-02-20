@@ -31,5 +31,10 @@
         public string Address { get; set; }
 
         public virtual ICollection<OrderItem> OrderedItems { get; set; }
+
+        public override string ToString()
+        {
+            return $"ID: {this.Id} | {this.OrderedItems.Count} Ordered Items | Total Sum: {this.OrderTotal}";
+        }
     }
 }

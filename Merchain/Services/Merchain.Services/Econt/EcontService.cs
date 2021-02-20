@@ -40,6 +40,13 @@
             return officesList.Offices.Info.AsQueryable();
         }
 
+        public async Task<Office> GetOffice(string officeId)
+        {
+            var offices = await this.GetOffices();
+
+            return offices.FirstOrDefault(x => x.Id.Equals(officeId));
+        }
+
         private async Task<OfficesList> ProcessRequest(SimpleRequest request)
         {
             string serializedRequest = XmlHelper.SerializeXml<SimpleRequest>(request);

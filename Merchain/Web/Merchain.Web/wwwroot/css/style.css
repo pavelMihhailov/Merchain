@@ -2359,7 +2359,7 @@ table tbody td {
 }
 
 .mark-order {
-    background-color: lightgray;
+    background-color: rgba(0, 0, 0, 0.05);
     border-radius: 30px;
 }
 

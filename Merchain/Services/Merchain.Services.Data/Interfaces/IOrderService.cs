@@ -9,7 +9,7 @@
 
     public interface IOrderService
     {
-        Task<bool> PlaceOrder(IEnumerable<CartItem> cartItems, string username, OrderAddress address = null);
+        Task<bool> PlaceOrder(IEnumerable<CartItem> cartItems, string username, OrderAddress address);
 
         Order GetOrderById(int id);
 

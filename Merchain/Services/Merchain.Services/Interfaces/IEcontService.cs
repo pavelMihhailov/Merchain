@@ -8,5 +8,7 @@
     public interface IEcontService
     {
         Task<IQueryable<Office>> GetOffices();
+
+        Task<Office> GetOffice(string officeCode);
     }
 }

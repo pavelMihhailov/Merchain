@@ -1,15 +1,18 @@
 ﻿namespace Merchain.Services.Data
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
 
+    using Merchain.Common;
     using Merchain.Common.Order;
     using Merchain.Data.Common.Repositories;
     using Merchain.Data.Models;
     using Merchain.Services.Data.Interfaces;
+    using Merchain.Services.Econt.Models.Response;
+    using Merchain.Services.Interfaces;
+    using Merchain.Services.Messaging;
     using Merchain.Web.ViewModels.Order;
     using Merchain.Web.ViewModels.Products;
     using Merchain.Web.ViewModels.ShoppingCart;
@@ -20,32 +23,42 @@
         private readonly IDeletableEntityRepository<Order> orderRepo;
         private readonly IOrderItemService orderItemService;
         private readonly IProductsService productsService;
+        private readonly IEcontService econtService;
+        private readonly SendGridEmailSender emailService;
         private readonly UserManager<ApplicationUser> userManager;
 
         public OrderService(
             IDeletableEntityRepository<Order> orderRepo,
             IOrderItemService orderItemService,
             IProductsService productsService,
+            IEcontService econtService,
+            SendGridEmailSender emailService,
             UserManager<ApplicationUser> userManager)
         {
             this.orderRepo = orderRepo;
             this.orderItemService = orderItemService;
             this.productsService = productsService;
+            this.econtService = econtService;
+            this.emailService = emailService;
             this.userManager = userManager;
         }
 
-        public async Task<bool> PlaceOrder(IEnumerable<CartItem> cartItems, string username, OrderAddress address = null)
+        public async Task<bool> PlaceOrder(IEnumerable<CartItem> cartItems, string username, OrderAddress address)
         {
-            var user = await this.userManager.FindByNameAsync(username);
+            ApplicationUser user = await this.userManager.FindByNameAsync(username);
 
-            if (user == null)
-            {
-                return false;
-            }
+            decimal totalSum = await this.TotalSum(cartItems);
 
-            var order = await this.CreateOrder(this.TotalSum(cartItems), user, address);
+            Order order = await this.CreateOrder(totalSum, user?.Id, address);
 
-            await this.CreateOrderedItems(order.OrderDate, cartItems, user);
+            await this.CreateOrderedItems(order.Id, cartItems, user);
+
+            await this.emailService.SendEmailAsync(
+                GlobalConstants.CompanyEmail,
+                "Internal",
+                GlobalConstants.CompanyEmail,
+                "New Order",
+                order.ToString());
 
             return true;
         }
@@ -99,9 +112,18 @@
             return viewModel.OrderByDescending(x => x.OrderDate);
         }
 
-        private decimal TotalSum(IEnumerable<CartItem> cartItems)
+        private async Task<decimal> TotalSum(IEnumerable<CartItem> cartItems)
         {
-            return cartItems.Sum(x => x.Product.Price * x.Quantity);
+            decimal totalSum = 0.0m;
+
+            foreach (CartItem item in cartItems)
+            {
+                Product product = await this.productsService.GetByIdAsync(item.ProductId);
+
+                totalSum += product.Price * item.Quantity;
+            }
+
+            return totalSum;
         }
 
         private async Task<List<OrderInfoViewModel>> GetOrdersInfo(
@@ -172,10 +194,10 @@
             return viewModel;
         }
 
-        private async Task<Order> CreateOrder(decimal totalSum, ApplicationUser user, OrderAddress? newAddress)
+        private async Task<Order> CreateOrder(decimal totalSum, string userId, OrderAddress newAddress)
         {
             string address;
-            if (newAddress != null)
+            if (!newAddress.ShipToOffice)
             {
                 address = this.ConcatenateAddress(
                     newAddress.Address,
@@ -185,12 +207,13 @@
             }
             else
             {
-                address = this.ConcatenateAddress(user.Address, user.Address2, user.Country, user.PhoneNumber);
+                Office office = await this.econtService.GetOffice(newAddress.OfficeIdSelected);
+                address = $"Град {office.CityName}, Офис - {office.OfficeCode} | {office.Name}";
             }
 
             var order = new Order()
             {
-                UserId = user.Id,
+                UserId = userId,
                 Address = address,
                 OrderTotal = totalSum,
                 Status = OrderStatus.Pending,
@@ -202,13 +225,8 @@
             return order;
         }
 
-        private async Task CreateOrderedItems(DateTime orderDate, IEnumerable<CartItem> cartItems, ApplicationUser user)
+        private async Task CreateOrderedItems(int orderId, IEnumerable<CartItem> cartItems, ApplicationUser user)
         {
-            var orderId = this.orderRepo.All()
-                            .FirstOrDefault(x =>
-                                x.OrderDate == orderDate &&
-                                x.UserId == user.Id).Id;
-
             var orderedItems = cartItems
                 .Select(x => new OrderItem()
                 {
@@ -223,11 +241,11 @@
         private string ConcatenateAddress(string address, string address2, string country, string phone)
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append(address);
+            sb.Append($"Град: {country}");
 
+            this.AddFieldToAddress(sb, address);
             this.AddFieldToAddress(sb, address2);
-            this.AddFieldToAddress(sb, country);
-            this.AddFieldToAddress(sb, phone);
+            this.AddFieldToAddress(sb, $"Телефон: {phone}");
 
             return sb.ToString();
         }
