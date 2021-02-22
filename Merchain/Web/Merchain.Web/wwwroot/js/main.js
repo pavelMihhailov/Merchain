@@ -89,18 +89,19 @@ $(window).on('load', function() {
 		navText: ['<i class="flaticon-left-arrow-1"></i>', '<i class="flaticon-right-arrow-1"></i>'],
 		responsive : {
 			0 : {
-				items: 1,
+				items: 1
 			},
 			480 : {
-				items: 2,
+				items: 2
 			},
 			768 : {
-				items: 3,
+				items: 3
 			},
 			1200 : {
-				items: 4,
+				items: 4
 			}
-		}
+		},
+		autoplayHoverPause: true
 	});
 
 	/*------------------
@@ -115,10 +116,10 @@ $(window).on('load', function() {
 		navText:['<i class="fa fa-angle-left"></i>','<i class="fa fa-angle-right"></i>'],
 		responsive : {
 			0 : {
-				items: 1,
+				items: 1
 			},
 			768 : {
-				items: 2,
+				items: 2
 			},
 			991: {
 				items: 3

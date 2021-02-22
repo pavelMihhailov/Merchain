@@ -11,7 +11,9 @@ $(document).ready(function () {
         }, 8000);
     }
 
-    $(".add-wishlist").on("click", function () {
+    $(document).on('click', '.add-wishlist', function (e) {
+        e.preventDefault();
+
         $el = $(this);
 
         let productId = $el.attr("id");
@@ -35,6 +37,7 @@ $(document).ready(function () {
         });
     });
 
+
     $(".remove-wishlist").on("click", function () {
         $el = $(this);
 
@@ -53,7 +56,9 @@ $(document).ready(function () {
         });
     });
 
-    $(".add-card").on("click", function () {
+    $(document).on('click', '.add-card', function (e) {
+        e.preventDefault();
+
         $el = $(this);
 
         let productId = $el.attr("id");

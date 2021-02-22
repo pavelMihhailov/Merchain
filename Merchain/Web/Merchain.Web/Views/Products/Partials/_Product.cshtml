@@ -1,18 +1,20 @@
 ﻿@model ProductDefaultViewModel
 
 <div class="product-item">
-    <div class="pi-pic">
-        <img src="@Model.DefaultImage" alt="@Model.Name">
-        <div class="pi-links">
-            <a id="@Model.Id" class="add-card pointer">
-                <i class="flaticon-bag"></i>
-                <span>В Кошницата</span>
-            </a>
-            <a class="pointer add-wishlist wishlist-btn" id="@Model.Id">
-                <i class="flaticon-heart"></i>
-            </a>
+    <a asp-controller="Products" asp-action="Details" asp-route-id="@Model.Id">
+        <div class="pi-pic">
+            <img src="@Model.DefaultImage" alt="@Model.Name">
+            <div class="pi-links">
+                <div id="@Model.Id" class="add-card pointer">
+                    <i class="flaticon-bag"></i>
+                    <span>В Кошницата</span>
+                </div>
+                <div class="pointer add-wishlist wishlist-btn" id="@Model.Id">
+                    <i class="flaticon-heart"></i>
+                </div>
+            </div>
         </div>
-    </div>
+    </a>
     <div class="pi-text">
         <h6>@Model.Price лв.</h6>
         <a asp-controller="Products" asp-action="Details" asp-route-id="@Model.Id">

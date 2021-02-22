@@ -382,9 +382,8 @@ ol {
 
     .shopping-card span {
         position: absolute;
-        top: -4px;
+        top: -8px;
         left: 100%;
-        height: 16px;
         min-width: 16px;
         color: #fff;
         font-size: 13px;
@@ -642,7 +641,7 @@ ol {
     text-align: right;
 }
 
-    .product-item .pi-links a {
+    .product-item .pi-links div {
         display: inline-table;
         width: 36px;
         height: 36px;
@@ -662,32 +661,32 @@ ol {
         text-align: center;
     }
 
-        .product-item .pi-links a i {
+        .product-item .pi-links div i {
             display: inline-block;
             color: #000;
         }
 
-        .product-item .pi-links a.add-card {
+        .product-item .pi-links div.add-card {
             padding-top: 8px;
         }
 
-            .product-item .pi-links a.add-card span {
+            .product-item .pi-links div.add-card span {
                 font-size: 12px;
                 font-weight: bold;
                 text-transform: uppercase;
                 position: absolute;
-                right: 19px;
+                right: 12px;
                 top: 20px;
                 opacity: 0;
             }
 
-            .product-item .pi-links a.add-card:hover {
+            .product-item .pi-links div.add-card:hover {
                 width: 148px;
                 padding: 8px 18px 0;
                 text-align: left;
             }
 
-                .product-item .pi-links a.add-card:hover span {
+                .product-item .pi-links div.add-card:hover span {
                     opacity: 1;
                     top: 10px;
                     -webkit-transition: all 0.4s ease 0.3s;
