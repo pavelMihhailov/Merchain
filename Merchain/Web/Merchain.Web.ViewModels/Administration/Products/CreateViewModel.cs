@@ -21,5 +21,8 @@
 
         [Display(Name = "Категории")]
         public IEnumerable<SelectListItem> Categories { get; set; }
+
+        [Display(Name = "Цветове")]
+        public IEnumerable<SelectListItem> Colors { get; set; }
     }
 }

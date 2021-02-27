@@ -1,6 +1,7 @@
 ﻿namespace Merchain.Data.Models
 {
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
@@ -11,6 +12,7 @@
         public Product()
         {
             this.ProductsCategories = new HashSet<ProductCategory>();
+            this.ProductsColors = new HashSet<ProductColor>();
             this.CartItems = new HashSet<OrderItem>();
         }
 
@@ -28,7 +30,12 @@
         [Display(Name = "Цена")]
         public decimal Price { get; set; }
 
+        [DefaultValue(true)]
+        public bool HasSize { get; set; }
+
         public virtual ICollection<ProductCategory> ProductsCategories { get; set; }
+
+        public virtual ICollection<ProductColor> ProductsColors { get; set; }
 
         public virtual ICollection<OrderItem> CartItems { get; set; }
 

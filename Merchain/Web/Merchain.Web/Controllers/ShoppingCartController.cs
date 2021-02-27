@@ -53,7 +53,7 @@
         }
 
         [HttpGet]
-        public async Task<IActionResult> AddProduct(int id, int quantity)
+        public async Task<IActionResult> AddProduct(int id, int quantity, string size, int? colorId)
         {
             try
             {
@@ -62,7 +62,7 @@
                     return new StatusCodeResult(404);
                 }
 
-                await this.cartService.AddToCart(this.HttpContext.Session, id, quantity);
+                await this.cartService.AddToCart(this.HttpContext.Session, id, quantity, size, colorId);
             }
             catch (Exception ex)
             {
@@ -74,11 +74,11 @@
         }
 
         [HttpGet]
-        public IActionResult RemoveProduct(int id)
+        public IActionResult RemoveProduct(int id, string size, int? colorId)
         {
             try
             {
-                this.cartService.RemoveFromCart(this.HttpContext.Session, id);
+                this.cartService.RemoveFromCart(this.HttpContext.Session, id, size, colorId);
             }
             catch (Exception ex)
             {
@@ -90,11 +90,11 @@
         }
 
         [HttpGet]
-        public IActionResult DecreaseQuantity(int id)
+        public IActionResult DecreaseQuantity(int id, string size, int? colorId)
         {
             try
             {
-                this.cartService.DecreaseQuantity(this.HttpContext.Session, id);
+                this.cartService.DecreaseQuantity(this.HttpContext.Session, id, size, colorId);
             }
             catch (Exception ex)
             {

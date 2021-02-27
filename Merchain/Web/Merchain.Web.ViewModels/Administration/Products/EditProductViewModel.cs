@@ -12,7 +12,13 @@
 
         public int[] SelectedCategories { get; set; }
 
+        public int[] SelectedColors { get; set; }
+
         public IEnumerable<SelectListItem> Categories { get; set; }
+
+        public IEnumerable<SelectListItem> Colors { get; set; }
+
+        public bool HasSize { get; set; }
 
         public IEnumerable<string> Images
         {

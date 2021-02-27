@@ -32,6 +32,8 @@
                                     <tr>
                                         <th></th>
                                         <th class="product-th">Продукт</th>
+                                        <th>Размер</th>
+                                        <th class="color-th">Цвят</th>
                                         <th class="quy-th">Количество</th>
                                         <th class="total-th">Цена</th>
                                     </tr>
@@ -48,6 +50,13 @@
                                                     <h4>@product.Name</h4>
                                                     <p class="product-price">@product.Price лв.</p>
                                                 </div>
+                                            </td>
+                                            <td class="size-col">@item.Size</td>
+                                            <td class="color-col">
+                                                @if (item.Color != null)
+                                                {
+                                                    <div id="@item.Color.Id" class="box" style="background-color: @item.Color?.Value"></div>
+                                                }
                                             </td>
                                             <td class="quy-col">
                                                 <div class="quantity">

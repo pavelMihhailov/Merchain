@@ -15,5 +15,7 @@
         public decimal Price { get; set; }
 
         public IEnumerable<int> Categories { get; set; }
+
+        public IEnumerable<int> Colors { get; set; }
     }
 }

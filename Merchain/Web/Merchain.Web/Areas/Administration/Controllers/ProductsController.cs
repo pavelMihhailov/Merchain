@@ -22,17 +22,23 @@
         private readonly IProductsService productsService;
         private readonly ICategoriesService categoriesService;
         private readonly IRepository<ProductCategory> productsCategoriesRepo;
+        private readonly IRepository<ProductColor> productsColorsRepo;
+        private readonly IDeletableEntityRepository<Color> colorsRepo;
         private readonly ILogger<ProductsController> logger;
 
         public ProductsController(
             IProductsService productsService,
             ICategoriesService categoriesService,
             IRepository<ProductCategory> productsCategoriesRepo,
+            IRepository<ProductColor> productsColorsRepo,
+            IDeletableEntityRepository<Color> colorsRepo,
             ILogger<ProductsController> logger)
         {
             this.productsService = productsService;
             this.categoriesService = categoriesService;
             this.productsCategoriesRepo = productsCategoriesRepo;
+            this.productsColorsRepo = productsColorsRepo;
+            this.colorsRepo = colorsRepo;
             this.logger = logger;
         }
 
@@ -73,8 +79,10 @@
             var viewModel = new CreateViewModel()
             {
                 Categories = this.categoriesService
-                .GetAll<CategoriesViewModel>()
-                .Select(x => new SelectListItem { Text = x.Title, Value = x.Id.ToString() }),
+                    .GetAll<CategoriesViewModel>()
+                    .Select(x => new SelectListItem { Text = x.Title, Value = x.Id.ToString() }),
+                Colors = this.colorsRepo.All()
+                    .Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString() }),
             };
 
             return this.View(viewModel);
@@ -92,7 +100,8 @@
                         viewModel.Description,
                         viewModel.Price,
                         viewModel.Images,
-                        viewModel.Categories);
+                        viewModel.Categories,
+                        viewModel.Colors);
 
                     this.TempData[ViewDataConstants.SucccessMessage] = "Successfully created product.";
                 }
@@ -131,9 +140,19 @@
                                             Text = x.Title,
                                             Value = x.Id.ToString(),
                                         }),
+                Colors = this.colorsRepo.All().Select(x =>
+                                        new SelectListItem
+                                        {
+                                            Text = x.Name,
+                                            Value = x.Id.ToString(),
+                                        }),
                 SelectedCategories = await this.productsCategoriesRepo.All()
                                             .Where(x => x.ProductId == product.Id)
                                             .Select(x => x.CategoryId)
+                                            .ToArrayAsync(),
+                SelectedColors = await this.productsColorsRepo.All()
+                                            .Where(x => x.ProductId == product.Id)
+                                            .Select(x => x.ColorId)
                                             .ToArrayAsync(),
             };
 
@@ -143,9 +162,10 @@
         [HttpPost]
         public async Task<IActionResult> Edit(
             int id,
-            [Bind("Id,Name,Description,ImagesUrls,Price")] Product product,
+            [Bind("Id,Name,Description,ImagesUrls,Price,HasSize")] Product product,
             IEnumerable<IFormFile> addedImages,
-            IEnumerable<int> selectedCategories)
+            IEnumerable<int> selectedCategories,
+            IEnumerable<int> selectedColors)
         {
             if (id != product.Id)
             {
@@ -154,7 +174,7 @@
 
             if (this.ModelState.IsValid)
             {
-                await this.productsService.Edit(product, addedImages, selectedCategories);
+                await this.productsService.Edit(product, addedImages, selectedCategories, selectedColors);
 
                 return this.RedirectToAction(nameof(this.Index));
             }

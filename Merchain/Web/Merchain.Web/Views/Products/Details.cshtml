@@ -1,7 +1,6 @@
 ﻿@model DetailsPageViewModel
-
 @{
-    this.ViewData["Title"] = "Details";
+    this.ViewData["Title"] = Model.Product.Name;
 }
 
 <div class="page-top-info">
@@ -54,6 +53,44 @@
                     <a asp-controller="Reviews" asp-action="AddReview"
                        asp-route-id="@Model.Product.Id">Добави Ревю</a>
                 </div>
+                @if (Model.Colors != null && Model.Colors.Any())
+                {
+                    <div id="colors" class="colors">
+                        <p>Избери цвят: </p>
+                        @foreach (var color in Model.Colors)
+                        {
+                            <div id="@color.Id" class="box" style="background-color:@color.Value"></div>
+                        }
+                    </div>
+                    <p class="color-error" style="color: red"></p>
+                }
+                @if (Model.Product.HasSize)
+                {
+                    <div class="fw-size-choose">
+                        <p>Размер</p>
+                        <div class="sc-item">
+                            <input type="radio" name="Size" id="S">
+                            <label for="S">S</label>
+                        </div>
+                        <div class="sc-item">
+                            <input type="radio" name="Size" id="M">
+                            <label for="M">M</label>
+                        </div>
+                        <div class="sc-item">
+                            <input type="radio" name="Size" id="L">
+                            <label for="L">L</label>
+                        </div>
+                        <div class="sc-item disable">
+                            <input type="radio" name="Size" id="XL">
+                            <label for="XL">XL</label>
+                        </div>
+                        <div class="sc-item">
+                            <input type="radio" name="Size" id="XXL">
+                            <label for="XXL">XXL</label>
+                        </div>
+                    </div>
+                    <p class="size-error" style="color: red"></p>
+                }
                 <div class="quantity">
                     <p>Количество</p>
                     <div class="pro-qty"><input type="text" name="quantity" value="1"></div>

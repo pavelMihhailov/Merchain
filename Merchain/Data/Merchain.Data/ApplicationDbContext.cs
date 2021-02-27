@@ -28,6 +28,8 @@
 
         public DbSet<Review> Reviews { get; set; }
 
+        public DbSet<Color> Colors { get; set; }
+
         public DbSet<Category> Categories { get; set; }
 
         public DbSet<OrderItem> OrderedItems { get; set; }

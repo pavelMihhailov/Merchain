@@ -396,6 +396,7 @@ ol {
 
 .main-navbar {
     background: #282828;
+    box-shadow: 0 10px 13px 1px rgb(0 0 0 / 26%);
 }
 
 .slicknav_menu {
@@ -675,7 +676,7 @@ ol {
                 font-weight: bold;
                 text-transform: uppercase;
                 position: absolute;
-                right: 12px;
+                left: 45px;
                 top: 20px;
                 opacity: 0;
             }
@@ -688,7 +689,7 @@ ol {
 
                 .product-item .pi-links div.add-card:hover span {
                     opacity: 1;
-                    top: 10px;
+                    top: 0px;
                     -webkit-transition: all 0.4s ease 0.3s;
                     -o-transition: all 0.4s ease 0.3s;
                     transition: all 0.4s ease 0.3s;
@@ -1038,7 +1039,7 @@ ol {
     .category-menu li a {
         display: block;
         position: relative;
-        font-size: 12px;
+        font-size: 15px;
         color: #414141;
         border-bottom: 1px solid #ebebeb;
         padding: 12px 0 5px 20px;
@@ -1054,7 +1055,7 @@ ol {
             width: 9px;
             height: 9px;
             left: 0;
-            top: 13px;
+            top: 19px;
             border: 1px solid #f51167;
             border-radius: 50%;
         }
@@ -1076,6 +1077,7 @@ ol {
         }
 
             .category-menu li a.is-active:after {
+                background: #f51167;
                 color: #f51167;
             }
 
@@ -1393,7 +1395,7 @@ ol {
 
 .product-details .fw-size-choose {
     border-bottom: none;
-    margin-bottom: 30px;
+    margin-bottom: 11px;
     padding-bottom: 0;
 }
 

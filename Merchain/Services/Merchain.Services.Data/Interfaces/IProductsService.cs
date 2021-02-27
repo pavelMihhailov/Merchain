@@ -2,10 +2,12 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Linq.Expressions;
     using System.Threading.Tasks;
 
     using Merchain.Data.Models;
+    using Merchain.Web.ViewModels.Colors;
     using Microsoft.AspNetCore.Http;
 
     public interface IProductsService
@@ -31,13 +33,16 @@
             string description,
             decimal price,
             IEnumerable<IFormFile> images,
-            IEnumerable<int> categoryIds);
+            IEnumerable<int> categoryIds,
+            IEnumerable<int> colorIds);
 
         Task<Task> Edit(Product product);
 
-        Task<Task> Edit(Product product, IEnumerable<IFormFile> addedImages, IEnumerable<int> categoryIds);
+        Task<Task> Edit(Product product, IEnumerable<IFormFile> addedImages, IEnumerable<int> categoryIds, IEnumerable<int> colorIds);
 
         Task<Task> Delete(Product product);
+
+        IQueryable<ColorViewModel> GetColorsOfProduct(int productId);
 
         IEnumerable<Product> GetProductsByCategory(int? categoryId);
 

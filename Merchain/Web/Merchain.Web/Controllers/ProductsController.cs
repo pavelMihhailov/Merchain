@@ -80,6 +80,7 @@
             var relatedProducts = await this.productsService.GetAllAsync<ProductDefaultViewModel>();
             var reviewsCount = this.reviewsService.GetProductReviewsCount((int)id);
             var avgStars = this.reviewsService.AvgProductStars((int)id);
+            var colors = this.productsService.GetColorsOfProduct((int)id);
 
             var viewModel = new DetailsPageViewModel()
             {
@@ -87,6 +88,7 @@
                 ReviewsCount = reviewsCount,
                 AvgStars = avgStars,
                 RelatedProducts = relatedProducts.Take(5),
+                Colors = colors,
             };
 
             return this.View(viewModel);

@@ -68,10 +68,32 @@ $(document).ready(function () {
             quantity = 1;
         }
 
+        let colorId = null;
+        if ($("#colors").length) {
+            let selectedColor = $("#colors .box.selected");
+            if (!selectedColor.length) {
+                $(".color-error").text("Моля изберете цвят");
+                return;
+            }
+
+            colorId = $("#colors .box.selected")[0].id;
+        }
+
+        let size = "";
+        if ($(".fw-size-choose").length) {
+            let selectedSize = $("input[name='Size']:checked");
+            if (!selectedSize.length) {
+                $(".size-error").text("Моля изберете размер");
+                return;
+            }
+
+            size = selectedSize[0].id;
+        }
+
         $.ajax({
             type: "GET",
             url: "/ShoppingCart/AddProduct",
-            data: { 'id': productId, 'quantity': quantity },
+            data: { 'id': productId, 'quantity': quantity, 'size': size, 'colorId': colorId },
             success: function (res) {
                 if ($(".cart-table").length) {
                     location.reload();
@@ -85,6 +107,18 @@ $(document).ready(function () {
                 }
             }
         });
+    });
+
+    $(document).on('click', '.box', function (e) {
+        $el = $(this);
+
+        $(".box").removeClass("selected");
+        $el.addClass("selected");
+        $(".color-error").text("");
+    });
+
+    $(document).on('click', "input[name='Size']", function (e) {
+        $(".size-error").text("");
     });
 
     $("#removeImage").on("click", function (e) {

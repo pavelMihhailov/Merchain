@@ -6,10 +6,17 @@
 
         refreshCartPrices(productId, true, false);
 
+        let size = $el.closest("tr").find(".size-col").text();
+        let colorId = null;
+        let color = $el.closest("tr").find(".box")[0];
+        if (color !== undefined) {
+            colorId = color.id;
+        }
+
         $.ajax({
             type: "GET",
             url: "/ShoppingCart/RemoveProduct",
-            data: { 'id': productId },
+            data: { 'id': productId, 'size': size, 'colorId': colorId },
             success: function () {
                 $($el.closest("tr")).remove();
                 refreshCartItems();

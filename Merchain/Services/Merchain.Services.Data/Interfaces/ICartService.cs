@@ -7,11 +7,11 @@
 
     public interface ICartService
     {
-        Task<Task> AddToCart(ISession session, int id, int quantity);
+        Task<Task> AddToCart(ISession session, int id, int quantity, string size, int? colorId);
 
-        void RemoveFromCart(ISession session, int id);
+        void RemoveFromCart(ISession session, int id, string size, int? colorId);
 
-        HttpStatusCode DecreaseQuantity(ISession session, int id);
+        HttpStatusCode DecreaseQuantity(ISession session, int id, string size, int? colorId);
 
         void EmptyCart(ISession session);
 

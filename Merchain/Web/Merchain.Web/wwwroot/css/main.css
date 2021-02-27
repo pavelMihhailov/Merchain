@@ -55,9 +55,9 @@
     font-size: 18px;
 }
 
-.topBtn:hover {
-    background-color: #555;
-}
+    .topBtn:hover {
+        background-color: #555;
+    }
 
 
 @media (max-width: 766px) {
@@ -69,3 +69,31 @@
 .d-none {
     display: none;
 }
+
+.colors {
+    margin-bottom: 2px;
+    display: -webkit-inline-box;
+}
+
+    .colors p {
+        font-weight: 700;
+        text-transform: uppercase;
+    }
+
+.box {
+    height: 35px;
+    width: 35px;
+    margin-bottom: 15px;
+    margin-left: 15px;
+    border: 1px solid black;
+    border-radius: 3px;
+    clear: both;
+}
+
+    .box.selected {
+        border: 3px solid black;
+    }
+
+    .color-col .box {
+        margin-left: 0px;
+    }

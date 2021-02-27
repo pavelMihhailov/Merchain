@@ -178,9 +178,9 @@
                     var orderedProduct = new OrderedProductsViewModel()
                     {
                         ProductId = productItem.ProductId,
-                        Name = matchingProduct.Name,
-                        ImageUrl = matchingProduct.ImagesUrls?.Split(';').ToList().FirstOrDefault(),
-                        Price = matchingProduct.Price,
+                        Name = matchingProduct != null ? matchingProduct.Name : "Продуктът не е наличен на сайта",
+                        ImageUrl = matchingProduct != null ? matchingProduct.ImagesUrls?.Split(';').ToList().FirstOrDefault() : string.Empty,
+                        Price = matchingProduct != null ? matchingProduct.Price : 0.0m,
                         Quantity = productItem.Quantity,
                     };
 

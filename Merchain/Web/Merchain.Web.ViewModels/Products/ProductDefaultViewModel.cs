@@ -15,6 +15,8 @@
 
         public decimal Price { get; set; }
 
+        public bool HasSize { get; set; }
+
         public string DefaultImage
         {
             get
