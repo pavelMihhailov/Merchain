@@ -53,13 +53,27 @@
         }
 
         [HttpGet]
+        public async Task<IActionResult> Details(int id)
+        {
+            if (id < 1)
+            {
+                return this.RedirectToAction("Index");
+            }
+
+            IEnumerable<OrderInfoViewModel> allOrders = await this.orderService.AllOrders();
+            OrderInfoViewModel orderViewModel = allOrders.FirstOrDefault(x => x.OrderId == id);
+
+            return this.View(orderViewModel);
+        }
+
+        [HttpGet]
         public async Task<IActionResult> Index(string promoCode)
         {
             var cartItems = SessionExtension.Get<List<CartItem>>(this.HttpContext.Session, SessionConstants.Cart);
 
-            if (cartItems == null)
+            if (cartItems == null || !cartItems.Any())
             {
-                this.TempData[ViewDataConstants.ErrorMessage] = "You do not have any products added in cart.";
+                this.TempData[ViewDataConstants.ErrorMessage] = "Нямате добавени продукти в количката.";
 
                 return this.RedirectToAction("Index", "ShoppingCart");
             }

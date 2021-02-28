@@ -21,47 +21,31 @@
     }
     else
     {
-        <table class="table table-striped">
+        <table class="table table-striped table-responsive">
             <thead class="table-head">
                 <tr>
-                    <th width="7%">Дата</th>
-                    <th width="7%">ID на поръчката</th>
-                    <th>Поръчани Продукти</th>
+                    <th width="14%">Дата</th>
+                    <th width="10%">Поръчка #</th>
                     <th>Общо</th>
                     <th>Адрес</th>
                     <th width="7%">Статус</th>
+                    <th>Действия</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach (var order in Model)
                 {
                     <tr>
-                        <td width="7%">@order.OrderDate.ToLocalTime()</td>
-                        <td width="7%">#@order.OrderId</td>
-                        <td>
-                            <table class="table table-nostriped">
-                                @foreach (var product in order.ProductsOrdered)
-                                {
-                                    <tr>
-                                        <td>
-                                            <a asp-area="" asp-controller="Products"
-                                               asp-action="Details" asp-route-id="@product.ProductId">@product.Name</a>
-                                        </td>
-                                        <td>@product.Size</td>
-                                        <td>@product.Color</td>
-                                        <td>
-                                            <img src="@product.ImageUrl" width="100" />
-                                        </td>
-                                        <td>@product.Price лв.</td>
-                                        <td>x@(product.Quantity)</td>
-                                    </tr>
-                                }
-                            </table>
-                        </td>
+                        <td width="14%">@order.OrderDate.ToLocalTime()</td>
+                        <td width="10%">#@order.OrderId</td>
                         <td>@order.OrderTotal лв.</td>
                         <td>@order.Address</td>
                         <td width="7%">
                             <span class="badge badge-@order.BadgeStatusCss">@order.OrderStatus</span>
+                        </td>
+                        <td>
+                            <a asp-area="" asp-controller="Order"
+                               asp-action="Details" asp-route-id="@order.OrderId">Виж Поръчката</a>
                         </td>
                     </tr>
                 }

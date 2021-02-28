@@ -19,15 +19,14 @@
         <div id="chartContainer"></div>
     </figure>
 
-    <table class="table table-striped">
+    <table class="table table-striped table-responsive">
         <thead class="table-head">
             <tr>
-                <th width="14%">Дата На Поръчване</th>
-                <th>ID на поръчка</th>
-                <th>Поръчани Продукти</th>
-                <th>Обща Сума</th>
-                <th>Статус</th>
-                <th></th>
+                <th width="14%">Дата</th>
+                <th width="10%">Поръчка #</th>
+                <th width="14%">Обща Сума</th>
+                <th width="10%">Статус</th>
+                <th width="25%">Действия</th>
             </tr>
         </thead>
         <tbody>
@@ -38,39 +37,13 @@
                     <td>
                         @order.OrderId
                     </td>
-                    <td>
-                        <table class="table table-nostriped">
-                            <thead class="table-head">
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Име</th>
-                                    <th>Цена</th>
-                                    <th>Количество</th>
-                                </tr>
-                            </thead>
-                            @foreach (var product in order.ProductsOrdered)
-                            {
-                                <tr>
-                                    <td>
-                                        <a asp-area="@AreaConstants.Administration" asp-controller="Products"
-                                           asp-action="Details" asp-route-id="@product.ProductId">
-                                            #@product.ProductId
-                                        </a>
-                                    </td>
-                                    <td>@product.Name</td>
-                                    <td>@product.Price лв.</td>
-                                    <td>x @product.Quantity</td>
-                                </tr>
-                            }
-                        </table>
-                    </td>
                     <td>@order.OrderTotal лв.</td>
                     <td>
                         <span class="badge badge-@order.BadgeStatusCss">@order.OrderStatus</span>
                     </td>
                     <td>
                         <a asp-area="@AreaConstants.Administration" asp-controller="Orders" asp-action="Details" asp-route-id="@order.OrderId">
-                            Прегледай Поръчката
+                            Виж Поръчката
                         </a>
                     </td>
                 </tr>
@@ -83,11 +56,15 @@
             {
                 <a class="prev page-numbers"
                    asp-area="@AreaConstants.Administration" asp-controller="Orders" asp-action="Index"
-                   asp-route-page="@(currPage - 1)">Назад</a>
+                   asp-route-page="@(currPage - 1)">
+                    <i class="flaticon-left-arrow arrow-pagination"></i>
+                </a>
             }
             else
             {
-                <span aria-current="page" class="prev page-numbers">Назад</span>
+                <span aria-current="page" class="prev page-numbers">
+                    <i class="flaticon-left-arrow arrow-pagination"></i>
+                </span>
             }
             @for (int i = 1; i <= ViewBag.MaxPage; i++)
             {
@@ -106,11 +83,15 @@
             {
                 <a class="next page-numbers"
                    asp-area="@AreaConstants.Administration" asp-controller="Orders" asp-action="Index"
-                   asp-route-page="@(currPage + 1)">Следваща</a>
+                   asp-route-page="@(currPage + 1)">
+                    <i class="flaticon-right-arrow arrow-pagination"></i>
+                </a>
             }
             else
             {
-                <span aria-current="page" class="next page-numbers">Следваща</span>
+                <span aria-current="page" class="next page-numbers">
+                    <i class="flaticon-right-arrow arrow-pagination"></i>
+                </span>
             }
         </div>
     </div>

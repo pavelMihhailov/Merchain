@@ -1,6 +1,59 @@
 ﻿<section class="footer-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-sm-4">
+                <div class="footer-widget about-widget">
+                    <h2>За Нас</h2>
+                    <p>Donec vitae purus nunc. Morbi faucibus erat sit amet congue mattis. Nullam frin-gilla faucibus urna, id dapibus erat iaculis ut. Integer ac sem.</p>
+                    <img src="~/img/econt_bg.png" width="75" alt="">
+                </div>
+            </div>
+            <div class="col-lg-4 col-sm-4">
+                <div class="footer-widget about-widget">
+                    <h2>Полезно</h2>
+                    <ul>
+                        <li><a asp-area="" asp-controller="Info" asp-action="ContactUs">Контакти</a></li>
+                        <li><a asp-area="" asp-controller="Products" asp-action="WishList">Харесани Продукти</a></li>
+                        <li><a asp-area="" asp-controller="ShoppingCart" asp-action="Index">Моята Количка</a></li>
+                        <li><a asp-area="Identity" asp-page="/Account/Register">Създай Акаунт</a></li>
+                        <li><a asp-area="Identity" asp-page="/Account/Login">Влез в Акаунта</a></li>
+                        <li><a asp-area="" asp-controller="Products" asp-action="Index">Категории</a></li>
+                    </ul>
+                    <ul>
+                        <li><a href="">Partners</a></li>
+                        <li><a href="">Bloggers</a></li>
+                        <li><a href="">Support</a></li>
+                        <li><a href="">Terms of Use</a></li>
+                        <li><a href="">Press</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-4 col-sm-4">
+                <div class="footer-widget contact-widget">
+                    <h2>Свържи се с нас</h2>
+                    <div class="con-info">
+                        <span>-</span>
+                        <p>БГ Кодинг ЕООД</p>
+                    </div>
+                    <div class="con-info">
+                        <span>-</span>
+                        <p>bgcodinglife@gmail.com</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="social-links-warp">
         <div class="container">
+            <div class="social-links">
+                <a href="https://www.instagram.com/bgcoding.life/" target="_blank" class="instagram">
+                    <i class="fa fa-instagram"></i><span>instagram</span>
+                </a>
+                <a href="" target="_blank" class="facebook">
+                    <i class="fa fa-facebook"></i><span>facebook</span>
+                </a>
+            </div>
+
             <p class="text-white text-center mt-5">
                 &copy; @DateTime.Now.Year Всички права запазени
                 <br />

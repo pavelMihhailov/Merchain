@@ -361,19 +361,19 @@ ol {
     padding-top: 11px;
 }
 
-.user-panel .up-item {
-    display: inline-block;
-    font-size: 14px;
-}
-
-    .user-panel .up-item i {
-        font-size: 22px;
-    }
-
-    .user-panel .up-item a {
+    .user-panel .up-item {
+        display: inline-block;
         font-size: 14px;
-        color: #000;
     }
+
+        .user-panel .up-item i {
+            font-size: 22px;
+        }
+
+        .user-panel .up-item a {
+            font-size: 14px;
+            color: #000;
+        }
 
 .shopping-card {
     display: inline-block;
@@ -397,6 +397,12 @@ ol {
 .main-navbar {
     background: #282828;
     box-shadow: 0 10px 13px 1px rgb(0 0 0 / 26%);
+    justify-content: center;
+    display: grid;
+}
+
+.arrow-pagination {
+    font-size: 25px;
 }
 
 .slicknav_menu {
@@ -821,7 +827,7 @@ ol {
     }
 
     .footer-widget.about-widget p {
-        margin-bottom: 50px;
+        margin-bottom: 30px;
         letter-spacing: -0.01em;
     }
 
@@ -920,73 +926,62 @@ ol {
     padding: 46px 0;
 }
 
-.social-links a {
-    margin-right: 60px;
-    display: inline-block;
+.social-links {
+    justify-content: center;
+    display: flex;
 }
 
-    .social-links a:last-child {
-        margin-right: 0;
-    }
-
-    .social-links a i {
-        font-size: 30px;
-        color: #d7d7d7;
-        float: left;
-        margin-right: 19px;
-        overflow: hidden;
-        -webkit-transition: all 0.3s;
-        -o-transition: all 0.3s;
-        transition: all 0.3s;
-    }
-
-    .social-links a span {
+    .social-links a {
+        margin-right: 60px;
         display: inline-block;
-        font-size: 12px;
-        font-weight: 600;
-        text-transform: uppercase;
-        color: #9f9fa0;
-        padding-top: 10px;
-        -webkit-transition: all 0.3s;
-        -o-transition: all 0.3s;
-        transition: all 0.3s;
     }
 
-    .social-links a.instagram:hover i {
-        color: #2F5D84;
-    }
+        .social-links a:last-child {
+            margin-right: 0;
+        }
 
-    .social-links a.google-plus:hover i {
-        color: #E04B37;
-    }
+        .social-links a i {
+            font-size: 30px;
+            color: #d7d7d7;
+            float: left;
+            margin-right: 19px;
+            overflow: hidden;
+            -webkit-transition: all 0.3s;
+            -o-transition: all 0.3s;
+            transition: all 0.3s;
+        }
 
-    .social-links a.twitter:hover i {
-        color: #5abed6;
-    }
+        .social-links a span {
+            display: inline-block;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: #9f9fa0;
+            padding-top: 10px;
+            -webkit-transition: all 0.3s;
+            -o-transition: all 0.3s;
+            transition: all 0.3s;
+        }
 
-    .social-links a.pinterest:hover i {
-        color: #CD212D;
-    }
+        .social-links a.instagram:hover i {
+            color: #2F5D84;
+        }
 
-    .social-links a.facebook:hover i {
-        color: #39599F;
-    }
+        .social-links a.google-plus:hover i {
+            color: #E04B37;
+        }
 
-    .social-links a.twitter:hover i {
-        color: #5abed6;
-    }
+        .social-links a.facebook:hover i {
+            color: #39599F;
+        }
 
-    .social-links a.youtube:hover i {
-        color: #D12227;
-    }
+        .social-links a.youtube:hover i {
+            color: #D12227;
+        }
 
-    .social-links a.tumblr:hover i {
-        color: #37475E;
-    }
-
-    .social-links a:hover span {
-        color: #fff;
-    }
+        .social-links a:hover span {
+            color: #fff;
+        }
 
 /* --------------
   Other Pages
@@ -2251,11 +2246,17 @@ table tbody td {
 
 .pagination {
     display: inline-block;
-    height: 70px;
+    height: 50px;
     margin-top: 70px;
-    padding: 0 25px;
     border-radius: 35px;
     background-color: #eee;
+}
+
+.gray-section {
+    border-radius: 23px;
+    background-color: #ededed;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 
 @media only screen and (max-width: 1199px) {
@@ -2269,13 +2270,12 @@ table tbody td {
 
 .page-numbers {
     display: block;
-    padding: 0 25px;
+    padding: 0 17px;
     float: left;
     transition: 400ms ease;
     color: #595959;
-    font-size: 20px;
     letter-spacing: 0.1em;
-    line-height: 70px;
+    line-height: 50px;
 }
 
     .page-numbers:hover, .page-numbers.current {
