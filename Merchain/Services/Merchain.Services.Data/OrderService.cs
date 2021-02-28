@@ -149,6 +149,8 @@
                                             {
                                                 ProductId = p.ProductId,
                                                 Quantity = p.Quantity,
+                                                Size = p.Size,
+                                                Color = p.Color,
                                             }),
                                     });
 
@@ -182,6 +184,8 @@
                         ImageUrl = matchingProduct != null ? matchingProduct.ImagesUrls?.Split(';').ToList().FirstOrDefault() : string.Empty,
                         Price = matchingProduct != null ? matchingProduct.Price : 0.0m,
                         Quantity = productItem.Quantity,
+                        Size = productItem.Size,
+                        Color = productItem.Color,
                     };
 
                     productsOfOrder.Add(orderedProduct);
@@ -232,6 +236,8 @@
                 {
                     ProductId = x.ProductId,
                     Quantity = x.Quantity,
+                    Size = x.Size,
+                    Color = x.Color?.Name,
                     OrderId = orderId,
                 });
 

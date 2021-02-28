@@ -29,7 +29,7 @@
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([Bind("Title")] Category category)
+        public async Task<IActionResult> Create([Bind("Title,BannerImage")] Category category)
         {
             if (this.ModelState.IsValid)
             {
@@ -59,7 +59,7 @@
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title")] Category category)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,BannerImage")] Category category)
         {
             if (id != category.Id)
             {

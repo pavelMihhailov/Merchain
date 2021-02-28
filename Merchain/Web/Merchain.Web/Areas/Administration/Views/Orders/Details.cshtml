@@ -48,6 +48,8 @@
                     <th scope="col">Име</th>
                     <th scope="col">Цена</th>
                     <th scope="col">Количество</th>
+                    <th scope="col">Размер</th>
+                    <th scope="col">Цвят</th>
                 </tr>
             </thead>
             <tbody>
@@ -67,6 +69,12 @@
                         </td>
                         <td>
                             @product.Quantity
+                        </td>
+                        <td>
+                            @product.Size
+                        </td>
+                        <td>
+                            @product.Color
                         </td>
                     </tr>
                 }

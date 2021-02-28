@@ -85,7 +85,7 @@ $(window).on('load', function () {
 		dots: false,
 		margin: 30,
 		autoplay: true,
-		navText: ['<i class="flaticon-left-arrow"></i>', '<i class="flaticon-right-arrow"></i>'],
+		navText: ['<i class="flaticon-left-arrow-1"></i>', '<i class="flaticon-right-arrow-1"></i>'],
 		responsive: {
 			0: {
 				items: 1

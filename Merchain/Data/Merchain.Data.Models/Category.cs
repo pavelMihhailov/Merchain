@@ -16,6 +16,9 @@
         [Display(Name = "Име")]
         public string Title { get; set; }
 
+        [Display(Name = "Снимка за банер")]
+        public string BannerImage { get; set; }
+
         public virtual ICollection<ProductCategory> ProductsCategories { get; set; }
     }
 }

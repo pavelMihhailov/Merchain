@@ -1,0 +1,74 @@
+﻿body .padding-2 {
+    padding: calc(5px + (2 * 0.4vmin)) !important;
+}
+
+body .padding-4 {
+    padding: calc(5px + (4 * 0.4vmin)) !important;
+}
+
+body .font-size-8 {
+    font-size: calc(12px + (8 * 0.3vmin)) !important;
+}
+
+body .element--bold {
+    font-weight: 700;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+#home-categories {
+    justify-content: center;
+    align-items: flex-start;
+    flex-grow: 1;
+    flex-wrap: wrap;
+    display: flex;
+}
+
+#category {
+    min-width: 300px;
+    width: 25%;
+    position: relative;
+    flex-direction: column;
+    color: white;
+    text-align: center;
+    text-shadow: 0 0 30px rgb(0,0,0);
+    display: flex;
+}
+
+    #category a {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        display: flex;
+        font-size: calc(14px + (8 * 0.3vmin)) !important;
+    }
+
+    #category h2 {
+        text-shadow: 0 0 30px rgb(0,0,0);
+        color: white;
+        text-align: center;
+        font-size: calc(14px + (8 * 0.3vmin)) !important;
+    }
+
+    #category .image {
+        background: black;
+        overflow: hidden;
+    }
+
+        #category .image:hover {
+            opacity: 0.9;
+        }
+
+    #category img {
+        max-width: 100%;
+        object-fit: cover;
+        opacity: 0.5;
+        height: 446px;
+    }

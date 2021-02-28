@@ -72,8 +72,18 @@
                     </div>
                     @for (int i = 0; i < Model.CartItems.Count; i++)
                     {
-                        <input type="hidden" name="CartItems[@i].ProductId" value="@Model.CartItems[i].Product.Id" />
-                        <input type="hidden" name="CartItems[@i].Quantity" value="@Model.CartItems[i].Quantity" />
+                        CartItem item = Model.CartItems[i];
+                        <input type="hidden" name="CartItems[@i].ProductId" value="@item.Product.Id" />
+                        <input type="hidden" name="CartItems[@i].Quantity" value="@item.Quantity" />
+                        if (!string.IsNullOrWhiteSpace(item.Size))
+                        {
+                            <input type="hidden" name="CartItems[@i].Size" value="@item.Size" />
+                        }
+                        if (!string.IsNullOrWhiteSpace(item.Color?.Name))
+                        {
+                            <input type="hidden" name="CartItems[@i].Color.Name" value="@item.Color?.Name" />
+                            <input type="hidden" name="CartItems[@i].Color.Value" value="@item.Color?.Value" />
+                        }
                     }
                     @if (Model.AppliedPromoCode != null)
                     {

@@ -38,7 +38,9 @@ $(document).ready(function () {
     });
 
 
-    $(".remove-wishlist").on("click", function () {
+    $(".remove-wishlist").on("click", function (e) {
+        e.preventDefault();
+
         $el = $(this);
 
         let productId = $el.attr("id");

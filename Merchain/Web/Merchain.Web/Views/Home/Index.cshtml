@@ -1,12 +1,30 @@
-﻿@model IndexViewModel
+﻿@using Merchain.Web.ViewModels.Shared
+
+@model IndexViewModel
 @{
     this.ViewData["Title"] = "Начало";
 }
 
-@*<div class="container">
-        <img src="~/img/home-banner-desktop.jpg" style="width:inherit" />
-    </div>*@
-
+<div class="container mt-4" style="max-width:1250px">
+    <div class="section-title">
+        <h2>КАТЕГОРИИ</h2>
+    </div>
+    <div id="home-categories">
+        @foreach (CategoryViewModel category in Model.Categories)
+        {
+            <article class="padding-2" id="category">
+                <div class="image">
+                    <img src="@category.BannerImage"
+                         data-loaded="true">
+                    <a class="link--inherit padding-4"
+                       asp-area="" asp-controller="Products" asp-action="Index" asp-route-categoryId="@category.Id">
+                        <h2>@category.Title</h2>
+                    </a>
+                </div>
+            </article>
+        }
+    </div>
+</div>
 <section class="top-letest-product-section mt-5">
     <div class="container">
         <div class="section-title">
@@ -42,4 +60,5 @@
 }
 @section Styles {
     <link rel="stylesheet" href="~/css/owl.carousel.min.css" />
+    <link rel="stylesheet" href="~/css/categories.css" />
 }
