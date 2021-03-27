@@ -1,13 +1,11 @@
-﻿@using Merchain.Common.Order;
-
-@model OrderInfoViewModel
+﻿@model OrderInfoViewModel
 @{
     this.ViewData["Title"] = "Детайли За Поръчката";
 }
 
 <div class="page-top-info">
     <div class="container">
-        <h4>Детайли За Поръчката</h4>
+        <h4>Поръчка #@Model.OrderId</h4>
         <div class="site-pagination">
             <a asp-controller="Home" asp-action="Index">Начало</a> /
             <a>Детайли За Поръчката</a>
@@ -22,7 +20,6 @@
         <table class="table table-striped table-responsive">
             <thead class="table-head">
                 <tr>
-                    <th scope="col">@Html.DisplayNameFor(model => model.UserId)</th>
                     <th scope="col">@Html.DisplayNameFor(model => model.OrderDate)</th>
                     <th scope="col">@Html.DisplayNameFor(model => model.Address)</th>
                     <th scope="col">@Html.DisplayNameFor(model => model.OrderTotal)</th>
@@ -31,7 +28,6 @@
             </thead>
             <tbody>
                 <tr>
-                    <th scope="row">@Html.DisplayFor(model => model.UserId)</th>
                     <td>@Model.OrderDate.ToLocalTime()</td>
                     <td>@Html.DisplayFor(model => model.Address)</td>
                     <td>@Html.DisplayFor(model => model.OrderTotal) лв.</td>
@@ -80,39 +76,5 @@
                 }
             </tbody>
         </table>
-        <hr />
-        <div class="row">
-            <div class="col-md-5 pb-2">
-                <form method="post" class="mark-order"
-                      asp-area="@AreaConstants.Administration" asp-controller="Orders" asp-action="MarkOrderAs">
-                    <div class="ml-3 p-3">
-                        <h3 class="pb-2">Маркирай Поръчката Като:</h3>
-                        <input type="hidden" name="id" value="@Model.OrderId" />
-                        <div class="form-group">
-                            <input type="radio" name="markedAs" id="shipped" value="@OrderStatus.Shipped" />
-                            <label for="shipped">
-                                <span class="badge badge-success">@OrderStatus.Shipped</span>
-                            </label>
-                        </div>
-                        <div class="form-group">
-                            <input type="radio" name="markedAs" id="accepted" value="@OrderStatus.Accepted" />
-                            <label for="accepted">
-                                <span class="badge badge-primary">@OrderStatus.Accepted</span>
-                            </label>
-                        </div>
-                        <div class="form-group">
-                            <input type="radio" name="markedAs" id="pending" value="@OrderStatus.Pending" />
-                            <label for="pending">
-                                <span class="badge badge-warning">@OrderStatus.Pending</span>
-                            </label>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Запази</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    <div class="pt-2">
-        <a asp-action="Index">Върни се обратно</a>
     </div>
 </div>

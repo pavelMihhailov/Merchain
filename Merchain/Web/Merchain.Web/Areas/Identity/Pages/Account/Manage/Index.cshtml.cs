@@ -1,5 +1,6 @@
 ﻿namespace Merchain.Web.Areas.Identity.Pages.Account.Manage
 {
+    using System.ComponentModel.DataAnnotations;
     using System.Threading.Tasks;
 
     using Merchain.Data.Models;
@@ -17,6 +18,7 @@
             this.userManager = userManager;
         }
 
+        [Display(Name = "Акаунт")]
         public string Username { get; set; }
 
         [TempData]

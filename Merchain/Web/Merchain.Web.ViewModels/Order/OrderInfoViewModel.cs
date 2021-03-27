@@ -9,6 +9,8 @@
         [Display(Name = "Поръчка ID")]
         public int OrderId { get; set; }
 
+        public Guid Guid { get; set; }
+
         [Display(Name = "Дата на Поръчване")]
         public DateTime OrderDate { get; set; }
 

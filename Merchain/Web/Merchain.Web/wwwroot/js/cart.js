@@ -1,14 +1,79 @@
-﻿$(document).ready(function () {
-    $(".remove-icon").on("click", function () {
+﻿var proQty = $('.cart-quantity');
+proQty.prepend('<span class="dec qtybtn qtybtn-cart">-</span>');
+proQty.append('<span class="inc qtybtn qtybtn-cart">+</span>');
+proQty.on('click', '.qtybtn-cart', function () {
+	var $button = $(this);
+	var oldValue = $button.parent().find('input').val();
+
+	var productId = $($button.closest("article")).attr("id");
+
+	if ($button.hasClass('inc')) {
+		var newVal = parseFloat(oldValue) + 1;
+
+		if ($button.parents('.cart-section').length) {
+            let size = $button.closest("article").find(".size-col").text();
+			let colorId = null;
+            let color = $button.closest("article").find(".box")[0];
+			if (color !== undefined) {
+				colorId = color.id;
+			}
+			$.ajax({
+				type: "GET",
+				url: "/ShoppingCart/AddProduct",
+				data: { 'id': productId, 'quantity': 1, 'size': size, 'colorId': colorId },
+				success: function () {
+				}
+			});
+
+			refreshCartPrices(productId, false, true);
+		}
+
+		$button.parent().find('input').val(newVal);
+	} else {
+		// Don't allow decrementing below zero
+		if (oldValue > 1) {
+			var newVal = parseFloat(oldValue) - 1;
+
+		} else {
+			newVal = 0;
+			$($button.closest("article")).remove();
+			refreshCartItems();
+		}
+
+		if ($button.parents('.cart-section').length) {
+            let size = $button.closest("article").find(".size-col").text();
+			let colorId = null;
+            let color = $button.closest("article").find(".box")[0];
+			if (color !== undefined) {
+				colorId = color.id;
+			}
+
+			$.ajax({
+				type: "GET",
+				url: "/ShoppingCart/DecreaseQuantity",
+				data: { 'id': productId, 'size': size, 'colorId': colorId },
+				success: function () {
+				}
+			});
+
+			refreshCartPrices(productId, false, false);
+		}
+
+		$button.parent().find('input').val(newVal);
+	}
+});
+
+$(document).ready(function () {
+    $(".remove-product").on("click", function () {
         $el = $(this);
 
-        let productId = $($el.closest("tr")).attr("id");
+        let productId = $($el.closest("article")).attr("id");
 
-        refreshCartPrices(productId, true, false);
+        //refreshCartPrices(productId, true, false);
 
-        let size = $el.closest("tr").find(".size-col").text();
+        let size = $el.closest("article").find(".size-col").text();
         let colorId = null;
-        let color = $el.closest("tr").find(".box")[0];
+        let color = $el.closest("article").find(".box")[0];
         if (color !== undefined) {
             colorId = color.id;
         }
@@ -18,8 +83,7 @@
             url: "/ShoppingCart/RemoveProduct",
             data: { 'id': productId, 'size': size, 'colorId': colorId },
             success: function () {
-                $($el.closest("tr")).remove();
-                refreshCartItems();
+                location.reload();
             }
         });
     });
@@ -32,35 +96,21 @@
 });
 
 function refreshCartPrices(id, isRemoved, increment) {
-    let productRow = $("tr[id='" + id + "']")[0];
+    let productRow = $("article[id='" + id + "']")[0];
 
-    let productPriceTag = $($(productRow).find(".total-col")[0]).find("h4")[0];
+	let productPriceTag = parseFloat($(productRow).find(".total-col")[0].innerText);
+
     let totalPriceTag = $(".total-cost").find("span")[0];
-
-    let productPriceHtml = $(productPriceTag)[0].innerText;
     let totalPriceHtml = totalPriceTag.innerText;
 
-    let productTotalPrice = parseFloat(productPriceHtml.substring(0, productPriceHtml.length - 3));
     let totalPrice = parseFloat(totalPriceHtml.substring(0, totalPriceHtml.length - 3));
 
-    let quantity = $(productRow).find('input').val();
-
-    let productPrice = productTotalPrice / quantity;
-
     if (increment) {
-        productTotalPrice += productPrice;
-        totalPrice += productPrice;
+        totalPrice += productPriceTag;
     }
     else {
-        productTotalPrice -= productPrice;
-        if (isRemoved) {
-            totalPrice -= productPrice * quantity;
-        }
-        else {
-            totalPrice -= productPrice;
-        }
+        totalPrice -= productPriceTag;
     }
 
-    $(productPriceTag).html(productTotalPrice.toFixed(2) + " лв.");
     $(totalPriceTag).html(totalPrice.toFixed(2) + " лв.");
 }

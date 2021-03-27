@@ -14,9 +14,12 @@
         {
             this.OrderedItems = new HashSet<OrderItem>();
             this.OrderDate = DateTime.UtcNow;
+            this.Guid = Guid.NewGuid();
         }
 
         public string UserId { get; set; }
+
+        public Guid Guid { get; set; }
 
         public virtual ApplicationUser User { get; set; }
 

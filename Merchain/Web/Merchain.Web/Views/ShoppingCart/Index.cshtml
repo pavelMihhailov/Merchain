@@ -18,14 +18,13 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8">
-                <div class="cart-table">
-                    @if (!Model.Cart.Any())
-                    {
-                        <h3>Количката е празна.</h3>
-                    }
-                    else
-                    {
-                        <h3>Твоята количка</h3>
+                @if (!Model.Cart.Any())
+                {
+                    <h3>Количката е празна.</h3>
+                }
+                else
+                {
+                    @*<h3>Твоята количка</h3>
                         <div class="cart-table-warp">
                             <table>
                                 <thead>
@@ -70,12 +69,67 @@
                                     }
                                 </tbody>
                             </table>
+                        </div>*@
+                    <section>
+                        <div class="card wish-list mb-3">
+                            <div class="card-body">
+                                <h5 class="mb-4">Количка (<span class="prod-count">@Model.Cart.Count()</span> продукта)</h5>
+                                @foreach (var item in Model.Cart)
+                                {
+                                    var product = item.Product;
+                                    <article id="@product.Id">
+                                        <div class="row mb-4">
+                                            <div class="col-md-5 col-lg-3 col-xl-3">
+                                                <div class="view zoom overlay z-depth-1 rounded mb-3 mb-md-0">
+                                                    <img class="img-fluid w-100"
+                                                         src="@product.ImagesUrls.Split(';')[0]" alt="">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-7 col-lg-9 col-xl-9">
+                                                <div>
+                                                    <div class="d-flex justify-content-between">
+                                                        <div>
+                                                            <h5>@product.Name</h5>
+                                                            @if (item.Color != null)
+                                                            {
+                                                                <p class="mb-2 text-muted text-uppercase small">Цвят: </p>
+                                                                <div id="@item.Color.Id" class="box" style="background-color: @item.Color?.Value"></div>
+                                                            }
+                                                            <p class="mb-3 text-muted text-uppercase small">Размер: <span class="size-col">@item.Size</span></p>
+                                                        </div>
+                                                        <div>
+                                                            <div class="def-number-input number-input safari_only mb-0 w-100">
+                                                                <div class="quy-col">
+                                                                    <div class="quantity">
+                                                                        <div class="pro-qty cart-quantity">
+                                                                            <input type="text" name="Quantity" value="@item.Quantity">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="d-flex justify-content-between align-items-center">
+                                                        <div>
+                                                            <a class="pointer card-link-secondary small text-uppercase mr-3 remove-product">
+                                                                <img src="~/img/icons/clear.svg" class="remove-icon mr-2" /> Изтрий Продукт
+                                                            </a>
+                                                        </div>
+                                                        <p class="mb-0"><span><strong class="total-col">@product.Price</strong><strong> лв.</strong></span></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </article>
+                                    <hr class="mb-4">
+                                }
+                            </div>
                         </div>
                         <div class="total-cost">
                             <h6>Общо <span>@Model.SumTotal лв.</span></h6>
                         </div>
-                    }
-                </div>
+                    </section>
+                }
             </div>
             <div class="col-lg-4 card-right">
                 <form class="promo-code-form">
@@ -102,4 +156,8 @@
 
 @section Scripts {
     <script src="~/js/cart.js"></script>
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/cart.css" />
 }

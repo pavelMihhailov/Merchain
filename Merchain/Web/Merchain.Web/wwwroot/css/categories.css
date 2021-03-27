@@ -60,6 +60,7 @@ body .element--bold {
     #category .image {
         background: black;
         overflow: hidden;
+        border-radius: 19px;
     }
 
         #category .image:hover {

@@ -55,10 +55,17 @@
 
             await this.emailService.SendEmailAsync(
                 GlobalConstants.CompanyEmail,
-                "Internal",
+                "Нова Поръчка на Сайта",
                 GlobalConstants.CompanyEmail,
-                "New Order",
+                "Прегледайте новата поръчка",
                 order.ToString());
+
+            await this.emailService.SendEmailAsync(
+                GlobalConstants.CompanyEmail,
+                "Coding Life",
+                address.Email,
+                "Нова Поръчка",
+                $"Вашата поръчка беше приета успешно!\nМожете да следите статуса на вашата поръчка на следният линк:\n https://localhost:44319/Order/StatusCheck/{order.Guid}");
 
             return true;
         }

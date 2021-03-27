@@ -53,6 +53,15 @@
         }
 
         [HttpGet]
+        public async Task<IActionResult> StatusCheck(Guid guid)
+        {
+            IEnumerable<OrderInfoViewModel> allOrders = await this.orderService.AllOrders();
+            OrderInfoViewModel orderViewModel = allOrders.FirstOrDefault(x => x.Guid == guid);
+
+            return this.View(orderViewModel);
+        }
+
+        [HttpGet]
         public async Task<IActionResult> Details(int id)
         {
             if (id < 1)

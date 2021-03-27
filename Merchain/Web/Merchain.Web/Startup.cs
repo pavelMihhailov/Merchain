@@ -4,7 +4,6 @@
     using System.Reflection;
 
     using CloudinaryDotNet;
-    using Merchain.Common;
     using Merchain.Data;
     using Merchain.Data.Common;
     using Merchain.Data.Common.Repositories;
@@ -112,7 +111,6 @@
             services.AddTransient<IPromoCodesService, PromoCodesService>();
             services.AddTransient<IEcontService, EcontService>();
             services.AddTransient<CloudinaryService>();
-            services.AddApplicationInsightsTelemetry();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

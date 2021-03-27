@@ -1,35 +1,43 @@
-﻿@inject Microsoft.ApplicationInsights.AspNetCore.JavaScriptSnippet JavaScriptSnippet
-@using Merchain.Common
+﻿@using Merchain.Common
 <!DOCTYPE html>
 <html>
 <head>
+    <!-- Google Tag Manager -->
+    <script>
+        (function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-P72KF7P');</script>
+    <!-- End Google Tag Manager -->
     <title>@this.ViewData["Title"] - @GlobalConstants.SystemName</title>
     <meta charset="UTF-8">
     <meta name="description" content="Coding Life">
     <meta name="keywords" content="coding, eCommerce, t-shirts, hoodies">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <environment names="Development">
-        <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" asp-append-version="true" />
-    </environment>
-    <environment names="Staging,Production">
-        <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" asp-append-version="true" />
-    </environment>
-
-    <link rel="stylesheet" href="~/css/font-awesome.min.css" />
+    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="preload" as="style" onload="this.rel='stylesheet'"  asp-append-version="true" />
+    <link href="~/css/font-awesome.min.css" rel="preload" as="style" onload="this.rel='stylesheet'" />
     <link rel="stylesheet" href="~/css/flaticon.css" />
     <link rel="stylesheet" href="~/css/slicknav.min.css" />
-    <link rel="stylesheet" href="~/css/jquery-ui.min.css" />
     <link rel="stylesheet" href="~/css/main.css" />
-    <link rel="stylesheet" href="~/css/animate.css" />
     <link rel="stylesheet" href="~/css/style.css" />
     @RenderSection("Styles", required: false)
 
-    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300,300i,400,400i,700,700i" rel="stylesheet">
+    <link rel="preload" href="https://fonts.googleapis.com/css?family=Josefin+Sans:300,300i,400,400i,700,700i"
+          as="style" onload="this.rel='stylesheet'">
     <link href="~/img/icons/favicon.png" rel="shortcut icon" />
-    @Html.Raw(JavaScriptSnippet.FullScript)
 </head>
 <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P72KF7P"
+                height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
     <div id="preloder">
         <div class="loader"></div>
     </div>
@@ -113,18 +121,8 @@
     </main>
     <partial name="_Footer" />
 
-    <environment names="Development">
-        <script src="~/lib/jquery/dist/jquery.js" asp-append-version="true"></script>
-        <script src="~/lib/jquery-validation/dist/jquery.validate.js" asp-append-version="true"></script>
-        <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js" asp-append-version="true"></script>
-        <script src="~/lib/bootstrap/dist/js/bootstrap.js" asp-append-version="true"></script>
-    </environment>
-    <environment names="Staging,Production">
-        <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
-        <script src="~/lib/jquery-validation/dist/jquery.validate.min.js" asp-append-version="true"></script>
-        <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js" asp-append-version="true"></script>
-        <script src="~/lib/bootstrap/dist/js/bootstrap.min.js" asp-append-version="true"></script>
-    </environment>
+    <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js" asp-append-version="true"></script>
 
     <partial name="_ScriptsPartial" />
 

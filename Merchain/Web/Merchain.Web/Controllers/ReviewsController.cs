@@ -67,11 +67,11 @@
 
             if (reviewId == -1)
             {
-                this.TempData[ViewDataConstants.ErrorMessage] = "There was a problem adding review.";
+                this.TempData[ViewDataConstants.ErrorMessage] = "Възникна проблем при добавянето на ревю.";
                 return this.View(inputModel.ProductId);
             }
 
-            this.TempData[ViewDataConstants.SucccessMessage] = "Successfully added review.";
+            this.TempData[ViewDataConstants.SucccessMessage] = "Успешно добавихте ревю.";
 
             return this.RedirectToAction("ProductReviews", new { productId = inputModel.ProductId });
         }
