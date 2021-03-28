@@ -64,7 +64,7 @@
                                                     </div>
                                                     <div class="d-flex justify-content-between align-items-center">
                                                         <div>
-                                                            <a class="pointer card-link-secondary small text-uppercase mr-3 remove-product">
+                                                            <a class="pointer card-link-secondary small text-uppercase mr-3 remove-product" id="@product.Name">
                                                                 <img src="~/img/icons/clear.svg" width="20" height="20" class="remove-icon mr-2" /> Изтрий Продукт
                                                             </a>
                                                         </div>
@@ -90,7 +90,7 @@
                     <a class="applyPromoCode" href="javascript:;">Добави</a>
                 </form>
                 <a asp-area="" asp-controller="Order" asp-action="Index" class="site-btn checkout-btn">Финализирай Поръчката</a>
-                <a asp-controller="Products" asp-action="Index" class="site-btn sb-dark">Продължи Пазаруването</a>
+                <a asp-controller="Products" asp-action="Index" class="site-btn sb-dark" id="continue-shopping">Продължи Пазаруването</a>
             </div>
         </div>
     </div>

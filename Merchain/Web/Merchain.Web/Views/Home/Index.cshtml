@@ -16,7 +16,7 @@
                 <div class="image">
                     <img src="@category.BannerImage"
                          data-loaded="true">
-                    <a class="link--inherit padding-4"
+                    <a class="link--inherit padding-4 category-banner-link" id="@category.Title"
                        asp-area="" asp-controller="Products" asp-action="Index" asp-route-categoryId="@category.Id">
                         <h2>@category.Title</h2>
                     </a>
