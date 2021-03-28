@@ -32,7 +32,7 @@ namespace Merchain.Web.Areas.Identity.Pages.Account.Manage
 
         public string Username { get; set; }
 
-        [Display(Name = "Имейл")]
+        [Display(Name = "Текущ Имейл")]
         public string Email { get; set; }
 
         public bool IsEmailConfirmed { get; set; }

@@ -107,6 +107,7 @@
             string description,
             decimal price,
             IEnumerable<IFormFile> images,
+            IFormFile previewImage,
             IEnumerable<int> categoryIds,
             IEnumerable<int> colorIds)
         {
@@ -130,6 +131,7 @@
                 }
 
                 product.ImagesUrls = imagesUrls.ToString();
+                product.PreviewImage = await this.cloudinaryService.UploadImage(previewImage);
 
                 await this.AddCategoriesToProduct(categoryIds, product);
                 await this.AddColorsToProduct(colorIds, product);
@@ -157,7 +159,12 @@
             return Task.CompletedTask;
         }
 
-        public async Task<Task> Edit(Product product, IEnumerable<IFormFile> addedImages, IEnumerable<int> categoryIds, IEnumerable<int> colorIds)
+        public async Task<Task> Edit(
+            Product product,
+            IEnumerable<IFormFile> addedImages,
+            IFormFile previewImageChanged,
+            IEnumerable<int> categoryIds,
+            IEnumerable<int> colorIds)
         {
             if (categoryIds != null)
             {
@@ -191,6 +198,11 @@
                 }
 
                 product.ImagesUrls = imagesUrls.ToString();
+            }
+
+            if (previewImageChanged != null)
+            {
+                product.PreviewImage = await this.cloudinaryService.UploadImage(previewImageChanged);
             }
 
             this.productsRepository.Update(product);

@@ -39,7 +39,7 @@
             public string OldPassword { get; set; }
 
             [Required]
-            [StringLength(100, ErrorMessage = "The {0} трябва да бъде поне {2} и макс {1} символа.", MinimumLength = 6)]
+            [StringLength(100, ErrorMessage = "{0} трябва да бъде поне {2} и макс {1} символа.", MinimumLength = 6)]
             [DataType(DataType.Password)]
             [Display(Name = "Нова Парола")]
             public string NewPassword { get; set; }
@@ -93,7 +93,7 @@
 
             await this.signInManager.RefreshSignInAsync(user);
             this.logger.LogInformation("User changed their password successfully.");
-            this.StatusMessage = "Your password has been changed.";
+            this.StatusMessage = "Вашата парола беше променена успешно.";
 
             return this.RedirectToPage();
         }

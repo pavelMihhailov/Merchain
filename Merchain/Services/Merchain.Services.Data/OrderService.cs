@@ -150,6 +150,7 @@
                                         UserId = order.UserId,
                                         Address = order.Address,
                                         OrderStatus = order.Status,
+                                        Guid = order.Guid,
                                         ProductsOrdered = orderItems
                                         .Select(p =>
                                             new
@@ -175,6 +176,7 @@
                     OrderStatus = info.OrderStatus,
                     UserId = info.UserId,
                     Address = info.Address,
+                    Guid = info.Guid,
                 };
 
                 var productsOfOrder = new List<OrderedProductsViewModel>();

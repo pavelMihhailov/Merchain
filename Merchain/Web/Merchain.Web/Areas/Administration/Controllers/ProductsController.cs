@@ -100,15 +100,16 @@
                         viewModel.Description,
                         viewModel.Price,
                         viewModel.Images,
+                        viewModel.PreviewImage,
                         viewModel.Categories,
                         viewModel.Colors);
 
-                    this.TempData[ViewDataConstants.SucccessMessage] = "Successfully created product.";
+                    this.TempData[ViewDataConstants.SucccessMessage] = "Продуктът е създаден успешно.";
                 }
                 catch (Exception ex)
                 {
                     this.logger.LogWarning($"Could not add product to the database.\n-{ex.Message}");
-                    this.TempData[ViewDataConstants.ErrorMessage] = "There was a problem creating product.";
+                    this.TempData[ViewDataConstants.ErrorMessage] = "Възникна проблем при създаването на продукта.";
                 }
             }
 
@@ -164,6 +165,7 @@
             int id,
             [Bind("Id,Name,Description,ImagesUrls,Price,HasSize")] Product product,
             IEnumerable<IFormFile> addedImages,
+            IFormFile previewImageChange,
             IEnumerable<int> selectedCategories,
             IEnumerable<int> selectedColors)
         {
@@ -174,7 +176,7 @@
 
             if (this.ModelState.IsValid)
             {
-                await this.productsService.Edit(product, addedImages, selectedCategories, selectedColors);
+                await this.productsService.Edit(product, addedImages, previewImageChange, selectedCategories, selectedColors);
 
                 return this.RedirectToAction(nameof(this.Index));
             }

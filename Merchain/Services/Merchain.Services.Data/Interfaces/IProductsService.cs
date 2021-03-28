@@ -33,12 +33,18 @@
             string description,
             decimal price,
             IEnumerable<IFormFile> images,
+            IFormFile previewImage,
             IEnumerable<int> categoryIds,
             IEnumerable<int> colorIds);
 
         Task<Task> Edit(Product product);
 
-        Task<Task> Edit(Product product, IEnumerable<IFormFile> addedImages, IEnumerable<int> categoryIds, IEnumerable<int> colorIds);
+        Task<Task> Edit(
+            Product product,
+            IEnumerable<IFormFile> addedImages,
+            IFormFile previewImageChanged,
+            IEnumerable<int> categoryIds,
+            IEnumerable<int> colorIds);
 
         Task<Task> Delete(Product product);
 

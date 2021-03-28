@@ -91,7 +91,12 @@ $(document).ready(function () {
     $(".applyPromoCode").on("click", function (e) {
         let promoCodeValue = $($("input[name='PromoCode']")[0]).val();
 
-        document.location.href = "/Order?promoCode=" + promoCodeValue;
+		if (promoCodeValue.length) {
+			document.location.href = "/Order?promoCode=" + promoCodeValue;
+		}
+		else {
+			e.preventDefault();
+		}
     });
 });
 

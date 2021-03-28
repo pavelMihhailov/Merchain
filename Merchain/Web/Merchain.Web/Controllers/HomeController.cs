@@ -3,7 +3,6 @@
     using System.Diagnostics;
     using System.Linq;
 
-    using Merchain.Common;
     using Merchain.Services.Data.Interfaces;
     using Merchain.Services.Mapping;
     using Merchain.Web.ViewModels;

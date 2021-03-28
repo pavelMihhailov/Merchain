@@ -53,12 +53,12 @@
 
             await this.emailSender.SendEmailAsync(
                     GlobalConstants.CompanyEmail,
-                    "Merchain",
+                    "BG Coding Life",
                     email,
-                    "Your Promo Code",
-                    $"Your promo code is: {assignedPromoCode.Code} and is valid until {assignedPromoCode.ValidUntil.ToLocalTime()}");
+                    "Твоят промо код",
+                    $"Твоят промо код е: {assignedPromoCode.Code} и е валиден до {assignedPromoCode.ValidUntil.ToLocalTime()}");
 
-            this.TempData[ViewDataConstants.SucccessMessage] = "Thank you for you subscription. New promo code has been added to your account.";
+            this.TempData[ViewDataConstants.SucccessMessage] = "Успешно се абонирахте за нашия седмичен бюлетин. Вашият промо код е добавен в профила Ви.";
 
             return this.RedirectToAction("Index", "Home");
         }

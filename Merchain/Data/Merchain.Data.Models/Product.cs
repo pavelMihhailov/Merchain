@@ -26,6 +26,9 @@
         [Display(Name = "Снимки")]
         public string ImagesUrls { get; set; }
 
+        [Display(Name = "Демо Снимка")]
+        public string PreviewImage { get; set; }
+
         [Column(TypeName = "decimal(5, 2)")]
         [Display(Name = "Цена")]
         public decimal Price { get; set; }

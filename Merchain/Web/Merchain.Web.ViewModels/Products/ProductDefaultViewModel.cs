@@ -17,11 +17,15 @@
 
         public bool HasSize { get; set; }
 
+        public string PreviewImage { get; set; }
+
         public string DefaultImage
         {
             get
             {
-                return this.ImagesUrls?.Split(';').ToList().FirstOrDefault();
+                return !string.IsNullOrWhiteSpace(this.PreviewImage) ?
+                    this.PreviewImage :
+                    this.ImagesUrls?.Split(';').ToList().FirstOrDefault();
             }
         }
     }

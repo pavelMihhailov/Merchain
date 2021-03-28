@@ -38,7 +38,7 @@
         {
             if (!this.ModelState.IsValid)
             {
-                this.TempData[ViewDataConstants.ErrorMessage] = "Sorry your submitted form was not valid.";
+                this.TempData[ViewDataConstants.ErrorMessage] = "Невалидна изпратена форма, моля опитайте пак.";
 
                 return this.RedirectToAction("ContactUs");
             }
@@ -52,11 +52,11 @@
                     inputModel.Subject,
                     inputModel.Content);
 
-                this.TempData[ViewDataConstants.SucccessMessage] = "Your email was submitted successfuly.";
+                this.TempData[ViewDataConstants.SucccessMessage] = "Вашият имейл е изпратен успешно.";
             }
             catch (Exception ex)
             {
-                this.TempData[ViewDataConstants.ErrorMessage] = "Sorry, there was a problem submiting the email.";
+                this.TempData[ViewDataConstants.ErrorMessage] = "Възникна проблем с изпращането на имейла, моля опитайте по-късно.";
                 this.logger.LogError($"Could not submit email.\n--{ex.Message}");
             }
 

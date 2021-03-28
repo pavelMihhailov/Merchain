@@ -24,9 +24,14 @@
                     <span asp-validation-for="Description" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label for="Images">Upload Images</label>
+                    <label for="Images">Снимки на продукта</label>
                     <input type="file" multiple name="Images" class="form-control-file"
                            id="Images" aria-describedby="fileHelp">
+                </div>
+                <div class="form-group">
+                    <label for="PreviewImage">Демо снимка на продукта</label>
+                    <input type="file" name="PreviewImage" class="form-control-file"
+                           id="PreviewImage" aria-describedby="fileHelp">
                 </div>
                 <div class="form-group">
                     <label asp-for="Price" class="control-label"></label>

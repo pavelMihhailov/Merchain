@@ -53,10 +53,21 @@
         }
 
         [HttpGet]
-        public async Task<IActionResult> StatusCheck(Guid guid)
+        public async Task<IActionResult> StatusCheck(string id)
         {
             IEnumerable<OrderInfoViewModel> allOrders = await this.orderService.AllOrders();
-            OrderInfoViewModel orderViewModel = allOrders.FirstOrDefault(x => x.Guid == guid);
+
+            if (!Guid.TryParse(id, out Guid wantedGuid))
+            {
+                return this.RedirectToAction("Index", "Products");
+            }
+
+            OrderInfoViewModel orderViewModel = allOrders.FirstOrDefault(x => x.Guid == wantedGuid);
+
+            if (orderViewModel == null || id.Equals("00000000-0000-0000-0000-000000000000"))
+            {
+                return this.RedirectToAction("Index", "Products");
+            }
 
             return this.View(orderViewModel);
         }
@@ -64,13 +75,21 @@
         [HttpGet]
         public async Task<IActionResult> Details(int id)
         {
-            if (id < 1)
+            if (id < 1 || this.User == null)
             {
-                return this.RedirectToAction("Index");
+                return this.RedirectToAction("Index", "Products");
             }
 
             IEnumerable<OrderInfoViewModel> allOrders = await this.orderService.AllOrders();
             OrderInfoViewModel orderViewModel = allOrders.FirstOrDefault(x => x.OrderId == id);
+
+            ApplicationUser user = await this.userManager.GetUserAsync(this.User);
+            bool isUserAdmin = await this.userManager.IsInRoleAsync(user, GlobalConstants.AdministratorRoleName);
+
+            if (orderViewModel.UserId != user.Id && !isUserAdmin)
+            {
+                return this.RedirectToAction("Index", "Products");
+            }
 
             return this.View(orderViewModel);
         }
