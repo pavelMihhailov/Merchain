@@ -78,20 +78,25 @@
                                 }
                             </div>
                         </div>
-                        <div class="total-cost">
+                    </section>
+                    <div class="card total-sum-box col-lg-4 col-sm-5 mb-4">
+                        <div class="total-cost m-2 text-center">
                             <h6>Общо <span>@Model.SumTotal лв.</span></h6>
                         </div>
-                    </section>
+                    </div>
                 }
             </div>
-            <div class="col-lg-4 card-right">
-                <form class="promo-code-form">
-                    <input type="text" placeholder="Добави Промо Код" name="PromoCode">
-                    <a class="applyPromoCode" href="javascript:;">Добави</a>
-                </form>
-                <a asp-area="" asp-controller="Order" asp-action="Index" class="site-btn checkout-btn">Финализирай Поръчката</a>
-                <a asp-controller="Products" asp-action="Index" class="site-btn sb-dark" id="continue-shopping">Продължи Пазаруването</a>
-            </div>
+            @if (Model.Cart.Any())
+            {
+                <div class="col-lg-4 card-right">
+                    <form class="promo-code-form">
+                        <input type="text" placeholder="Добави Промо Код" name="PromoCode">
+                        <a class="applyPromoCode" href="javascript:;">Добави</a>
+                    </form>
+                    <a asp-area="" asp-controller="Order" asp-action="Index" class="site-btn checkout-btn">Финализирай Поръчката</a>
+                    <a asp-controller="Products" asp-action="Index" class="site-btn sb-dark" id="continue-shopping">Продължи Пазаруването</a>
+                </div>
+            }
         </div>
     </div>
 </section>

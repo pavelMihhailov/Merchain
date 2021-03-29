@@ -11,9 +11,9 @@ proQty.on('click', '.qtybtn-cart', function () {
 		var newVal = parseFloat(oldValue) + 1;
 
 		if ($button.parents('.cart-section').length) {
-            let size = $button.closest("article").find(".size-col").text();
+			let size = $button.closest("article").find(".size-col").text();
 			let colorId = null;
-            let color = $button.closest("article").find(".box")[0];
+			let color = $button.closest("article").find(".box")[0];
 			if (color !== undefined) {
 				colorId = color.id;
 			}
@@ -33,63 +33,57 @@ proQty.on('click', '.qtybtn-cart', function () {
 		// Don't allow decrementing below zero
 		if (oldValue > 1) {
 			var newVal = parseFloat(oldValue) - 1;
+			$button.parent().find('input').val(newVal);
 
-		} else {
-			newVal = 0;
-			$($button.closest("article")).remove();
-			refreshCartItems();
-		}
-
-		if ($button.parents('.cart-section').length) {
-            let size = $button.closest("article").find(".size-col").text();
-			let colorId = null;
-            let color = $button.closest("article").find(".box")[0];
-			if (color !== undefined) {
-				colorId = color.id;
-			}
-
-			$.ajax({
-				type: "GET",
-				url: "/ShoppingCart/DecreaseQuantity",
-				data: { 'id': productId, 'size': size, 'colorId': colorId },
-				success: function () {
+			if ($button.parents('.cart-section').length) {
+				let size = $button.closest("article").find(".size-col").text();
+				let colorId = null;
+				let color = $button.closest("article").find(".box")[0];
+				if (color !== undefined) {
+					colorId = color.id;
 				}
-			});
 
-			refreshCartPrices(productId, false, false);
+				$.ajax({
+					type: "GET",
+					url: "/ShoppingCart/DecreaseQuantity",
+					data: { 'id': productId, 'size': size, 'colorId': colorId },
+					success: function () {
+					}
+				});
+
+				refreshCartPrices(productId, false, false);
+			}
 		}
-
-		$button.parent().find('input').val(newVal);
 	}
 });
 
 $(document).ready(function () {
-    $(".remove-product").on("click", function () {
-        $el = $(this);
+	$(".remove-product").on("click", function () {
+		$el = $(this);
 
-        let productId = $($el.closest("article")).attr("id");
+		let productId = $($el.closest("article")).attr("id");
 
-        //refreshCartPrices(productId, true, false);
+		//refreshCartPrices(productId, true, false);
 
-        let size = $el.closest("article").find(".size-col").text();
-        let colorId = null;
-        let color = $el.closest("article").find(".box")[0];
-        if (color !== undefined) {
-            colorId = color.id;
-        }
+		let size = $el.closest("article").find(".size-col").text();
+		let colorId = null;
+		let color = $el.closest("article").find(".box")[0];
+		if (color !== undefined) {
+			colorId = color.id;
+		}
 
-        $.ajax({
-            type: "GET",
-            url: "/ShoppingCart/RemoveProduct",
-            data: { 'id': productId, 'size': size, 'colorId': colorId },
-            success: function () {
-                location.reload();
-            }
-        });
-    });
+		$.ajax({
+			type: "GET",
+			url: "/ShoppingCart/RemoveProduct",
+			data: { 'id': productId, 'size': size, 'colorId': colorId },
+			success: function () {
+				location.reload();
+			}
+		});
+	});
 
-    $(".applyPromoCode").on("click", function (e) {
-        let promoCodeValue = $($("input[name='PromoCode']")[0]).val();
+	$(".applyPromoCode").on("click", function (e) {
+		let promoCodeValue = $($("input[name='PromoCode']")[0]).val();
 
 		if (promoCodeValue.length) {
 			document.location.href = "/Order?promoCode=" + promoCodeValue;
@@ -97,25 +91,25 @@ $(document).ready(function () {
 		else {
 			e.preventDefault();
 		}
-    });
+	});
 });
 
 function refreshCartPrices(id, isRemoved, increment) {
-    let productRow = $("article[id='" + id + "']")[0];
+	let productRow = $("article[id='" + id + "']")[0];
 
 	let productPriceTag = parseFloat($(productRow).find(".total-col")[0].innerText);
 
-    let totalPriceTag = $(".total-cost").find("span")[0];
-    let totalPriceHtml = totalPriceTag.innerText;
+	let totalPriceTag = $(".total-cost").find("span")[0];
+	let totalPriceHtml = totalPriceTag.innerText;
 
-    let totalPrice = parseFloat(totalPriceHtml.substring(0, totalPriceHtml.length - 3));
+	let totalPrice = parseFloat(totalPriceHtml.substring(0, totalPriceHtml.length - 3));
 
-    if (increment) {
-        totalPrice += productPriceTag;
-    }
-    else {
-        totalPrice -= productPriceTag;
-    }
+	if (increment) {
+		totalPrice += productPriceTag;
+	}
+	else {
+		totalPrice -= productPriceTag;
+	}
 
-    $(totalPriceTag).html(totalPrice.toFixed(2) + " лв.");
+	$(totalPriceTag).html(totalPrice.toFixed(2) + " лв.");
 }

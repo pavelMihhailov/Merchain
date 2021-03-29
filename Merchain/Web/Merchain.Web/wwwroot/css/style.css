@@ -89,8 +89,8 @@ ol {
 }
 
 .spad {
-    padding-top: 105px;
-    padding-bottom: 105px;
+    padding-top: 85px;
+    padding-bottom: 90px;
 }
 
 .text-white h1,
@@ -1016,7 +1016,7 @@ ol {
 ------------------*/
 
 .filter-widget {
-    margin-bottom: 100px;
+    margin-bottom: 63px;
 }
 
     .filter-widget .fw-title {
@@ -1024,7 +1024,8 @@ ol {
         font-weight: 700;
         color: #414141;
         text-transform: uppercase;
-        margin-bottom: 45px;
+        text-align: center;
+        margin-bottom: 18px;
     }
 
 .category-menu {
@@ -1035,6 +1036,7 @@ ol {
         display: block;
         position: relative;
         font-size: 15px;
+        text-align: center;
         color: #414141;
         border-bottom: 1px solid #ebebeb;
         padding: 12px 0 5px 20px;
@@ -1042,17 +1044,6 @@ ol {
 
         .category-menu li a span {
             float: right;
-        }
-
-        .category-menu li a:after {
-            position: absolute;
-            content: "";
-            width: 9px;
-            height: 9px;
-            left: 0;
-            top: 19px;
-            border: 1px solid #f51167;
-            border-radius: 50%;
         }
 
         .category-menu li a:hover {
@@ -1070,11 +1061,6 @@ ol {
         .category-menu li a.is-active {
             color: #f51167;
         }
-
-            .category-menu li a.is-active:after {
-                background: #f51167;
-                color: #f51167;
-            }
 
     .category-menu li .sub-menu {
         list-style: none;
@@ -1386,27 +1372,27 @@ ol {
     }
 
     .quantity .pro-qty {
-        width: 94px;
+        width: 100px;
         height: 36px;
         border: 1px solid #ddd;
-        padding: 0 15px;
         border-radius: 40px;
         float: left;
     }
 
         .quantity .pro-qty .qtybtn {
-            width: 15px;
+            width: 38px;
             display: block;
             float: left;
-            line-height: 36px;
+            line-height: 34px;
             cursor: pointer;
             text-align: center;
             font-size: 18px;
             color: #404040;
+            margin-left: 3px;
         }
 
         .quantity .pro-qty input {
-            width: 28px;
+            width: 15px;
             float: left;
             border: none;
             height: 36px;
@@ -1763,10 +1749,17 @@ ol {
     min-height: 58px;
 }
 
+.total-sum-box {
+    box-shadow: 3px 3px 2px #e3e3e3;
+    float: right;
+    border-radius: 5px;
+}
+
 .checkout-cart {
     background: #f0f0f0;
     padding: 40px 24px 30px;
     border-radius: 25px;
+    box-shadow: 3px 3px 2px #e3e3e3;
 }
 
     .checkout-cart h3 {
@@ -1931,7 +1924,7 @@ ol {
         left: 0;
         top: 0;
         text-align: center;
-        padding-top: 20px;
+        padding-top: 7px;
     }
 
         .product-slider .owl-nav button.owl-prev,
@@ -1959,6 +1952,10 @@ ol {
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
     .site-logo {
+    }
+
+    .spad {
+        padding-top: 53px;
     }
 
     .header-search-form {
@@ -2025,6 +2022,10 @@ ol {
 @media only screen and (max-width: 767px) {
     .site-logo {
         margin-bottom: 20px;
+    }
+
+    .spad {
+        padding-top: 53px;
     }
 
     .header-search-form {
@@ -2177,7 +2178,7 @@ table tbody td {
 
 .pagination-wrapper {
     text-align: center;
-    margin: 40px 0;
+    margin-bottom: 40px;
 }
 
 .pagination {
@@ -2189,7 +2190,7 @@ table tbody td {
 }
 
 .category-section {
-    padding-top: 20px;
+    padding-top: 33px;
     padding-bottom: 20px;
 }
 
