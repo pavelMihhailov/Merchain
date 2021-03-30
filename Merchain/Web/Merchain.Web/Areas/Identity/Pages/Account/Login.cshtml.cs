@@ -43,14 +43,17 @@ namespace Merchain.Web.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required]
+            [Required(ErrorMessage = "Името е задължително.")]
+            [Display(Name = "Име На Акаунта")]
             public string Username { get; set; }
 
-            [Required]
+            [Required(ErrorMessage = "Паролата е задължителна.")]
+            [StringLength(100, ErrorMessage = "{0} трябва да бъде от {2} до {1} символа.", MinimumLength = 6)]
             [DataType(DataType.Password)]
+            [Display(Name = "Парола")]
             public string Password { get; set; }
 
-            [Display(Name = "Запомни данните")]
+            [Display(Name = "Запомни ме")]
             public bool RememberMe { get; set; }
         }
 

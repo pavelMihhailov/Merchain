@@ -13,18 +13,18 @@
                     'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
         })(window, document, 'script', 'dataLayer', 'GTM-P72KF7P');</script>
     <!-- End Google Tag Manager -->
-    <title>@this.ViewData["Title"] - @GlobalConstants.SystemName</title>
+    <title>@this.ViewData[ViewDataConstants.Title]</title>
     <meta charset="UTF-8">
-    <meta name="description" content="Coding Life">
-    <meta name="keywords" content="coding, eCommerce, t-shirts, hoodies">
+    <meta name="description" content="@this.ViewData[ViewDataConstants.Description]">
+    <meta name="keywords" content="@this.ViewData[ViewDataConstants.Keywords]">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="preload" as="style" onload="this.rel='stylesheet'"  asp-append-version="true" />
+    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="preload" as="style" onload="this.rel='stylesheet'" asp-append-version="true" />
     <link href="~/css/font-awesome.min.css" rel="preload" as="style" onload="this.rel='stylesheet'" />
     <link rel="stylesheet" href="~/css/flaticon.css" />
     <link rel="stylesheet" href="~/css/slicknav.min.css" />
-    <link href="~/css/main.css" rel="preload" as="style" onload="this.rel='stylesheet'"/>
-    <link href="~/css/style.css" rel="preload" as="style" onload="this.rel='stylesheet'"/>
+    <link href="~/css/main.css" rel="preload" as="style" onload="this.rel='stylesheet'" />
+    <link href="~/css/style.css" rel="stylesheet" />
     @RenderSection("Styles", required: false)
 
     <link rel="preload" href="https://fonts.googleapis.com/css?family=Josefin+Sans:300,300i,400,400i,700,700i"
@@ -46,9 +46,9 @@
         <div class="header-top">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-2 pb-1 text-center text-lg-left mobile-none">
+                    <div class="col-lg-2 p-1 text-center text-lg-left mobile-none">
                         <a asp-area="" asp-controller="Home" asp-action="Index" class="site-logo">
-                            <img src="~/img/coding-life-logo.png" alt="" width="147" height="52">
+                            <img src="~/img/coding-life-logo-white.png" alt="" width="147" height="52">
                         </a>
                     </div>
                     <div class="col-xl-5 col-lg-4">
@@ -61,14 +61,14 @@
                             {
                                 <div class="up-item ml-2">
                                     <div class="shopping-card">
-                                        <i class="flaticon-bag"></i>
+                                        <i class="flaticon-bag text-white"></i>
                                         <span>0</span>
                                     </div>
                                     <a asp-area="" asp-controller="ShoppingCart" asp-action="Index">Количка</a>
                                 </div>
                                 <div class="up-item ml-2">
                                     <div class="pointer">
-                                        <i class="flaticon-heart"></i>
+                                        <i class="flaticon-heart text-white"></i>
                                         <a asp-area="" asp-controller="Products" asp-action="WishList">Харесани</a>
                                     </div>
                                 </div>
@@ -78,7 +78,7 @@
                                 <div class="up-item">
                                     <form asp-area="Identity" asp-page="/Account/Logout"
                                           asp-route-returnUrl="@(this.Url.Action("Index", "Home", new { area = string.Empty }))">
-                                        <button type="submit" class="nav-link btn btn-link text-dark">Излез</button>
+                                        <button type="submit" class="nav-link btn">Излез</button>
                                     </form>
                                 </div>
                             }
@@ -117,7 +117,9 @@
                 <h1>Продуктът е добавен във Вашата количка!</h1>
             </div>
         </div>
-        <button onclick="topFunction()" class="topBtn" title="Go to top">Top</button>
+        <button onclick="topFunction()" class="topBtn" title="Go to top">
+            <i class="flaticon-up-arrow"></i>
+        </button>
     </main>
     <partial name="_Footer" />
 

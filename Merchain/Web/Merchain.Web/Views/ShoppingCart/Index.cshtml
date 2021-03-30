@@ -48,7 +48,10 @@
                                                                 <p class="mb-2 text-muted text-uppercase small">Цвят: </p>
                                                                 <div id="@item.Color.Id" class="box" style="background-color: @item.Color?.Value"></div>
                                                             }
-                                                            <p class="mb-3 text-muted text-uppercase small">Размер: <span class="size-col">@item.Size</span></p>
+                                                            @if (product.HasSize)
+                                                            {
+                                                                <p class="mb-3 text-muted text-uppercase small">Размер: <span class="size-col">@item.Size</span></p>
+                                                            }
                                                         </div>
                                                         <div>
                                                             <div class="def-number-input number-input safari_only mb-0 w-100">

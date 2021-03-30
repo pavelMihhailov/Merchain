@@ -239,8 +239,16 @@ ol {
         margin-bottom: 0;
     }
 
-/* Accordion */
+.header-top {
+    background-color: #222;
+}
 
+.pink-btn {
+    background-color: #f51167;
+    color: black;
+}
+
+/* Accordion */
 .accordion-area {
     margin-top: 50px;
     border-top: 2px solid #e1e1e1;
@@ -358,7 +366,7 @@ ol {
     }
 
 .user-panel {
-    padding-top: 11px;
+    padding-top: 14px;
 }
 
     .user-panel .up-item {
@@ -372,7 +380,11 @@ ol {
 
         .user-panel .up-item a {
             font-size: 14px;
-            color: #000;
+            color: white;
+        }
+
+        .user-panel .up-item button {
+            color: white;
         }
 
 .shopping-card {
@@ -395,10 +407,11 @@ ol {
     }
 
 .main-navbar {
-    background: #282828;
+    background: #444;
     box-shadow: 0 10px 13px 1px rgb(0 0 0 / 26%);
     justify-content: center;
-    display: grid;
+    display: flex;
+    align-items: center;
 }
 
 .arrow-pagination {
@@ -1571,7 +1584,7 @@ ol {
     margin-bottom: 14px;
     width: 100%;
     min-height: 57px;
-    padding: 23px 47px 14px;
+    padding: 19px 40px 13px;
 }
 
 .promo-code-form {
@@ -1839,10 +1852,7 @@ ol {
 }
 
 .contact-social {
-    display: -ms-flex;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
+    display: block;
     margin-bottom: 85px;
     padding-top: 20px;
 }
@@ -1882,7 +1892,7 @@ ol {
     border: none;
     padding: 0 18px;
     background: #f0f0f0;
-    border-radius: 40px;
+    border-radius: 5px;
     margin-bottom: 17px;
     font-size: 14px;
 }
@@ -1945,6 +1955,18 @@ ol {
 
     .social-links a {
         margin-right: 20px;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .main-navbar .container {
+        width: auto;
+    }
+}
+
+@media only screen and (max-width: 991px) {
+    .header-top {
+        padding-bottom: 9px;
     }
 }
 
@@ -2045,7 +2067,6 @@ ol {
     }
 
     .slicknav_menu {
-        background: #282828;
         display: block;
     }
 
@@ -2300,7 +2321,7 @@ table tbody td {
 }
 
 .econt-dropdown {
-    border-radius: 30px;
+    border-radius: 6px;
     height: 30px;
     text-align: center;
 }

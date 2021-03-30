@@ -14,8 +14,8 @@ $(window).on('load', function () {
 	--------------------*/
 	$('.main-menu').slicknav({
 		prependTo: '.main-navbar .container',
-		closedSymbol: '<i class="flaticon-right-arrow"></i>',
-		openedSymbol: '<i class="flaticon-down-arrow"></i>'
+		closedSymbol: '<i class="flaticon-down-arrow"></i>',
+		openedSymbol: '<i class="flaticon-up-arrow"></i>'
 	});
 
 	/*------------------

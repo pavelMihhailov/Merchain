@@ -7,13 +7,13 @@
 @if (this.SignInManager.IsSignedIn(this.User))
 {
     <div class="up-item">
-        <i class="flaticon-profile"></i>
+        <i class="flaticon-profile text-white"></i>
         <a asp-area="Identity" asp-page="/Account/Manage/Index">Здравей, @(this.User.Identity.Name)!</a>
     </div>
     if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
     {
         <div class="up-item ml-2">
-            <i class="flaticon-profile"></i>
+            <i class="flaticon-profile text-white"></i>
             <a asp-area="Administration" asp-controller="Dashboard" asp-action="Index">Админ</a>
         </div>
     }
@@ -21,7 +21,7 @@
 else
 {
     <div class="up-item ml-2">
-        <i class="flaticon-profile"></i>
-        <a asp-area="Identity" asp-page="/Account/Login">Влез</a> или <a asp-area="Identity" asp-page="/Account/Register">Създай Акаунт</a>
+        <i class="flaticon-profile text-white"></i>
+        <a asp-area="Identity" asp-page="/Account/Login">Влез</a> <span class="p-1 text-white">или</span> <a asp-area="Identity" asp-page="/Account/Register">Създай Акаунт</a>
     </div>
 }
