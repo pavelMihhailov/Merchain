@@ -163,22 +163,35 @@
                     }
 
                     this.cartService.EmptyCart(this.HttpContext.Session);
-                    this.TempData[ViewDataConstants.SucccessMessage] = "Поръчката Ви беше приета успешно.";
                 }
                 else
                 {
                     throw new InvalidOperationException();
                 }
 
-                return this.RedirectToAction("Index", "Home");
+                this.TempData[ViewDataConstants.FromOrderPage] = true;
+
+                return this.RedirectToAction("ThankYou");
             }
             catch (Exception ex)
             {
                 this.logger.LogCritical($"Could not complete the order!!!\n{ex.Message}");
                 this.TempData[ViewDataConstants.ErrorMessage] = "Възникна проблем при обработването на вашата поръчка. Моля опитайте отново.";
 
+                return this.RedirectToAction("Index");
+            }
+        }
+
+        public IActionResult ThankYou()
+        {
+            object fromOrderPage = this.TempData[ViewDataConstants.FromOrderPage];
+
+            if (string.IsNullOrWhiteSpace(fromOrderPage?.ToString()))
+            {
                 return this.RedirectToAction("Index", "Home");
             }
+
+            return this.View();
         }
 
         private bool ApplyPromoCodeValid(string promoCode, OrderViewModel viewModel)

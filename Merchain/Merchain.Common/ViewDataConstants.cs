@@ -11,5 +11,7 @@
         public const string Description = "Description";
 
         public const string Keywords = "Keywords";
+
+        public const string FromOrderPage = "FromOrderPage";
     }
 }

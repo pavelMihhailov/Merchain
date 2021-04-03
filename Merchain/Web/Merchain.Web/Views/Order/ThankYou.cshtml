@@ -1,0 +1,28 @@
+﻿@{
+    this.ViewData["Title"] = "Успешна Поръчка";
+}
+
+<div class="thank-you-container text-center">
+    <img id="consoleApp" src="~/img/console-app.png" />
+    <img id="compiledApp" class="d-none" src="~/img/compiled-app.png" />
+
+    <h2 id="compileText" class="m-2">Цъкни бутона за да компилираш кода</h2>
+    <button type="button" class="btn btn-dark m-2" id="compileBtn">Компилирай</button>
+    <br />
+    <a id="back-home-btn" class="btn btn-dark m-3 d-none"
+       asp-area="" asp-controller="Home" asp-action="Index">
+        Върни се на началната страница
+    </a>
+</div>
+
+@section Scripts {
+    <script>
+        $("#compileBtn").on("click", function () {
+            $("#consoleApp").hide();
+            $("#compileText").hide();
+            $("#compileBtn").hide();
+            $("#compiledApp").removeClass("d-none");
+            $("#back-home-btn").removeClass("d-none");
+        });
+    </script>
+}
