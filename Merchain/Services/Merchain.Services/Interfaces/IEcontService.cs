@@ -10,5 +10,7 @@
         Task<IQueryable<Office>> GetOffices();
 
         Task<Office> GetOffice(string officeCode);
+
+        Task<bool> ValidateAddress(string city, string address, string otherAddress);
     }
 }

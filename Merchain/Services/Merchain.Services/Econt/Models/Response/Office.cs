@@ -31,7 +31,7 @@
         public string SimpleAddress { get; set; }
 
         [XmlElement("address_details")]
-        public Address Address { get; set; }
+        public OfficeAddress Address { get; set; }
 
         [XmlElement("office_details")]
         public Shipping Shipping { get; set; }

@@ -7,11 +7,9 @@
         public bool ShipToOffice { get; set; }
 
         [Display(Name = "* Населено Място")]
-        [Required(ErrorMessage = "Населеното място е задължително.")]
         public string Country { get; set; }
 
         [Display(Name = "* Адрес")]
-        [Required(ErrorMessage = "Първото име е задължително.")]
         public string Address { get; set; }
 
         [Display(Name = "Допълнителен Адрес")]

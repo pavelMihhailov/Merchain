@@ -4,7 +4,7 @@
     using System.Xml.Serialization;
 
     [Serializable]
-    public class Address
+    public class OfficeAddress
     {
         [XmlElement("id_quarter")]
         public string QuarterId { get; set; }

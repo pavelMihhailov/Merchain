@@ -131,9 +131,19 @@
         }
 
         [HttpPost]
-        public async Task<IActionResult> MakeOrder(MakeOrderInputModel inputModel, OrderAddress addressModel)
+        public async Task<IActionResult> MakeOrder(MakeOrderInputModel inputModel)
         {
-            if (!this.ModelState.IsValid)
+            var addressModel = inputModel.OrderAddress;
+
+            bool validAddress = true;
+
+            if (!addressModel.ShipToOffice)
+            {
+                await this.econtService.ValidateAddress(
+                       addressModel.Country, addressModel.Address, addressModel.Address2);
+            }
+
+            if (!this.ModelState.IsValid || !validAddress)
             {
                 this.TempData[ViewDataConstants.ErrorMessage] = "Попълнените данни не бяха правилни. Моля опитайте отново.";
 
