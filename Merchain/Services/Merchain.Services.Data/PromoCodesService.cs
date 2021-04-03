@@ -27,7 +27,7 @@
 
         public IEnumerable<PromoCode> GetAllUnused()
         {
-            return this.promoCodesRepo.All().Where(x => !x.IsUsed);
+            return this.promoCodesRepo.All().Where(x => !x.IsUsed && x.ValidUntil >= DateTime.UtcNow);
         }
 
         public async Task<PromoCode> GetByIdAsync(int id)
@@ -35,10 +35,10 @@
             return await this.promoCodesRepo.GetById(id);
         }
 
-        public PromoCode GetByCodeAsync(string forUserId, string code)
+        public PromoCode GetByCodeAsync(string code)
         {
             var promoCode = this.promoCodesRepo.All()
-                .FirstOrDefault(x => x.UserId == forUserId && x.Code == code && !x.IsUsed);
+                .FirstOrDefault(x => x.Code == code && !x.IsUsed && x.ValidUntil >= DateTime.UtcNow);
 
             return promoCode;
         }

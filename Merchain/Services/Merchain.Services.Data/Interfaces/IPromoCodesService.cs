@@ -10,7 +10,7 @@
     {
         Task<PromoCode> GetByIdAsync(int id);
 
-        PromoCode GetByCodeAsync(string forUserId, string code);
+        PromoCode GetByCodeAsync(string code);
 
         IEnumerable<T> GetAllOfUserId<T>(string userId);
 

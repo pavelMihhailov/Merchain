@@ -30,7 +30,7 @@
         {
             this.HandlePopupMessages();
 
-            return this.View();
+            return this.View(new EmailInputModel());
         }
 
         [HttpPost]

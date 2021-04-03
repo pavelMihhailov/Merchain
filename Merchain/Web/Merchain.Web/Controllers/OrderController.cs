@@ -97,6 +97,15 @@
         [HttpGet]
         public async Task<IActionResult> Index(string promoCode)
         {
+            var viewModel = new OrderViewModel();
+
+            if (!string.IsNullOrWhiteSpace(promoCode) && !this.ApplyPromoCodeValid(promoCode, viewModel))
+            {
+                this.TempData[ViewDataConstants.ErrorMessage] = "Въведеният от вас промо код не е валиден.";
+
+                return this.RedirectToAction("Index", "ShoppingCart");
+            }
+
             var cartItems = SessionExtension.Get<List<CartItem>>(this.HttpContext.Session, SessionConstants.Cart);
 
             if (cartItems == null || !cartItems.Any())
@@ -112,19 +121,11 @@
                 user = await this.userManager.FindByNameAsync(this.User.Identity.Name);
             }
 
-            var viewModel = new OrderViewModel()
-            {
-                CartItems = cartItems,
-                Total = cartItems.Sum(x => x.Product.Price * x.Quantity),
-                UserHasAddressByDefault = this.UserHasDefaultAddress(user),
-            };
+            viewModel.CartItems = cartItems;
+            viewModel.Total = cartItems.Sum(x => x.Product.Price * x.Quantity);
+            viewModel.UserHasAddressByDefault = this.UserHasDefaultAddress(user);
 
             await this.AddEcontOffices(viewModel);
-
-            if (!string.IsNullOrWhiteSpace(promoCode))
-            {
-                this.ApplyPromoCode(promoCode, viewModel, user.Id);
-            }
 
             return this.View(viewModel);
         }
@@ -146,7 +147,7 @@
 
                 if (success)
                 {
-                    if (inputModel.PromoCodeId != null)
+                    if (inputModel.PromoCodeId != null && username != null)
                     {
                         await this.promoCodesService.MarkAsUsed((int)inputModel.PromoCodeId);
                     }
@@ -170,14 +171,20 @@
             }
         }
 
-        private void ApplyPromoCode(string promoCode, OrderViewModel viewModel, string userId)
+        private bool ApplyPromoCodeValid(string promoCode, OrderViewModel viewModel)
         {
-            var promoCodeFromDb = this.promoCodesService.GetByCodeAsync(userId, promoCode);
+            var promoCodeFromDb = this.promoCodesService.GetByCodeAsync(promoCode);
             if (promoCodeFromDb != null)
             {
-                viewModel.Total -= Math.Round(viewModel.Total * promoCodeFromDb.PercentageDiscount / 100, 2);
+                decimal discount = Math.Round(viewModel.Total * promoCodeFromDb.PercentageDiscount / 100, 2);
+                viewModel.Discount = discount;
+                viewModel.Total -= discount;
                 viewModel.AppliedPromoCode = promoCodeFromDb;
+
+                return true;
             }
+
+            return false;
         }
 
         private bool UserHasDefaultAddress(ApplicationUser user)

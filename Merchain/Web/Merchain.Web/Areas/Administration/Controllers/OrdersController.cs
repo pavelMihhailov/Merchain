@@ -67,6 +67,8 @@
                 return this.RedirectToAction("Index");
             }
 
+            this.HandlePopupMessages();
+
             var allOrders = await this.orderService.AllOrders();
             var orderViewModel = allOrders.FirstOrDefault(x => x.OrderId == id);
 
@@ -86,7 +88,7 @@
             order.Status = markedAs;
             await this.orderService.UpdateOrder(order);
 
-            this.TempData[ViewDataConstants.SucccessMessage] = "Order status has been updated.";
+            this.TempData[ViewDataConstants.SucccessMessage] = "Статуса на поръчката беше ъпдейтнат.";
 
             return this.RedirectToAction("Details", new { id });
         }

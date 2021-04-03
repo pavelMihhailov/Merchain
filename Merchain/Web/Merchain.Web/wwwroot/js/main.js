@@ -18,6 +18,16 @@ $(window).on('load', function () {
 		openedSymbol: '<i class="flaticon-up-arrow"></i>'
 	});
 
+	$('<img/>').attr({
+		src: '/img/coding-life-logo-white.png',
+		alt: '',
+		width: 147,
+		height: 52,
+		style: 'margin: auto'
+	}).prependTo(".slicknav_menu");
+
+	$($(".slicknav_nav").detach()).appendTo(".main-navbar .container");
+
 	/*------------------
 		Category menu
 	--------------------*/

@@ -6,24 +6,33 @@
     {
         public bool ShipToOffice { get; set; }
 
+        [Display(Name = "* Населено Място")]
+        [Required(ErrorMessage = "Населеното място е задължително.")]
         public string Country { get; set; }
 
+        [Display(Name = "* Адрес")]
+        [Required(ErrorMessage = "Първото име е задължително.")]
         public string Address { get; set; }
 
+        [Display(Name = "Допълнителен Адрес")]
         public string Address2 { get; set; }
 
         public string OfficeIdSelected { get; set; }
 
-        [Required]
+        [Display(Name = "* Име")]
+        [Required(ErrorMessage = "Името е задължително.")]
         public string FirstName { get; set; }
 
-        [Required]
+        [Display(Name = "* Фамилия")]
+        [Required(ErrorMessage = "Фамилията е задължителна.")]
         public string LastName { get; set; }
 
-        [Required]
+        [Display(Name = "* Телефон")]
+        [Required(ErrorMessage = "Телефонът е задължителен.")]
         public string Phone { get; set; }
 
-        [EmailAddress]
+        [Display(Name = "* Имейл Адрес")]
+        [EmailAddress(ErrorMessage = "Имейл адресът е задължителен.")]
         public string Email { get; set; }
     }
 }

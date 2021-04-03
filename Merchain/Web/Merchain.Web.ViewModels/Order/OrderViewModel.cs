@@ -1,6 +1,7 @@
 ﻿namespace Merchain.Web.ViewModels.Order
 {
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     using System.Linq;
 
     using Merchain.Data.Models;
@@ -19,11 +20,15 @@
 
         public decimal Total { get; set; }
 
+        public decimal Discount { get; set; }
+
         public PromoCode AppliedPromoCode { get; set; }
 
         public bool UserHasAddressByDefault { get; set; }
 
         public string SelectedOffice { get; set; }
+
+        public OrderAddress OrderAddress { get; set; }
 
         public IQueryable<OfficeViewModel> Offices { get; set; }
 

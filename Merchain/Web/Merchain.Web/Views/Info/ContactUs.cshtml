@@ -1,4 +1,7 @@
-﻿@{
+﻿@using Merchain.Web.ViewModels.Email
+
+@model EmailInputModel
+@{
     this.ViewData["Title"] = "Контакти";
 }
 
@@ -27,10 +30,10 @@
             <div class="col-lg-5 contact-info mb-3">
                 <h3>Пишете ни имейл</h3>
                 <form method="post" class="contact-form" asp-controller="Info" asp-action="SendEmailToUs">
-                    <input type="text" name="Name" placeholder="Вашето Име">
-                    <input type="text" name="Email" placeholder="Вашият Имейл">
-                    <input type="text" name="Subject" placeholder="Относно">
-                    <textarea name="Content" placeholder="Съобщение"></textarea>
+                    <input type="text" asp-for="Email" placeholder="Вашето Име">
+                    <input type="email" asp-for="Email" placeholder="Вашият Имейл">
+                    <input type="text" asp-for="Subject" placeholder="Относно">
+                    <textarea asp-for="Content" placeholder="Съобщение"></textarea>
                     <button class="site-btn" type="submit">Изпрати</button>
                 </form>
             </div>

@@ -59,18 +59,23 @@
                         </div>
                     </div>
                     <div class="cf-title">*Информация за доставка</div>
+
                     <div class="row user-info input-fields pl-3 pr-3">
                         <div class="col-md-6">
-                            <input type="text" required placeholder="Име" name="FirstName">
+                            <input asp-for="OrderAddress.FirstName" placeholder="* Име">
+                            <span asp-validation-for="OrderAddress.FirstName" class="text-danger"></span>
                         </div>
                         <div class="col-md-6">
-                            <input type="text" required placeholder="Фамилия" name="LastName">
+                            <input asp-for="OrderAddress.LastName" placeholder="* Фамилия">
+                            <span asp-validation-for="OrderAddress.LastName" class="text-danger"></span>
                         </div>
                         <div class="col-md-6">
-                            <input type="text" required placeholder="Телефон" name="Phone">
+                            <input asp-for="OrderAddress.Phone" placeholder="* Телефон">
+                            <span asp-validation-for="OrderAddress.Phone" class="text-danger"></span>
                         </div>
                         <div class="col-md-6">
-                            <input type="email" required placeholder="Имейл" name="Email">
+                            <input asp-for="OrderAddress.Email" placeholder="Имейл">
+                            <span asp-validation-for="OrderAddress.Email" class="text-danger"></span>
                         </div>
                     </div>
                     @for (int i = 0; i < Model.CartItems.Count; i++)
@@ -103,7 +108,7 @@
                         {
                             <li>
                                 <div class="pl-thumb">
-                                    <img src="@item.Product.ImagesUrls.Split(';')[0]" alt="@item.Product.Name">
+                                    <img src="@item.Product.PreviewImage" alt="@item.Product.Name">
                                 </div>
                                 <h6>@item.Product.Name <p style="color: red">x @item.Quantity</p></h6>
                                 <p>@item.Product.Price лв.</p>
@@ -113,9 +118,13 @@
                     <ul class="price-list">
                         @if (Model.AppliedPromoCode != null)
                         {
-                            <li>Приложен Промо Код: <strong>@Model.AppliedPromoCode.PercentageDiscount% Отстъпка</strong></li>
+                            <li>Промо Код: <strong>@Model.AppliedPromoCode.Code</strong></li>
+                            <hr />
+                            <li>Междинна сума: <span>лв.</span><strong>@(Model.Discount + Model.Total)</strong></li>
+                            <li>Отстъпка: <span>лв.</span><strong>-@Model.Discount</strong></li>
+                            <hr />
                         }
-                        <li class="total">Общо <span>@Model.Total лв.</span></li>
+                        <li class="total">Крайна сума: <span>@Model.Total лв.</span></li>
                     </ul>
                 </div>
             </div>

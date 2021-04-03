@@ -13,7 +13,7 @@
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Logging;
 
-    public class ShoppingCartController : Controller
+    public class ShoppingCartController : BaseController
     {
         private readonly ICartService cartService;
         private readonly IProductsService productsService;
@@ -48,6 +48,7 @@
             };
 
             this.ViewData[ViewDataConstants.ErrorMessage] = this.TempData[ViewDataConstants.ErrorMessage];
+            this.HandlePopupMessages();
 
             return this.View(viewModel);
         }
