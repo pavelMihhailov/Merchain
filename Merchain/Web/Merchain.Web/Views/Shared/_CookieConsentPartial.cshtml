@@ -1,25 +1,21 @@
 ﻿@using Microsoft.AspNetCore.Http.Features
 
 @{
-    var consentFeature = this.Context.Features.Get<ITrackingConsentFeature>();
-    var showBanner = !consentFeature?.CanTrack ?? false;
-    var cookieString = consentFeature?.CreateConsentCookie();
+    ITrackingConsentFeature consentFeature = this.Context.Features.Get<ITrackingConsentFeature>();
+    bool showBanner = !consentFeature?.CanTrack ?? false;
+    string cookieString = consentFeature?.CreateConsentCookie();
 }
 
 @if (showBanner)
 {
-    <div id="cookieConsent" class="alert alert-info alert-dismissible fade show" role="alert">
-        Използваме бисквитки, за да подобряваме вашето преживяване в сайта. <a asp-area="" asp-controller="Home" asp-action="Privacy">Научи Повече</a>.
-        <button type="button" class="accept-policy close" data-dismiss="alert" aria-label="Close" data-cookie-string="@cookieString">
-            <span aria-hidden="true">Приемам</span>
-        </button>
+    <div id="cookieConsent" class="cookie-banner cookie-float cc-theme-classic cc-bottom cc-right" data-cookie-string="@cookieString">
+        <span class="cc-message">
+            Използваме бисквитки, за да подобряваме вашето преживяване в сайта.
+            С използването му, вие се съгласявате с нашата <a asp-area="" asp-controller="Home" asp-action="Privacy" onclick="hideCookieBanner()">Политика за бисквитки</a>.
+        </span>
+        <div class="cookie-complience cookie-highlight">
+            <a asp-area="" asp-controller="Home" asp-action="Privacy" class="cookie-btn cc-dismiss" onclick="hideCookieBanner()">Научете Повече</a>
+            <a href="#" class="cookie-btn cc-save cookie-accept" onclick="hideCookieBanner()">Приемам</a>
+        </div>
     </div>
-    <script>
-        (function () {
-            var button = document.querySelector("#cookieConsent button[data-cookie-string]");
-            button.addEventListener("click", function () {
-                document.cookie = button.dataset.cookieString;
-            }, false);
-        })();
-    </script>
 }

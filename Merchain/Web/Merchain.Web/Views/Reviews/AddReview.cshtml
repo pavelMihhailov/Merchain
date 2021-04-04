@@ -29,41 +29,41 @@
                         <div class="cfr-item">
                             <input asp-for="Stars" type="radio" id="oneStar" value="1">
                             <label for="oneStar">
-                                <i class="fa fa-star-o"></i>
+                                <i class="fa fa-star"></i>
                             </label>
                         </div>
                         <div class="cfr-item">
                             <input asp-for="Stars" type="radio" id="twoStars" value="2">
                             <label for="twoStars">
-                                <i class="fa fa-star-o"></i>
-                                <i class="fa fa-star-o"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
                             </label>
                         </div>
                         <div class="cfr-item">
                             <input asp-for="Stars" type="radio" id="threeStars" value="3">
                             <label for="threeStars">
-                                <i class="fa fa-star-o"></i>
-                                <i class="fa fa-star-o"></i>
-                                <i class="fa fa-star-o"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
                             </label>
                         </div>
                         <div class="cfr-item">
                             <input asp-for="Stars" type="radio" id="fourStars" value="4">
                             <label for="fourStars">
-                                <i class="fa fa-star-o"></i>
-                                <i class="fa fa-star-o"></i>
-                                <i class="fa fa-star-o"></i>
-                                <i class="fa fa-star-o"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
                             </label>
                         </div>
                         <div class="cfr-item">
                             <input asp-for="Stars" type="radio" id="fiveStars" value="5">
                             <label for="fiveStars">
-                                <i class="fa fa-star-o"></i>
-                                <i class="fa fa-star-o"></i>
-                                <i class="fa fa-star-o"></i>
-                                <i class="fa fa-star-o"></i>
-                                <i class="fa fa-star-o"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
                             </label>
                         </div>
                         <span asp-validation-for="Stars" class="text-danger"></span>
@@ -80,3 +80,7 @@
         </form>
     </div>
 </div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

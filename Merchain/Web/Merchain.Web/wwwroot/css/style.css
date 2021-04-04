@@ -1,7 +1,12 @@
+@font-face {
+    font-family: NotoSans;
+    src: url('../fonts/NotoSansTC-Regular.otf'), url('../fonts/NotoSansTC-Bold.otf');
+}
+
 html,
 body {
     height: 100%;
-    font-family: cursive;
+    font-family: NotoSans, sans-serif;
     -webkit-font-smoothing: antialiased;
     font-smoothing: antialiased;
 }
@@ -1016,6 +1021,7 @@ ol {
     font-size: 10px;
     font-weight: 600;
     color: #414141;
+    word-spacing: 2px;
 }
 
     .site-pagination a {
@@ -1259,7 +1265,7 @@ ol {
     }
 
 .product-details .p-title {
-    font-size: 18px;
+    font-size: 24px;
     font-weight: 700;
     color: #414141;
     text-transform: uppercase;
@@ -1268,7 +1274,7 @@ ol {
 
 .product-details .p-price {
     font-size: 24px;
-    color: #414141;
+    color: #f51167;
     font-weight: 700;
     margin-bottom: 20px;
 }
@@ -1926,6 +1932,133 @@ ol {
         height: 100%;
     }
 
+
+.cookie-banner {
+    opacity: 1;
+    transition: opacity 1s ease;
+    text-align: center;
+    position: fixed;
+    overflow: hidden;
+    box-sizing: border-box;
+    font-family: Montserrat,sans-serif;
+    font-size: 16px;
+    line-height: 1.5em;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+    z-index: 9999;
+    color: rgb(0, 0, 0);
+    background-color: rgb(239, 239, 239);
+    box-shadow: 0 .5rem 1rem rgba(5,0,3,0.35);
+}
+
+    .cookie-banner.cookie-float {
+        padding: 2em;
+        max-width: 24em;
+        -ms-flex-direction: column;
+        flex-direction: column;
+    }
+
+.cookie-btn {
+    display: block;
+    color: rgb(255, 255, 255);
+    border-color: #222;
+    background-color: #222;
+    padding: .4em .8em;
+    font-size: .9em;
+    font-weight: 700;
+    border-width: 2px;
+    border-style: solid;
+    text-align: center;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+    .cookie-btn:hover, .cookie-btn:focus {
+        background-color: #444;
+    }
+
+.cookie-highlight .cookie-btn:first-child:focus, .cookie-highlight .cookie-btn:first-child:hover {
+    text-decoration: underline;
+}
+
+.cc-right {
+    right: 1em;
+}
+
+.cc-bottom {
+    bottom: 1em;
+}
+
+.cookie-float .cc-message {
+    display: block;
+    margin-bottom: 1em;
+}
+
+.cookie-banner.cookie-float .cookie-complience {
+    -ms-flex: 1 0 auto;
+    flex: 1 0 auto;
+}
+
+.cookie-complience {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-line-pack: justify;
+    align-content: space-between;
+}
+
+.cookie-float .cookie-complience > .cookie-btn {
+    -ms-flex: 1;
+    flex: 1;
+}
+
+.cookie-btn + .cookie-btn {
+    margin-left: .5em;
+}
+
+.cookie-float.cc-theme-classic {
+    padding: 1.2em;
+    border-radius: 5px;
+}
+
+.cc-theme-classic .cookie-btn {
+    border-radius: 5px;
+}
+
+    .cc-theme-classic .cookie-btn:last-child {
+        min-width: 140px;
+    }
+
+a.cookie-btn {
+    text-decoration: none;
+}
+
+.cc-message {
+    word-wrap: break-word;
+}
+
+.cookie-banner .cookie-complience .cookie-btn.cc-dismiss {
+    color: #848484;
+    background-color: #c9c9c9;
+    border-color: #848484;
+}
+
+    .cookie-banner .cookie-complience .cookie-btn.cc-dismiss:hover {
+        background-color: #efefef;
+        text-decoration: none;
+    }
+
+.cookie-accept:hover {
+    color: white;
+}
+
+.cookie-banner.cookie-float {
+    max-width: 485px;
+}
+
 /* ----------------
   Responsive
 ---------------------*/
@@ -1979,6 +2112,23 @@ ol {
 @media only screen and (max-width: 991px) {
     .header-top {
         padding-bottom: 9px;
+    }
+
+    .cookie-banner.cc-bottom {
+        bottom: 0;
+    }
+
+    .cookie-banner.cookie-float, .cookie-banner.cc-right {
+        left: 0;
+        right: 0;
+    }
+
+    .cookie-banner.cookie-float {
+        max-width: 100%;
+    }
+
+    .cookie-banner .cc-message {
+        margin-bottom: 1em;
     }
 }
 
@@ -2327,6 +2477,10 @@ table tbody td {
 
 .font-weight-300 {
     font-weight: 300;
+}
+
+.pink-color {
+    color: #f51167;
 }
 
 .mark-order {

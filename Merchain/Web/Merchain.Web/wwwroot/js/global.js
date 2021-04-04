@@ -159,6 +159,12 @@ function refreshCartItems() {
     });
 }
 
+function hideCookieBanner() {
+    var cookieConsent = $("#cookieConsent");
+    document.cookie = cookieConsent.data("cookie-string");
+    cookieConsent.addClass("d-none");
+}
+
 window.onscroll = function () { scrollFunction(); };
 
 var topBtn = document.getElementsByClassName("topBtn")[0];

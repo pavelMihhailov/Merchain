@@ -6,7 +6,8 @@
     <img id="consoleApp" src="~/img/console-app.png" />
     <img id="compiledApp" class="d-none" src="~/img/compiled-app.png" />
 
-    <h2 id="compileText" class="m-2">Цъкни бутона за да компилираш кода</h2>
+    <h3 id="compileTitle" class="pink-color font-weight-bold">Благодарим за вашата поръчка!</h3>
+    <h4 id="compileText" class="m-2">Цъкни бутона, за да компилираш кода за повече информация</h4>
     <button type="button" class="btn btn-dark m-2" id="compileBtn">Компилирай</button>
     <br />
     <a id="back-home-btn" class="btn btn-dark m-3 d-none"
@@ -20,6 +21,7 @@
         $("#compileBtn").on("click", function () {
             $("#consoleApp").hide();
             $("#compileText").hide();
+            $("#compileTitle").hide();
             $("#compileBtn").hide();
             $("#compiledApp").removeClass("d-none");
             $("#back-home-btn").removeClass("d-none");

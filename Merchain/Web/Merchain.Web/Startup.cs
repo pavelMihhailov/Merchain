@@ -49,7 +49,7 @@
             services.Configure<CookiePolicyOptions>(
                 options =>
                     {
-                        options.CheckConsentNeeded = context => false;
+                        options.CheckConsentNeeded = context => true;
                         options.MinimumSameSitePolicy = SameSiteMode.None;
                     });
 

@@ -10,10 +10,9 @@
 
         public ProductDefaultViewModel Product { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Трябва да изберете оценка.")]
         public int Stars { get; set; }
 
-        [Required]
         public string Title { get; set; }
 
         public string Content { get; set; }

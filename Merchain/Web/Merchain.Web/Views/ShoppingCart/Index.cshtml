@@ -1,6 +1,7 @@
 ﻿@model CartViewModel
 @{
     this.ViewData["Title"] = "Твоята Количка";
+    bool hasProducts = Model.Cart.Any();
 }
 
 <div class="page-top-info">
@@ -16,13 +17,17 @@
 <section class="cart-section spad">
     <div class="container">
         <div class="row">
-            <div class="col-lg-8">
-                @if (!Model.Cart.Any())
-                {
-                    <h3>Количката е празна.</h3>
-                }
-                else
-                {
+            @if (!hasProducts)
+            {
+                <h2 class="m-auto pink-color font-weight-bolder">Вашата количка е празна.</h2>
+                <h5 class="m-auto p-3">
+                    Може да разгледате някои от нашите предложени продукти, или да разгледате
+                    <a asp-area="" asp-controller="Products" asp-action="Index">всички</a>
+                </h5>
+            }
+            else
+            {
+                <div class="col-lg-8">
                     <section>
                         <div class="card wish-list mb-3">
                             <div class="card-body">
@@ -87,9 +92,9 @@
                             <h6>Общо <span>@Model.SumTotal лв.</span></h6>
                         </div>
                     </div>
-                }
-            </div>
-            @if (Model.Cart.Any())
+                </div>
+            }
+            @if (hasProducts)
             {
                 <div class="col-lg-4 card-right">
                     <form class="promo-code-form">
@@ -107,7 +112,10 @@
 <section class="related-product-section">
     <div class="container">
         <div class="section-title text-uppercase">
-            <h2>Предложени Продукти</h2>
+            @if (hasProducts)
+            {
+                <h2>Предложени Продукти</h2>
+            }
         </div>
         <div class="row">
             <partial name="/Views/Products/Partials/_ListProducts.cshtml" model="Model.SuggestedProducts" />
