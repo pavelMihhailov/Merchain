@@ -12,6 +12,7 @@ E-Commerce site for every type of products.
 - User can order different products
 - Admin can create different promo codes with % discount
 - User can apply promo code for discount to his order
+- User can create account and watch his orders, orders statuses and promo codes assigned
 
 # External Integrations
 - Econt ["Get all offices in Bulgaria and list them", "Validate user address when typed in" ]
