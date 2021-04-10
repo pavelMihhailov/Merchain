@@ -1,7 +1,6 @@
 ﻿@model ProductReviewsViewModel
-
 @{
-    this.ViewData["Title"] = "Ревю за продукт";
+    this.ViewData["Title"] = "Оценки за продукт";
 }
 
 <div class="page-top-info">
@@ -11,7 +10,7 @@
             <a asp-controller="Products" asp-action="Index">Продукти</a> /
             <a asp-controller="Products" asp-action="Details"
                asp-route-id="@Model.Product.Id">@Model.Product.Name</a> /
-            <a>Ревюта</a>
+            <a>Оценки</a>
         </div>
     </div>
 </div>
@@ -23,9 +22,9 @@
                 <partial name="/Views/Products/Partials/_Product.cshtml" model="Model.Product" />
             </div>
             <div class="col-lg-7 pt-5">
-                <h3>Ревюта</h3>
+                <h3>Оценки</h3>
                 <a asp-controller="Reviews" asp-action="AddReview" asp-route-id="@Model.Product.Id" class="mt-2">
-                    Добави Ревю
+                    Добави Оценка
                 </a>
                 @foreach (var review in Model.Reviews)
                 {

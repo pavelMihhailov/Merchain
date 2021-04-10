@@ -13,7 +13,7 @@ proQty.on('click', '.qtybtn-cart', function () {
 		if ($button.parents('.cart-section').length) {
 			let size = $button.closest("article").find(".size-col").text();
 			let colorId = null;
-			let color = $button.closest("article").find(".box")[0];
+			let color = $button.closest("article").find(".selected-color")[0];
 			if (color !== undefined) {
 				colorId = color.id;
 			}
@@ -38,7 +38,7 @@ proQty.on('click', '.qtybtn-cart', function () {
 			if ($button.parents('.cart-section').length) {
 				let size = $button.closest("article").find(".size-col").text();
 				let colorId = null;
-				let color = $button.closest("article").find(".box")[0];
+				let color = $button.closest("article").find(".selected-color")[0];
 				if (color !== undefined) {
 					colorId = color.id;
 				}
@@ -63,11 +63,9 @@ $(document).ready(function () {
 
 		let productId = $($el.closest("article")).attr("id");
 
-		//refreshCartPrices(productId, true, false);
-
 		let size = $el.closest("article").find(".size-col").text();
 		let colorId = null;
-		let color = $el.closest("article").find(".box")[0];
+		let color = $el.closest("article").find(".selected-color")[0];
 		if (color !== undefined) {
 			colorId = color.id;
 		}

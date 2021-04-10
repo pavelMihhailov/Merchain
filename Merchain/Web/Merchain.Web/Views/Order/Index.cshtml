@@ -111,7 +111,18 @@
                                 <div class="pl-thumb">
                                     <img src="@item.Product.PreviewImage" alt="@item.Product.Name">
                                 </div>
-                                <h6>@item.Product.Name <p style="color: red">x @item.Quantity</p></h6>
+                                <h5>
+                                    @item.Product.Name
+                                    @if (item.Product.HasSize)
+                                    {
+                                        <p>Размер: @item.Size</p>
+                                    }
+                                    @if (item.Color != null)
+                                    {
+                                        <p>Цвят: @item.Color.Name</p>
+                                    }
+                                    <p style="color: red">x @item.Quantity</p>
+                                </h5>
                                 <p>@item.Product.Price лв.</p>
                             </li>
                         }
@@ -125,7 +136,7 @@
                             <li>Отстъпка: <span>лв.</span><strong>-@Model.Discount</strong></li>
                             <hr />
                         }
-                        <li class="total">Крайна сума: <span>@Model.Total лв.</span></li>
+                        <li class="total">Крайна сума: <span class="pink-color">@Model.Total лв.</span></li>
                     </ul>
                 </div>
             </div>

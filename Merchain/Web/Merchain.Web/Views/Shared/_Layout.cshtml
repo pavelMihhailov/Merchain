@@ -73,11 +73,14 @@
                             }
                             @if (this.User.Identity.IsAuthenticated)
                             {
-                                <div class="up-item">
-                                    <form asp-area="Identity" asp-page="/Account/Logout"
-                                          asp-route-returnUrl="@(this.Url.Action("Index", "Home", new { area = string.Empty }))">
-                                        <button type="submit" class="nav-link btn">Излез</button>
-                                    </form>
+                                <div class="up-item ml-2">
+                                    <div class="pointer">
+                                        <form asp-area="Identity" asp-page="/Account/Logout"
+                                              asp-route-returnUrl="@(this.Url.Action("Index", "Home", new { area = string.Empty }))">
+                                            @*<i class="fa fa-sign-out text-white"></i>*@
+                                            <button type="submit" class="nav-link btn">Излез</button>
+                                        </form>
+                                    </div>
                                 </div>
                             }
                         </div>

@@ -384,12 +384,13 @@ ol {
         }
 
         .user-panel .up-item a {
-            font-size: 14px;
+            font-size: 13px;
             color: white;
         }
 
         .user-panel .up-item button {
             color: white;
+            font-size: 14px;
         }
 
 .shopping-card {
@@ -438,7 +439,7 @@ ol {
 
         .main-menu li a {
             display: inline-block;
-            font-size: 16px;
+            font-size: 15px;
             color: #ffffff;
             margin-right: 50px;
             line-height: 1;
@@ -2468,11 +2469,14 @@ table tbody td {
 }
 
 .table-head {
-    background-color: #f51167;
+    background-color: #444;
+    color: white;
 }
 
     .table-head th {
         text-align: center;
+        font-weight: 200;
+        font-size: 15px;
     }
 
 .font-weight-300 {

@@ -51,9 +51,7 @@ $(document).ready(function () {
             data: { 'id': productId },
             success: function () {
                 $el.parents(".col-lg-3")[0].remove();
-                if ($(".col-lg-3").length === 0) {
-                    $($("section .row")[0]).html("<div>Нямате харесани продукти към момента.</div>");
-                }
+                $($("section .row")[0]).html("<div>Нямате харесани продукти към момента.</div>");
             }
         });
     });

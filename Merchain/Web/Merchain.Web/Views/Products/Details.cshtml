@@ -48,21 +48,25 @@
                 </div>
                 <div class="p-review">
                     <a asp-controller="Reviews" asp-action="ProductReviews"
-                       asp-route-productId="@Model.Product.Id">@Model.ReviewsCount ревюта</a>
+                       asp-route-productId="@Model.Product.Id">
+                        @Model.ReviewsCount @(Model.ReviewsCount == 1 ? "оценка" : "оценки")
+                    </a>
                     |
                     <a asp-controller="Reviews" asp-action="AddReview"
-                       asp-route-id="@Model.Product.Id">Добави Ревю</a>
+                       asp-route-id="@Model.Product.Id">Добави Оценка</a>
                 </div>
                 @if (Model.Colors != null && Model.Colors.Any())
                 {
-                    <div id="colors" class="colors">
+                    <div class="choose-color">
                         <p>Избери цвят: </p>
+                    </div>
+                    <div id="colors" class="colors">
                         @foreach (var color in Model.Colors)
                         {
-                            <div id="@color.Id" class="box" style="background-color:@color.Value"></div>
+                            <div id="@color.Id" class="box">@color.Name</div>
                         }
+                        <p class="color-error" style="color: red"></p>
                     </div>
-                    <p class="color-error" style="color: red"></p>
                 }
                 @if (Model.Product.HasSize)
                 {
@@ -81,7 +85,7 @@
                             <label for="L">L</label>
                         </div>
                         <div class="sc-item disable">
-                            <input type="radio" name="Size" id="XL">
+                            <input type="radio" name="Size" disabled id="XL">
                             <label for="XL">XL</label>
                         </div>
                         <div class="sc-item">
@@ -114,54 +118,59 @@
                             </div>
                         </div>
                     </div>
-                    <div class="panel">
-                        <div class="panel-header" id="headingTwo">
-                            <button class="panel-link" data-toggle="collapse" data-target="#collapse2" aria-expanded="false"
-                                    aria-controls="collapse2">
-                                Размери
-                            </button>
-                        </div>
-                        <div id="collapse2" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
-                            <div class="panel-body">
-                                <div class="container">
-                                    <table class="table table-striped table-bordered table-responsive-sm">
-                                        <thead class="table-head">
-                                            <tr>
-                                                <th></th>
-                                                <th>S</th>
-                                                <th>M</th>
-                                                <th>L</th>
-                                                <th>XL</th>
-                                                <th>2XL</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>Ширина</td>
-                                                <td>46</td>
-                                                <td>48.5</td>
-                                                <td>53.5</td>
-                                                <td>59</td>
-                                                <td>64</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Дължина</td>
-                                                <td>68</td>
-                                                <td>70.5</td>
-                                                <td>73</td>
-                                                <td>75.5</td>
-                                                <td>78</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                    @if (Model.Product.HasSize)
+                    {
+                        <div class="panel">
+                            <div class="panel-header" id="headingTwo">
+                                <button class="panel-link" data-toggle="collapse" data-target="#collapse2" aria-expanded="false"
+                                        aria-controls="collapse2">
+                                    Размери
+                                </button>
+                            </div>
+                            <div id="collapse2" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                                <div class="panel-body">
+                                    <div class="container">
+                                        <table class="table table-striped table-bordered table-responsive-sm">
+                                            <thead class="table-head">
+                                                <tr>
+                                                    <th></th>
+                                                    <th>S</th>
+                                                    <th>M</th>
+                                                    <th>L</th>
+                                                    <th>XL</th>
+                                                    <th>2XL</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Ширина (см.)</td>
+                                                    <td>46</td>
+                                                    <td>48.5</td>
+                                                    <td>53.5</td>
+                                                    <td>59</td>
+                                                    <td>64</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Дължина (см.)</td>
+                                                    <td>68</td>
+                                                    <td>70.5</td>
+                                                    <td>73</td>
+                                                    <td>75.5</td>
+                                                    <td>78</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    }
                     <div class="panel">
                         <div class="panel-header" id="headingThree">
                             <button class="panel-link" data-toggle="collapse" data-target="#collapse3"
-                                    aria-expanded="false" aria-controls="collapse3">Доставка и плащане</button>
+                                    aria-expanded="false" aria-controls="collapse3">
+                                Доставка и плащане
+                            </button>
                         </div>
                         <div id="collapse3" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
                             <div class="panel-body">

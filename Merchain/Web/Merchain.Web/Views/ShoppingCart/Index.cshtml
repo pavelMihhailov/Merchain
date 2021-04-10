@@ -50,8 +50,9 @@
                                                             <h5>@product.Name</h5>
                                                             @if (item.Color != null)
                                                             {
-                                                                <p class="mb-2 text-muted text-uppercase small">Цвят: </p>
-                                                                <div id="@item.Color.Id" class="box" style="background-color: @item.Color?.Value"></div>
+                                                                <p id="@item.Color.Id" class="mb-2 text-muted text-uppercase small selected-color">
+                                                                    Цвят: @item.Color.Name
+                                                                </p>
                                                             }
                                                             @if (product.HasSize)
                                                             {
