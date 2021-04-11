@@ -1,6 +1,7 @@
 @font-face {
     font-family: NotoSans;
-    src: url('../fonts/NotoSansTC-Regular.otf'), url('../fonts/NotoSansTC-Bold.otf');
+    src: url('../fonts/NotoSansTC-Regular.woff'), url('../fonts/NotoSansTC-Bold.woff');
+    font-display: swap;
 }
 
 html,

@@ -1,6 +1,7 @@
 ﻿@model DetailsPageViewModel
 @{
-    this.ViewData["Title"] = Model.Product.Name;
+    this.ViewData[ViewDataConstants.Title] = Model.Product.Name;
+    this.ViewData[ViewDataConstants.Description] = Model.Product.Description;
 }
 
 <div class="page-top-info">
@@ -36,8 +37,8 @@
                 </div>
             </div>
             <div class="col-lg-6 product-details">
-                <h2 class="p-title">@Model.Product.Name</h2>
-                <h3 class="p-price">@Model.Product.Price лв.</h3>
+                <h1 class="p-title">@Model.Product.Name</h1>
+                <h2 class="p-price">@Model.Product.Price лв.</h2>
                 <h4 class="p-stock">Налично: <span>Да</span></h4>
                 <h4 class="p-stock">ID: @Model.Product.Id</h4>
                 <div class="p-rating">

@@ -1,6 +1,7 @@
 ﻿@model CartViewModel
 @{
-    this.ViewData["Title"] = "Твоята Количка";
+    this.ViewData[ViewDataConstants.Title] = "Твоята Количка";
+    this.ViewData[ViewDataConstants.Indexing] = "noindex";
     bool hasProducts = Model.Cart.Any();
 }
 

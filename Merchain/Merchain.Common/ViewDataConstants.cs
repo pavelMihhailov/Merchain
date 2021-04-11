@@ -12,6 +12,8 @@
 
         public const string Keywords = "Keywords";
 
+        public const string Indexing = "Indexing";
+
         public const string FromOrderPage = "FromOrderPage";
     }
 }

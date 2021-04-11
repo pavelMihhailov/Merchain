@@ -17,14 +17,15 @@
     <meta charset="UTF-8">
     <meta name="description" content="@this.ViewData[ViewDataConstants.Description]">
     <meta name="keywords" content="@this.ViewData[ViewDataConstants.Keywords]">
+    <meta name="robots" content="@this.ViewData[ViewDataConstants.Indexing]">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="preload" as="style" onload="this.rel='stylesheet'" asp-append-version="true" />
     <link href="~/css/font-awesome.min.css" rel="preload" as="style" onload="this.rel='stylesheet'" />
     <link rel="stylesheet" href="~/css/flaticon.css" />
-    <link rel="stylesheet" href="~/css/slicknav.min.css" />
+    <link href="~/css/slicknav.min.css" rel="preload" as="style" onload="this.rel='stylesheet'" />
     <link href="~/css/main.css" rel="preload" as="style" onload="this.rel='stylesheet'" />
-    <link href="~/css/style.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/style.css" asp-append-version="true" />
     @RenderSection("Styles", required: false)
 
     <link href="~/img/icons/favicon.png" rel="shortcut icon" />
